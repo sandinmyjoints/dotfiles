@@ -1,0 +1,10 @@
+\.git
+\.hg
+
+\.DS_Store
+\.project
+
+local
+local_*
+
+.dir-locals.el
