@@ -10,6 +10,7 @@ alias egrep='grep -E --color=auto -Ii'
 alias egrepn='grep -E --color=auto -Iin'
 alias fin='egrepn -r -C 3 --exclude *~'
 alias pg='pgrep -fil'
+alias pgrepf='pgrep -f'
 
 alias ld='otool -L'
 
@@ -55,3 +56,5 @@ alias tn='tr -d "\n"'
 
 # list TODO/FIX lines from the current project
 alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
+
+alias utcdate='date -u'

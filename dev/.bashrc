@@ -1,5 +1,5 @@
 # Ensure usr/local takes precendence on PATH
-PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/bin"
+PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local_bin:~/bin"
 export PATH
 
 export PYTHONPATH=/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages:$PYTHONPATH
