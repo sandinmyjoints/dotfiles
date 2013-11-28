@@ -1,13 +1,15 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+export PATH="$PATH:~/local_bin:~/bin"
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
 nodename () {
     cat /etc/chef/client.rb | grep node_name | cut -f 2 -d ' ' | sed "s/\"//g"
 }
-chef_nodename=`nodename`
+CHEF_NODENAME=`nodename`
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
@@ -52,16 +54,16 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@$chef_nodename\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@$CHEF_NODENAME\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@$chef_nodename:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@$CHEF_NODENAME:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@$chef_nodename: \w\a\]$PS1"
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@$CHEF_NODENAME: \w\a\]$PS1"
     ;;
 *)
     ;;
@@ -80,7 +82,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -ahlF'
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -108,6 +110,7 @@ fi
 greplog () {
     # cd /mnt/var/log
     # up to 9999 with 1 the most recent so should go last
+    # TODO: use ls -rt maybe?
     {
         nice zcat $1.log.*.gz  # platform.log.XXXX.gz -- what is the order
         nice cat $1.*[0-9]  # platform.log.1 -- what is the order
@@ -115,15 +118,80 @@ greplog () {
     } | nice grep "$2"
 }
 
+greplog5 () {
+    # Adds 5 lines of context.
+    {
+        nice zcat $1.log.*.gz  # platform.log.XXXX.gz -- what is the order
+        nice cat $1.*[0-9]  # platform.log.1 -- what is the order
+        nice cat $1.log  # platform.log
+    } | nice grep -C 5 "$2"
+}
+
+PROMT_IP="72\.55\.171\.23"
+SDL_IP="207\.38\.17\.15"
 
 conns_mysql () {
-    netstat | egrep -o "mysql.*" | sort | uniq -c
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    netstat -a | egrep -o "mysql.*" | sort | uniq -c
 }
 
 conns_promt () {
-    netstat | egrep -o "72\.55\.171\.23" | sort | uniq -c
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    # IP address could change.
+    netstat -a | egrep -o $PROMT_IP | uniq -c
 }
 
 conns_sdl () {
-    netstat | egrep -o "207\.38\.17\.15" | sort | uniq -c
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    # IP address could change.
+    netstat -a | egrep -o $SDL_IP | uniq -c
+}
+
+conns_which () {
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    sudo netstat --inet -aenp  | egrep "72\.55.171\.23"
+}
+
+conns_timewait () {
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    netstat --inet -a | egrep -o "TIME_WAIT" | uniq -c
+}
+
+conns_prod_mongo () {
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    # 55997 is the port MongoLab assigned our prod db.
+    sudo netstat --inet -ap | egrep -o "55997" | uniq -c
+}
+
+conns_staging_mongo () {
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    # 39477 is the port MongoLab assigned our prod db.
+    sudo netstat --inet -ap | egrep -o "39477" | uniq -c
+}
+
+conns_promt_open () {
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    sudo netstat -ap | egrep $PROMT_IP | egrep -v TIME_WAIT
+}
+
+conns_sdl_open () {
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    sudo netstat -ap | egrep $SDL_IP | egrep -v TIME_WAIT
+}
+
+conns_all_open () {
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    sudo netstat -ap | egrep "($SDL_IP|$PROMT_IP)" | egrep -v TIME_WAIT
+}
+
+
+# TODO
+conns_open_per_service () {
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    conns_all_open|wc -l
+}
+
+conns_open_per_worker () {
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    conns_all_open|wc -l
 }
