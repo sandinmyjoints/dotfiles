@@ -7,7 +7,7 @@ export PATH="$PATH:~/local_bin:~/bin"
 [ -z "$PS1" ] && return
 
 nodename () {
-    cat /etc/chef/client.rb | grep node_name | cut -f 2 -d ' ' | sed "s/\"//g"
+    cat /etc/chef/client.rb |egrep node_name | cut -f 2 -d ' ' | sed "s/\"//g"
 }
 CHEF_NODENAME=`nodename`
 
@@ -115,7 +115,7 @@ greplog () {
         nice zcat $1.log.*.gz  # platform.log.XXXX.gz -- what is the order
         nice cat $1.*[0-9]  # platform.log.1 -- what is the order
         nice cat $1.log  # platform.log
-    } | nice grep "$2"
+    } | nice egrep "$2"
 }
 
 greplog5 () {
@@ -124,25 +124,22 @@ greplog5 () {
         nice zcat $1.log.*.gz  # platform.log.XXXX.gz -- what is the order
         nice cat $1.*[0-9]  # platform.log.1 -- what is the order
         nice cat $1.log  # platform.log
-    } | nice grep -C 5 "$2"
+    } | nice egrep -C 5 "$2"
 }
 
 PROMT_IP="72\.55\.171\.23"
 SDL_IP="207\.38\.17\.15"
 
 conns_mysql () {
-    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
     netstat -a | egrep -o "mysql.*" | sort | uniq -c
 }
 
 conns_promt () {
-    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
     # IP address could change.
     netstat -a | egrep -o $PROMT_IP | uniq -c
 }
 
 conns_sdl () {
-    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
     # IP address could change.
     netstat -a | egrep -o $SDL_IP | uniq -c
 }
@@ -153,22 +150,23 @@ conns_which () {
 }
 
 conns_timewait () {
-    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
     netstat --inet -a | egrep -o "TIME_WAIT" | uniq -c
 }
 
 conns_prod_mongo () {
-    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
     # 55997 is the port MongoLab assigned our prod db.
     sudo netstat --inet -ap | egrep -o "55997" | uniq -c
 }
 
 conns_staging_mongo () {
-    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
     # 39477 is the port MongoLab assigned our prod db.
     sudo netstat --inet -ap | egrep -o "39477" | uniq -c
 }
 
+conns_mysql_open () {
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    sudo netstat -ap | egrep "mysql.*" | egrep -v TIME_WAIT
+}
 conns_promt_open () {
     echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
     sudo netstat -ap | egrep $PROMT_IP | egrep -v TIME_WAIT
@@ -187,11 +185,13 @@ conns_all_open () {
 
 # TODO
 conns_open_per_service () {
-    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
     conns_all_open|wc -l
 }
 
 conns_open_per_worker () {
-    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
     conns_all_open|wc -l
+}
+
+get_dropbox_uploader () {
+    mkdir -p ~/bin && curl "https://raw.github.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh" -o ~/bin/dropbox_uploader.sh && chmod u+x ~/bin/dropbox_uploader.sh
 }
