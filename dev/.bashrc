@@ -1,5 +1,7 @@
-# Ensure usr/local takes precendence on PATH
-PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local_bin:~/bin"
+# Initially, PATH is /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+#
+# Ensure usr/local takes precendence. Add home bin dirs.
+PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin"
 export PATH
 
 export PYTHONPATH=/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages:$PYTHONPATH
@@ -83,7 +85,7 @@ nvm_quit () {
 }
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="$PATH:/usr/local/heroku/bin"
 
 # Clojure/Clojurescript
 export CLOJURESCRIPT_HOME=$HOME/scm/vendor/clojurescript
@@ -94,7 +96,7 @@ export PATH=$PATH:"/Users/william/Downloads/adt-bundle-mac-x86_64-20130219/sdk/p
 
 ulimit -n 10000
 
-export JAVA_HOME=`/usr/libexec/java_home`
+#export JAVA_HOME=`/usr/libexec/java_home`
 
 function tabname {
   printf "\e]1;$1\a"
