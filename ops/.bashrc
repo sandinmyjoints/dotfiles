@@ -1,7 +1,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-export PATH="$PATH:~/local_bin:~/bin"
+export PATH="$PATH:~/local/bin:~/bin"
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -106,47 +106,47 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# Useful sysadmin functions.
+#
 # usage: greplog <logprefix> <pattern>
+#
 greplog () {
-    # cd /mnt/var/log
-    # up to 9999 with 1 the most recent so should go last
-    # TODO: use ls -rt maybe?
     {
-        nice zcat $1.log.*.gz  # platform.log.XXXX.gz -- what is the order
-        nice cat $1.*[0-9]  # platform.log.1 -- what is the order
-        nice cat $1.log  # platform.log
+        nice zcat $(ls -rt $1.log.*.gz)  # Matches <prefix>.log.XXXX.gz
+        nice cat $(ls -rt $1.*[0-9])  # Matches <prefix>.log.X
+        nice cat $1.log  # Matches <prefix>.log
     } | nice egrep "$2"
 }
 
+# Adds 5 lines of context.
 greplog5 () {
-    # Adds 5 lines of context.
     {
-        nice zcat $1.log.*.gz  # platform.log.XXXX.gz -- what is the order
-        nice cat $1.*[0-9]  # platform.log.1 -- what is the order
-        nice cat $1.log  # platform.log
+        nice zcat $(ls -rt $1.log.*.gz)  # Matches <prefix>.log.XXXX.gz
+        nice cat $(ls -rt $1.*[0-9])  # Matches <prefix>.log.X
+        nice cat $1.log  # Matches <prefix>.log
     } | nice egrep -C 5 "$2"
 }
 
+# IP addresses for our machine translation providers. These could change.
+#
 PROMT_IP="72\.55\.171\.23"
 SDL_IP="207\.38\.17\.15"
+
+# The ports MongoLab assigned our Fluencia databases. These could change.
+#
+MONGOLAB_PROD_PORT="55997"
+MONGOLAB_STAGING_PORT="39477"
 
 conns_mysql () {
     netstat -a | egrep -o "mysql.*" | sort | uniq -c
 }
 
 conns_promt () {
-    # IP address could change.
     netstat -a | egrep -o $PROMT_IP | uniq -c
 }
 
 conns_sdl () {
-    # IP address could change.
     netstat -a | egrep -o $SDL_IP | uniq -c
-}
-
-conns_which () {
-    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-    sudo netstat --inet -aenp  | egrep "72\.55.171\.23"
 }
 
 conns_timewait () {
@@ -154,19 +154,18 @@ conns_timewait () {
 }
 
 conns_prod_mongo () {
-    # 55997 is the port MongoLab assigned our prod db.
-    sudo netstat --inet -ap | egrep -o "55997" | uniq -c
+    sudo netstat --inet -ap | egrep -o MONGOLAB_PROD_PORT | uniq -c
 }
 
 conns_staging_mongo () {
-    # 39477 is the port MongoLab assigned our prod db.
-    sudo netstat --inet -ap | egrep -o "39477" | uniq -c
+    sudo netstat --inet -ap | egrep -o MONGOLAB_STAGING_PORT | uniq -c
 }
 
 conns_mysql_open () {
     echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
     sudo netstat -ap | egrep "mysql.*" | egrep -v TIME_WAIT
 }
+
 conns_promt_open () {
     echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
     sudo netstat -ap | egrep $PROMT_IP | egrep -v TIME_WAIT
@@ -184,6 +183,11 @@ conns_all_open () {
 
 
 # TODO
+conns_which () {
+    echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+    sudo netstat --inet -aenp  | egrep PROMT_IP
+}
+
 conns_open_per_service () {
     conns_all_open|wc -l
 }
@@ -195,3 +199,6 @@ conns_open_per_worker () {
 get_dropbox_uploader () {
     mkdir -p ~/bin && curl "https://raw.github.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh" -o ~/bin/dropbox_uploader.sh && chmod u+x ~/bin/dropbox_uploader.sh
 }
+
+# Local customizations.
+[[ -s ~/.bashrc_local ]] && source ~/.bashrc_local
