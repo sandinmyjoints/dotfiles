@@ -111,20 +111,20 @@ fi
 # usage: greplog <logprefix> <pattern>
 #
 greplog () {
-    {
-        nice zcat $(ls -rt $1.log.*.gz)  # Matches <prefix>.log.XXXX.gz
-        nice cat $(ls -rt $1.*[0-9])  # Matches <prefix>.log.X
-        nice cat $1.log  # Matches <prefix>.log
-    } | nice egrep "$2"
+  {
+      nice zcat $(ls -rt $1.log.*.gz)  # Matches <prefix>.log.XXXX.gz
+      nice cat $(ls -rt $1.*[0-9])  # Matches <prefix>.log.X
+      nice cat $1.log  # Matches <prefix>.log
+  } | nice egrep "$2"
 }
 
 # Adds 5 lines of context.
 greplog5 () {
-    {
-        nice zcat $(ls -rt $1.log.*.gz)  # Matches <prefix>.log.XXXX.gz
-        nice cat $(ls -rt $1.*[0-9])  # Matches <prefix>.log.X
-        nice cat $1.log  # Matches <prefix>.log
-    } | nice egrep -C 5 "$2"
+  {
+      nice zcat $(ls -rt $1.log.*.gz)  # Matches <prefix>.log.XXXX.gz
+      nice cat $(ls -rt $1.*[0-9])  # Matches <prefix>.log.X
+      nice cat $1.log  # Matches <prefix>.log
+  } | nice egrep -C 5 "$2"
 }
 
 # IP addresses for our machine translation providers. These could change.
