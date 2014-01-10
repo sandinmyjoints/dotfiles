@@ -1,0 +1,2 @@
+#!/bin/bash
+date +%s | md5 | base64 | head -c 32 ; echo

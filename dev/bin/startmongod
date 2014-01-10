@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/local/bin/mongod run --config /usr/local/etc/mongod.conf
