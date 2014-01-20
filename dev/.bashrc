@@ -6,6 +6,8 @@ export PATH
 
 export PYTHONPATH=/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages:$PYTHONPATH
 
+export HISTIGNORE=' *'
+
 # Virtualenvwrapper
 export WORKON_HOME=$HOME/env
 export PROJECT_HOME=$HOME/scm

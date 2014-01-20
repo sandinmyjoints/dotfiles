@@ -3,6 +3,8 @@
 
 export PATH="$PATH:~/local/bin:~/bin"
 
+export HISTIGNORE=' *'
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
