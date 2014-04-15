@@ -38,3 +38,5 @@ alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 alias udate='date -u'
 
 alias scr='screen -dRR'
+
+alias tcpcount="wc -l /proc/net/tcp"

@@ -204,3 +204,11 @@ get_dropbox_uploader () {
 
 # Local customizations.
 [[ -s ~/.bashrc_local ]] && source ~/.bashrc_local
+
+conns_darwin () {
+    netstat -at|egrep ":http " | wc  -l
+}
+
+conns_site () {
+    netstat -at|egrep ":8001 " | wc  -l
+}
