@@ -1,0 +1,22 @@
+* TODO Fix tmux scrollback in Terminal.app.
+  - See: http://sourceforge.net/p/tmux/tickets/62/
+* TODO Find a way to set Terminal tab name from tmux window.
+
+  - the printf thing doesn't seem to work
+* tmux show-options -g -w
+* TODO copy-mode key bindings more like Emacs
+
+* echo $TERM
+
+  - outside tmux
+    #+BEGIN_SRC
+    ~/scm/sd/ops (master)$ echo $TERM
+    xterm-256color
+    #+END_SRC
+
+  - inside tmux
+    #+BEGIN_SRC
+    ~$ echo $TERM
+    screen
+    #+END_SRC
+* TODO learn screen commands better, or replace with tmux globally
