@@ -212,3 +212,15 @@ conns_darwin () {
 conns_site () {
     netstat -at|egrep ":8001 " | wc  -l
 }
+
+conns_darwin_not_time_wait () {
+    netstat -at|egrep ":http " | egrep -v "TIME_WAIT" | wc  -l
+}
+
+conns_site_not_time_wait () {
+    netstat -at|egrep ":8001 " | egrep -v "TIME_WAIT" | wc  -l
+}
+
+apache_status () {
+    curl http://localhost/server-status?auto
+}
