@@ -1,7 +1,7 @@
 # Initially, PATH is /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 #
 # Ensure usr/local takes precendence. Add home bin dirs.
-PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin"
+PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin:/usr/local/opt/python3/bin"
 export PATH
 
 export PYTHONPATH=/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages:$PYTHONPATH
@@ -100,6 +100,7 @@ ulimit -n 10000
 
 #export JAVA_HOME=`/usr/libexec/java_home`
 
+# These don't work inside of tmux. Why not?
 function tabname {
   printf "\e]1;$1\a"
 }
@@ -107,3 +108,17 @@ function tabname {
 function winname {
   printf "\e]2;$1\a"
 }
+
+# added by travis gem
+[ -f /Users/william/.travis/travis.sh ] && source /Users/william/.travis/travis.sh
+
+# Useful commands for checking what process is using a port. TODO: Make into functions.
+#netstat -anp tcp | grep 3000
+#lsof -i tcp:3000
+
+# How to stop tracking a git remote.
+# TODO: Make a function or script
+# git branch -d -r origin/BRANCH
+# git push origin :BRANCH
+# git config --unset branch.BRANCH.remote
+# git config --unset branch.BRANCH.merge
