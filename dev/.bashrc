@@ -55,7 +55,7 @@ rvm_use () {
 }
 
 # Node
-export NODE_LATEST=0.10.20
+export NODE_LATEST=0.10.26
 source ~/.nvm/nvm.sh
 export PATH="${PATH}:./node_modules/.bin"
 
