@@ -55,7 +55,7 @@ rvm_use () {
 }
 
 # Node
-export NODE_LATEST=0.10.26
+export NODE_LATEST=0.10.28
 source ~/.nvm/nvm.sh
 export PATH="${PATH}:./node_modules/.bin"
 
@@ -65,7 +65,7 @@ nvm_ps1 () {
     # export PS1="(nvm $(nvm version)) ${ORIG_PS1}"
 
     # Set $VERSION, then manually do ANSI colors:
-    nvm_version
+    export VERSION=`nvm_version`
     export PS1="(nvm \[$(tput setaf 4)\]$VERSION\[$(tput sgr0)\]) ${ORIG_PS1}"
 }
 
