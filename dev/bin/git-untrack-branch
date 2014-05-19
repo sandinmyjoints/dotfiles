@@ -1,0 +1,27 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Please provide a branch name."
+    exit 1
+fi
+
+# Based on http://stackoverflow.com/a/8217870
+safeRunCommand() {
+    typeset cmnd="$*"
+    typeset ret_code
+
+    echo $cmnd
+    eval $cmnd
+    ret_code=$?
+    if [ $ret_code != 0 ]; then
+        printf "'$cmnd' exited with %d. Bailing.\n" $ret_code
+        exit $ret_code
+    fi
+}
+
+command="git push origin :$1"
+safeRunCommand "$command"
+command="git config --unset branch.$1.remote"
+safeRunCommand "$command"
+command="git config --unset branch.$1.merge"
+safeRunCommand "$command"
