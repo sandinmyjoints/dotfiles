@@ -80,9 +80,9 @@ nvm_ps1 () {
     # Original:
     # export PS1="(nvm $(nvm version)) ${ORIG_PS1}"
 
-    # Set $VERSION, then manually do ANSI colors:
-    export VERSION=`nvm_version`
-    export PS1="(nvm \[$(tput setaf 4)\]$VERSION\[$(tput sgr0)\]) ${ORIG_PS1}"
+    # Set $NVM_VERSION, then manually do ANSI colors:
+    local NVM_VERSION=`nvm_version`
+    export PS1="(nvm \[$(tput setaf 4)\]$NVM_VERSION\[$(tput sgr0)\]) ${ORIG_PS1}"
 }
 
 nvm_use () {
