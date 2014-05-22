@@ -1,10 +1,8 @@
 # Initially, PATH is /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 #
 # Ensure usr/local takes precendence. Add home bin dirs.
-PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin:/usr/local/opt/python3/bin"
+PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin"
 export PATH
-
-export PYTHONPATH=/usr/local/Cellar/python/2.7.3/lib/python2.7/site-packages:$PYTHONPATH
 
 export HISTIGNORE=' *'
 
