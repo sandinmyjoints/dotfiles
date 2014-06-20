@@ -46,6 +46,12 @@ subl_open () {
  open "../${NAME}.sublime-project"
 }
 
+##########
+# Python #
+##########
+
+export PYTHONPATH=":${PYTHONPATH}"
+
 ########
 # Ruby #
 ########
