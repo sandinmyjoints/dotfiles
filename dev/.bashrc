@@ -114,6 +114,10 @@ nvm_quit () {
 
 . <(npm completion)
 
+function npmtop () {
+    npm list -g --depth=0
+}
+
 ########
 # Misc #
 ########
