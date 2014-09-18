@@ -224,3 +224,21 @@ conns_site_not_time_wait () {
 apache_status () {
     curl http://localhost/server-status?auto
 }
+
+# Number of tcp ports open:
+#
+# $ ss -s # can do basically the same thing
+#
+open_tcp_count () {
+    netstat -ant|wc -l
+}
+
+# Open ports and the process that has opened them:
+open_ports () {
+    sudo netstat -pan --tcp
+}
+
+
+count_file_handles () {
+    sudo lsof -i |grep node
+}
