@@ -242,3 +242,25 @@ open_ports () {
 count_file_handles () {
     sudo lsof -i |grep node
 }
+
+total_open_fds () {
+    sudo ps -eL | awk 'NR > 1 { print $1, $2 }' | \
+    while read x; do \
+        sudo find /proc/${x% *}/task/${x#* }/fd/ -type l; \
+    done | wc -l
+}
+
+total_node_open_fds () {
+    sudo ps -eL | grep node | awk 'NR > 1 { print $1, $2 }' | \
+    while read x; do \
+        sudo find /proc/${x% *}/task/${x#* }/fd/ -type l; \
+    done | wc -l
+}
+
+per_node_open_fds () {
+    sudo ps -eL | grep node | awk 'NR > 1 { print $1, $2 }' | \
+    while read x; do \
+        echo "${x% *}";
+        sudo find /proc/${x% *}/task/${x#* }/fd/ -type l | wc -l
+    done
+}

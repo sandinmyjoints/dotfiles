@@ -43,3 +43,4 @@ hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u
 screen -ln -t "emacs" 1 bash
 screen -ln -t "logs" 2 bash
 screen -ln -t "deploy" 3 bash
+screen -ln -t "top" 4 bash
