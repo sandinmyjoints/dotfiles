@@ -5,6 +5,8 @@ export PATH="$PATH:~/local/bin:~/bin"
 
 export HISTIGNORE=' *'
 
+shopt -s extglob
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -263,4 +265,17 @@ per_node_open_fds () {
         echo "${x% *}";
         sudo find /proc/${x% *}/task/${x#* }/fd/ -type l | wc -l
     done
+}
+
+per_node_open_fds () {
+    sudo ps -ef | grep node | awk 'NR > 1 { print $2, $8 }' | \
+    while read x; do \
+      echo "${x}:"
+      sudo ls /proc/${x% *}/fd | wc -l;
+      echo "--------"
+    done
+}
+
+psnode () {
+    ps -ef|grep -v grep|grep node
 }
