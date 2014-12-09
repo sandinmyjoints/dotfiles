@@ -4,10 +4,11 @@ alias p='ipython'
 
 alias subl='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl'
 
-alias grep='grep --color=auto -Ii'
+alias grepc='grep --color=auto -Ii'
 alias grepn='grep --color=auto -Iin'
 alias egrep='grep -E --color=auto -Ii'
 alias egrepn='grep -E --color=auto -Iin'
+alias grepnc='grep -E --color=never -Ii'
 alias fin='egrepn -r -C 3 --exclude *~'
 alias pg='pgrep -fil'
 alias pgrepf='pgrep -f'

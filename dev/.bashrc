@@ -74,7 +74,7 @@ rvm_use () {
 # Node #
 ########
 
-export NODE_LATEST=0.10.28
+export NODE_LATEST=0.10.33
 source ~/.nvm/nvm.sh
 export PATH="${PATH}:./node_modules/.bin"
 
@@ -127,6 +127,8 @@ export HISTIGNORE=' *'
 export EDITOR='emacsclient'
 
 ulimit -n 10000
+
+shopt -s extglob
 
 ### Added by the Heroku Toolbelt
 export PATH="$PATH:/usr/local/heroku/bin"
