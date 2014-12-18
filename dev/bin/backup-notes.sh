@@ -17,6 +17,7 @@ safeRunCommand() {
     fi
 }
 
+# TODO: Skip any files > 20 MB or so.
 command="tar cvf - notes/ | gzip > notes-$DATE.tgz"
 safeRunCommand $command
 command="openssl enc -aes-256-cbc -in notes-$DATE.tgz  -out Dropbox/Backups/notes-$DATE.tgz.enc"
