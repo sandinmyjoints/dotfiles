@@ -1,0 +1,10 @@
+#!/bin/bash
+
+servers=( *-app-* *-router-* *-neodarwin-* *-site-rw-*)
+for i in "${servers[@]}"
+do
+   :
+   # do whatever on $i
+   echo staging-reboot-pattern "$i"
+   staging-reboot-pattern "$i" && true
+done

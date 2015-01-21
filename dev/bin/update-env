@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ENV=${1:-"staging"}
+patterns=( *-app-* *-app2-* *-router-* *-neodarwin-* *-site-rw-* )
+
+for pattern in "${patterns[@]}"
+do
+   :
+   echo Update and upgrade "$pattern".
+   rake chef:ssh_cmd["sudo apt-get update","$pattern","$ENV"] && \
+   rake chef:ssh_cmd["sudo apt-get --assume-yes upgrade","$pattern","$ENV"] && \
+   rake chef:ssh_cmd['ls /var/run/reboot-required || :',"$pattern","$ENV"]
+done
