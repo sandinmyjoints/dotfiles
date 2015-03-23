@@ -114,20 +114,24 @@ fi
 #
 # usage: greplog <logprefix> <pattern>
 #
+# When there's a lot, use with head -n to grab n lines:
+#
+# $ greplog suggest '"warning"' | head -n 30
+#
 greplog () {
   {
-      nice zcat $(ls -rt $1.log.*.gz)  # Matches <prefix>.log.XXXX.gz
-      nice cat $(ls -rt $1.*[0-9])  # Matches <prefix>.log.X
-      nice cat $1.log  # Matches <prefix>.log
+      nice zcat $(ls -rt $1.log.*.gz || ls /dev/null)  # Matches <prefix>.log.XXXX.gz
+      nice cat $(ls -rt $1.*[0-9] || ls /dev/null) # Matches <prefix>.log.X
+      nice cat $(ls $1.log || ls /dev/null)  # Matches <prefix>.log
   } | nice egrep "$2"
 }
 
 # Adds 5 lines of context.
 greplog5 () {
   {
-      nice zcat $(ls -rt $1.log.*.gz)  # Matches <prefix>.log.XXXX.gz
-      nice cat $(ls -rt $1.*[0-9])  # Matches <prefix>.log.X
-      nice cat $1.log  # Matches <prefix>.log
+      nice zcat $(ls -rt $1.log.*.gz || ls /dev/null)  # Matches <prefix>.log.XXXX.gz
+      nice cat $(ls -rt $1.*[0-9] || ls /dev/null) # Matches <prefix>.log.X
+      nice cat $(ls $1.log || ls /dev/null)  # Matches <prefix>.log
   } | nice egrep -C 5 "$2"
 }
 
