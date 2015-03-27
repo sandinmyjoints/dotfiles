@@ -25,8 +25,17 @@ function parse_git_branch {
   echo "("${ref#refs/heads/}")"
 }
 
-source ~/bin/git-completion.bash
-source ~/bin/git-prompt.sh
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+else
+    source ~/bin/git-completion.bash
+fi
+if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
+    . $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+else
+    source ~/bin/git-prompt.sh
+fi
+
 export PS1='\w$(__git_ps1 " (%s)")\$ '
 
 ###########
@@ -96,6 +105,7 @@ nvm_use () {
     source ~/.nvm/nvm.sh
     if [ ${VERS} ]; then
         nvm use ${VERS}
+        . <(npm completion)
         nvm_ps1
     else
         echo "Choose a version:"
@@ -111,8 +121,6 @@ nvm_quit () {
 #######
 # npm #
 #######
-
-. <(npm completion)
 
 function npmtop () {
     npm list -g --depth=0
