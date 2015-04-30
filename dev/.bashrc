@@ -8,6 +8,9 @@
 # Ensure usr/local takes precendence. Add home bin dirs.
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin"
 
+
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+
 #####################
 # Virtualenvwrapper #
 #####################
@@ -83,8 +86,16 @@ rvm_use () {
 # Node #
 ########
 
-export NODE_LATEST=0.10.34
+export NODE_LATEST=0.10.38
+
+# If I set nvm default, then nvm.sh will add it to PATH. Then Emacs
+# nvm.el is always going to find and use that version, even if I try
+# to switch it. So for now, I'm not setting nvm default.
+
 source ~/.nvm/nvm.sh
+
+# nvm deactivate  # Can be useful if nvm default is set.
+
 export PATH="${PATH}:./node_modules/.bin"
 
 #######
@@ -100,9 +111,11 @@ nvm_ps1 () {
     export PS1="(nvm \[$(tput setaf 4)\]$NVM_VERSION\[$(tput sgr0)\]) ${ORIG_PS1}"
 }
 
+## nvm_use stable
+## nvm_use system
 nvm_use () {
     VERS=${1:-''}
-    source ~/.nvm/nvm.sh
+    # source ~/.nvm/nvm.sh # Not needed if called earlier.
     if [ ${VERS} ]; then
         nvm use ${VERS}
         . <(npm completion)
@@ -126,6 +139,18 @@ function npmtop () {
     npm list -g --depth=0
 }
 
+# npm global packages I want:
+# $ npm ls -g --depth=0
+# /Users/william/.nvm/v0.10.38/lib
+# ├── bower@1.4.1
+# ├── eslint@0.20.0
+# ├── http-server@0.7.5
+# ├── jsonlint@1.6.2
+# ├── node-repl@2.0.2
+# ├── npm@2.5.1
+# └── tzloc@1.0.1
+
+
 ########
 # Misc #
 ########
@@ -137,6 +162,7 @@ export EDITOR='emacsclient'
 ulimit -n 10000
 
 shopt -s extglob
+shopt -s globstar
 
 ### Added by the Heroku Toolbelt
 export PATH="$PATH:/usr/local/heroku/bin"
@@ -166,3 +192,9 @@ function winname {
 # git push origin :BRANCH
 # git config --unset branch.BRANCH.remote
 # git config --unset branch.BRANCH.merge
+
+# script / col
+# $ script -q
+# $ col -bp <typescript | less
+
+# tar -cvzf tarballname.tar.gz itemtocompress
