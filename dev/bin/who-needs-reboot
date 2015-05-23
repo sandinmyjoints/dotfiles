@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ENV=${1:-"staging"}
+servers=( *-app-* *-router-* *-neodarwin-* *-site-rw-*)
+
+for i in "${servers[@]}"
+do
+   :
+   # do whatever on $i
+   rake chef:ssh_cmd['ls /var/run/reboot-required || :',"$i","$ENV"]
+done
