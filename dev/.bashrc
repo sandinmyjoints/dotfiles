@@ -139,22 +139,25 @@ function npmtop () {
     npm list -g --depth=0
 }
 
+alias npm_globals=npmtop
+
 # npm global packages I want:
 # $ npm ls -g --depth=0
 # /Users/william/.nvm/v0.10.38/lib
 # ├── @spanishdict/sd-language@2.1.0 -> /Users/william/scm/sd/sd-language
 # ├── bower@1.4.1
+# ├── cleaver@0.7.4
 # ├── coffeelint@1.9.6
 # ├── eslint@0.20.0
 # ├── express-generator@4.12.1
+# ├── http-server@0.8.0
 # ├── jsonlint@1.6.2
 # ├── node-inspector@0.10.1
 # ├── npm@2.5.1
 # └── tzloc@1.0.1#
 
 function install_globals () {
-   npm install -g bower coffeelint eslint express-generator jsonlint node-inspector
-   npm uninstall bower coffeelint eslint express-generator jsonlint node-inspector
+   npm install -g bower coffeelint eslint express-generator jsonlint node-inspector http-server cleaver
 }
 
 ########
