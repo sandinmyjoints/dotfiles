@@ -10,6 +10,7 @@ export PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin"
 
 
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export CDPATH='.:~/scm/sd:~/scm/wjb'
 
 #####################
 # Virtualenvwrapper #
@@ -33,6 +34,7 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 else
     source ~/bin/git-completion.bash
 fi
+
 if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
     . $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
 else
