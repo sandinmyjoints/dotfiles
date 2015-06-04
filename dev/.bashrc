@@ -208,13 +208,6 @@ man() {
 #netstat -anp tcp | grep 3000
 #lsof -i tcp:3000
 
-# How to stop tracking a git remote.
-# TODO: Make a function or script
-# git branch -d -r origin/BRANCH
-# git push origin :BRANCH
-# git config --unset branch.BRANCH.remote
-# git config --unset branch.BRANCH.merge
-
 # script / col
 # $ script -q
 # $ col -bp <typescript | less
