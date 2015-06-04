@@ -19,3 +19,11 @@
     screen
     #+END_SRC
 * TODO learn screen commands better, or replace with tmux globally
+* TODO tmux hook on new session to send keys to run certain commands
+  - send-keys: http://codebrane.com/blog/2014/01/25/developing-with-tmux/
+#+BEGIN_SRC
+add-hook new-session
+
+tmux add-hook "new-session" if-shell "[ -e $HOME/.tmux-session.conf ]" source-file
+  $HOME/.tmux-session.conf
+#+END_SRC
