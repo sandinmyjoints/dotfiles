@@ -5,7 +5,6 @@
   - the printf thing doesn't seem to work
 * tmux show-options -g -w
 * TODO copy-mode key bindings more like Emacs
-
 * echo $TERM
 
   - outside tmux
