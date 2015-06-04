@@ -11,7 +11,7 @@ function __git_dirty {
 }
 
 function __git_branch {
-  clr_escape $(__git_ps1 "%s") $CLR_LIGHT_GRAY
+  clr_escape $(echo $(__git_ps1 "%s") | sed 's/feature/f/' | sed 's/chore/c/' | sed 's/bug/b/') $CLR_LIGHT_GRAY
 }
 
 function __my_rvm_ruby_version {
@@ -40,7 +40,7 @@ function __info {
     $(__virtualenv)
     $(__node)
     $(__git_branch)
-    $(__git_dirty)
+    # $(__git_dirty)
   )
   full="${full[*]}"
   [ "$full" != "" ] && echo $(clr_escape "[" $CLR_DARK_GRAY)"$full"$(clr_escape "]" $CLR_DARK_GRAY)
