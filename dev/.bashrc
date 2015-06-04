@@ -73,15 +73,17 @@ export PYTHONPATH=":${PYTHONPATH}"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-# Store original PS1
-ORIG_PS1=$PS1
-
-# Add rvm terminal prompt.
-alias rvm_ps1="export PS1=\"(\$(rvm-prompt v g s)) ${ORIG_PS1}\""
-
-# Issue rvm use command and change terminal prompt.
 rvm_use () {
-    rvm use $@ && rvm_ps1;
+    export SHOW_RVM=true
+    rvm use $@;
+}
+
+rvm_deactivate () {
+    unset SHOW_RVM
+}
+
+rvm_quit () {
+    rvm_deactivate
 }
 
 ########
