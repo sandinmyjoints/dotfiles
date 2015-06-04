@@ -28,6 +28,7 @@ CLR_GREEN=32            # set green foreground
 CLR_YELLOW=33           # set brown foreground
 CLR_LIGHT_YELLOW=93
 CLR_BLUE=34             # set blue foreground
+CLR_LIGHT_BLUE=94
 CLR_MAGENTA=35          # set magenta foreground
 CLR_LIGHT_MAGENTA=95
 CLR_CYAN=36             # set cyan foreground
@@ -51,11 +52,11 @@ function clr_escape
 {
     local result="$1"
     until [ -z "$2" ]; do
-	if ! [ $2 -ge 0 -a $2 -le 97 ] 2>/dev/null; then
-	    echo "clr_escape: argument \"$2\" is out of range" >&2 && return 1
-	fi
+	      if ! [ $2 -ge 0 -a $2 -le 97 ] 2>/dev/null; then
+	          echo "clr_escape: argument \"$2\" is out of range" >&2 && return 1
+	      fi
         result="${CLR_ESC}${2}m${result}${CLR_ESC}${CLR_RESET}m"
-	shift || break
+	      shift || break
     done
 
     echo -e "$result"
