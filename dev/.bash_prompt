@@ -11,10 +11,13 @@ function __git_dirty {
 }
 
 function __git_branch {
-  [ "$(__git_ps1)" != "" ] && clr_escape $(echo $(__git_ps1 "%s") | sed 's/feature/f/; s/chore/c/; s/bug/b/') $CLR_LIGHT_GRAY
+  local git_ps1=$(__git_ps1 "%s")
+  [ "$git_ps1" != "" ] && clr_escape $(echo "$git_ps1" | sed 's/feature/f/; s/chore/c/; s/bug/b/') $CLR_LIGHT_GRAY
 }
 
 function __my_rvm_ruby_version {
+  [ -z "$SHOW_RVM" ] && return
+
   local gemset=$(echo $GEM_HOME | awk -F'@' '{print $2}')
   [ "$gemset" != "" ] && gemset="@$gemset"
   local version=$(echo $MY_RUBY_HOME | awk -F'-' '{print $2}')
@@ -23,6 +26,8 @@ function __my_rvm_ruby_version {
 }
 
 function __virtualenv {
+  [ -z "$VIRTUAL_ENV" ] && return
+
   local env=$(basename "$VIRTUAL_ENV")
   [ "$env" != "" ] && clr_escape "$env" $CLR_LIGHT_BLUE
 }
@@ -43,10 +48,7 @@ function __info {
     # $(__git_dirty)
   )
   full="${full[*]}"
-  [ "$full" != "" ] && echo $(clr_escape "[" $CLR_DARK_GRAY)"$full"$(clr_escape "]" $CLR_DARK_GRAY)
+  [ "$full" != "" ] && echo "$full"
 }
 
 PS1="\$(__info) \w \$ "
-
-# Bolded $:
-# PS1="\$(__info) \w \[\e[1m\]\$\[\e[0m\] "
