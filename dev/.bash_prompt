@@ -48,7 +48,18 @@ function __info {
     # $(__git_dirty)
   )
   full="${full[*]}"
-  [ "$full" != "" ] && echo "$full"
+  # [ "$full" != "" ] && echo "$full"
+  echo "$full"
 }
 
 PS1="\$(__info) \w \$ "
+BIG_PS1=$PS1
+LITTLE_PS1="\$ "
+
+function big_prompt {
+    PS1=$BIG_PS1
+}
+
+function little_prompt {
+    PS1=$LITTLE_PS1
+}
