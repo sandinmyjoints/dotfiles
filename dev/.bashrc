@@ -18,7 +18,8 @@ export CDPATH='.:~/scm/sd:~/scm/wjb'
 
 export WORKON_HOME=$HOME/env
 export PROJECT_HOME=$HOME/scm
-source /usr/local/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 #######
 # git #
@@ -170,6 +171,7 @@ ulimit -n 10000
 
 shopt -s extglob
 shopt -s globstar
+shopt -s checkwinsize
 
 ### Added by the Heroku Toolbelt
 export PATH="$PATH:/usr/local/heroku/bin"
@@ -201,8 +203,8 @@ man() {
 [ -f /Users/william/.travis/travis.sh ] && source /Users/william/.travis/travis.sh
 
 # Useful commands for checking what process is using a port. TODO: Make into functions.
-#netstat -anp tcp | grep 3000
-#lsof -i tcp:3000
+# $ netstat -anp tcp | grep 3000
+# $ lsof -i tcp:3000
 
 # script / col
 # $ script -q

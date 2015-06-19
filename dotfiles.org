@@ -21,6 +21,7 @@
 * TODO learn screen commands better, or replace with tmux globally
 * TODO tmux hook on new session to send keys to run certain commands
   - send-keys: http://codebrane.com/blog/2014/01/25/developing-with-tmux/
+  - hook: https://gist.github.com/ThomasAdam/4007114
 #+BEGIN_SRC
 add-hook new-session
 

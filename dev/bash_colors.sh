@@ -7,6 +7,7 @@
 #
 # List of colors: http://misc.flogisoft.com/bash/tip_colors_and_formatting
 
+# Escape code is 033 octal.
 CLR_ESC="\033["
 
 # All these varibles has a function with the same name, but in lower case.
@@ -46,6 +47,10 @@ CLR_MAGENTAB=45         # set magenta background
 CLR_CYANB=46            # set cyan background
 CLR_WHITEB=47           # set white background
 
+# See: http://stackoverflow.com/a/19501528/599258
+NON_PRINTABLE_START="\001"
+NON_PRINTABLE_STOP="\002"
+
 # General function to wrap string with escape seqence(s).
 # Ex: console_escape foobar $CLR_RED $CLR_BOLD
 function clr_escape
@@ -56,10 +61,14 @@ function clr_escape
 	          echo "clr_escape: argument \"$2\" is out of range" >&2 && return 1
 	      fi
         result="${CLR_ESC}${2}m${result}${CLR_ESC}${CLR_RESET}m"
+
+        # TODO: Fix multiline commands being overwritten
+        # result="${NON_PRINTABLE_START}${CLR_ESC}${2}m${NON_PRINTABLE_STOP}${result}${NON_PRINTABLE_START}${CLR_ESC}${CLR_RESET}m${NON_PRINTABLE_STOP}"
+
 	      shift || break
     done
 
-    echo -e "$result"
+    echo -e "$NON_PRINTABLE_START$result$NON_PRINTABLE_STOP"
 }
 
 function clr_reset           { clr_escape "$1" $CLR_RESET;           }

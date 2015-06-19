@@ -13,6 +13,8 @@ alias fin='egrepn -r -C 3 --exclude *~'
 alias pg='pgrep -fil'
 alias pgrepf='pgrep -f'
 
+alias pingg='ping 8.8.8.8'
+
 alias ld='otool -L'
 
 alias ec='emacsclient'
