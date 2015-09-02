@@ -123,7 +123,7 @@ greplog () {
       nice zcat $(ls -rt $1.log.*.gz || ls /dev/null)  # Matches <prefix>.log.XXXX.gz
       nice cat $(ls -rt $1.*[0-9] || ls /dev/null) # Matches <prefix>.log.X
       nice cat $(ls $1.log || ls /dev/null)  # Matches <prefix>.log
-  } | nice egrep "$2"
+  } | nice grep -E "$2"
 }
 
 # Adds 5 lines of context.
@@ -132,7 +132,7 @@ greplog5 () {
       nice zcat $(ls -rt $1.log.*.gz || ls /dev/null)  # Matches <prefix>.log.XXXX.gz
       nice cat $(ls -rt $1.*[0-9] || ls /dev/null) # Matches <prefix>.log.X
       nice cat $(ls $1.log || ls /dev/null)  # Matches <prefix>.log
-  } | nice egrep -C 5 "$2"
+  } | nice grep -E -C 5 "$2"
 }
 
 # IP addresses for our machine translation providers. These could change.
@@ -146,54 +146,54 @@ MONGOLAB_PROD_PORT="55997"
 MONGOLAB_STAGING_PORT="39477"
 
 conns_mysql () {
-    netstat -a | egrep -o "mysql.*" | sort | uniq -c
+    netstat -a | grep -E -o "mysql.*" | sort | uniq -c
 }
 
 conns_promt () {
-    netstat -a | egrep -o $PROMT_IP | uniq -c
+    netstat -a | grep -E -o $PROMT_IP | uniq -c
 }
 
 conns_sdl () {
-    netstat -a | egrep -o $SDL_IP | uniq -c
+    netstat -a | grep -E -o $SDL_IP | uniq -c
 }
 
 conns_timewait () {
-    netstat --inet -a | egrep -o "TIME_WAIT" | uniq -c
+    netstat --inet -a | grep -E -o "TIME_WAIT" | uniq -c
 }
 
 conns_prod_mongo () {
-    sudo netstat --inet -ap | egrep -o MONGOLAB_PROD_PORT | uniq -c
+    sudo netstat --inet -ap | grep -E -o MONGOLAB_PROD_PORT | uniq -c
 }
 
 conns_staging_mongo () {
-    sudo netstat --inet -ap | egrep -o MONGOLAB_STAGING_PORT | uniq -c
+    sudo netstat --inet -ap | grep -E -o MONGOLAB_STAGING_PORT | uniq -c
 }
 
 conns_mysql_open () {
     echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-    sudo netstat -ap | egrep "mysql.*" | egrep -v TIME_WAIT
+    sudo netstat -ap | grep -E "mysql.*" | grep -E -v TIME_WAIT
 }
 
 conns_promt_open () {
     echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-    sudo netstat -ap | egrep $PROMT_IP | egrep -v TIME_WAIT
+    sudo netstat -ap | grep -E $PROMT_IP | grep -E -v TIME_WAIT
 }
 
 conns_sdl_open () {
     echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-    sudo netstat -ap | egrep $SDL_IP | egrep -v TIME_WAIT
+    sudo netstat -ap | grep -E $SDL_IP | grep -E -v TIME_WAIT
 }
 
 conns_all_open () {
     echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-    sudo netstat -ap | egrep "($SDL_IP|$PROMT_IP)" | egrep -v TIME_WAIT
+    sudo netstat -ap | grep -E "($SDL_IP|$PROMT_IP)" | grep -E -v TIME_WAIT
 }
 
 
 # TODO
 conns_which () {
     echo Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-    sudo netstat --inet -aenp  | egrep PROMT_IP
+    sudo netstat --inet -aenp  | grep -E PROMT_IP
 }
 
 conns_open_per_service () {
@@ -212,19 +212,19 @@ get_dropbox_uploader () {
 [[ -s ~/.bashrc_local ]] && source ~/.bashrc_local
 
 conns_darwin () {
-    netstat -at|egrep ":http " | wc  -l
+    netstat -at|grep -E ":http " | wc  -l
 }
 
 conns_site () {
-    netstat -at|egrep ":8001 " | wc  -l
+    netstat -at|grep -E ":8001 " | wc  -l
 }
 
 conns_darwin_not_time_wait () {
-    netstat -at|egrep ":http " | egrep -v "TIME_WAIT" | wc  -l
+    netstat -at|grep -E ":http " | grep -E -v "TIME_WAIT" | wc  -l
 }
 
 conns_site_not_time_wait () {
-    netstat -at|egrep ":8001 " | egrep -v "TIME_WAIT" | wc  -l
+    netstat -at|grep -E ":8001 " | grep -E -v "TIME_WAIT" | wc  -l
 }
 
 apache_status () {
