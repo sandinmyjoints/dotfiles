@@ -40,3 +40,5 @@ alias udate='date -u'
 alias scr='screen -dRR'
 
 alias tcpcount="wc -l /proc/net/tcp"
+
+alias psnode="ps -ef | grep node"
