@@ -14,6 +14,7 @@ alias pg='pgrep -fil'
 alias pgrepf='pgrep -f'
 
 alias pingg='ping 8.8.8.8'
+alias ping7='ping 75.75.75.75'
 
 alias ld='otool -L'
 

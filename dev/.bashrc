@@ -91,7 +91,7 @@ rvm_quit () {
 # Node #
 ########
 
-export NODE_LATEST=0.10.38
+export NODE_LATEST=0.10.40
 
 # If I set nvm default, then nvm.sh will add it to PATH. Then Emacs
 # nvm.el is always going to find and use that version, even if I try
@@ -146,17 +146,21 @@ alias npm_globals=npmtop
 # ├── @spanishdict/sd-language@2.1.0 -> /Users/william/scm/sd/sd-language
 # ├── bower@1.4.1
 # ├── cleaver@0.7.4
-# ├── coffeelint@1.9.6
+# ├── coffeelint@1.9.7
+# ├── doctoc@0.14.2
 # ├── eslint@0.20.0
+# ├── eslint-config-standard@1.1.0
 # ├── express-generator@4.12.1
 # ├── http-server@0.8.0
 # ├── jsonlint@1.6.2
 # ├── node-inspector@0.10.1
-# ├── npm@2.5.1
-# └── tzloc@1.0.1#
+# ├── npm@2.8.0
+# ├── surge@0.14.3
+# └── tzloc@1.0.1
 
 function install_globals () {
-   npm install -g bower coffeelint eslint express-generator jsonlint node-inspector http-server cleaver
+   npm install -g npm@2.8.4
+   npm install -g bower cleaver coffeelint doctoc eslint eslint-config-standard express-generator http-server jsonlint node-inspector surge tzloc
 }
 
 ########
