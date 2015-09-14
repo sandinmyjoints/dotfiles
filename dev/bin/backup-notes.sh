@@ -17,8 +17,12 @@ safeRunCommand() {
     fi
 }
 
-# TODO: Skip any files > 20 MB or so.
 command="tar cvf - notes/ | gzip > notes-$DATE.tgz"
+
+# Here's how to exclude particular directories.
+# TODO: Skip any files > 20 MB or so.
+# command="tar cv --exclude notes/database/sd-prod-dump --exclude notes/atalanta/mgiza - notes/ | gzip > notes-$DATE.tgz"
+
 safeRunCommand $command
 command="openssl enc -aes-256-cbc -in notes-$DATE.tgz  -out Dropbox/Backups/notes-$DATE.tgz.enc"
 safeRunCommand $command
