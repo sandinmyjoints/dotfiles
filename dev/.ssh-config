@@ -1,1 +1,3 @@
 ServerAliveInterval 59
+
+# Useful: http://superuser.com/questions/247564/is-there-a-way-for-one-ssh-config-file-to-include-another-one
