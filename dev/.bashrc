@@ -93,6 +93,8 @@ rvm_quit () {
 
 export NODE_LATEST=0.10.40
 
+[[ -s ~/local/node-latest ]] && source ~/local/node-latest
+
 # If I set nvm default, then nvm.sh will add it to PATH. Then Emacs
 # nvm.el is always going to find and use that version, even if I try
 # to switch it. So for now, I'm not setting nvm default.
@@ -215,3 +217,9 @@ man() {
 # $ col -bp <typescript | less
 
 # tar -cvzf tarballname.tar.gz itemtocompress
+
+#########
+# Local #
+#########
+
+[[ -s ~/local/.bashrc ]] && source ~/local/.bashrc
