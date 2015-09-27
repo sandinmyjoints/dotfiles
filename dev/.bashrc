@@ -179,6 +179,9 @@ shopt -s extglob
 shopt -s globstar
 shopt -s checkwinsize
 
+# From http://superuser.com/a/59198
+[[ $- = *i* ]] && bind TAB:menu-complete
+
 ### Added by the Heroku Toolbelt
 export PATH="$PATH:/usr/local/heroku/bin"
 
