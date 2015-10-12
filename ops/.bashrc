@@ -283,3 +283,5 @@ per_node_open_fds () {
 psnode () {
     ps -ef|grep -v grep|grep node
 }
+
+alias scr='screen -dRR'
