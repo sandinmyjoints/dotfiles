@@ -9,7 +9,8 @@ dump() {
 }
 
 save() {
-  dump > ~/.tmux-session
+  cp ~/.tmux-session ~/.tmux-session.bak
+  dump > ~/.tmux-session || mv ~/.tmux-session.bak ~/.tmux-session
 }
 
 terminal_size() {
