@@ -205,6 +205,10 @@ man() {
     man "$@"
 }
 
+function quick-whois () {
+    command whois "domain ${1}"
+}
+
 ##########
 # Travis #
 ##########
@@ -219,7 +223,8 @@ man() {
 # $ script -q
 # $ col -bp <typescript | less
 
-# tar -cvzf tarballname.tar.gz itemtocompress
+# How to tar and gzip:
+# $ tar -cvzf tarballname.tar.gz itemtocompress
 
 #########
 # Local #
