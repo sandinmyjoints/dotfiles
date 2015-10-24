@@ -215,6 +215,15 @@ function quick-whois () {
 
 [ -f /Users/william/.travis/travis.sh ] && source /Users/william/.travis/travis.sh
 
+
+#########
+# Other #
+#########
+
+function fix-tmux () {
+    killall -USR1 tmux
+}
+
 # Useful commands for checking what process is using a port. TODO: Make into functions.
 # $ netstat -anp tcp | grep 3000
 # $ lsof -i tcp:3000
