@@ -160,7 +160,7 @@ alias npm_globals=npmtop
 # ├── surge@0.14.3
 # └── tzloc@1.0.1
 
-function install_globals () {
+function npm_install_globals () {
    npm install -g npm@2.8.4
    npm install -g bower cleaver coffeelint doctoc eslint eslint-config-standard express-generator http-server jsonlint node-inspector surge tzloc
 }
