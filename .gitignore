@@ -10,3 +10,4 @@ local_*
 .dir-locals.el
 
 dev/bin/subl
+dev/bin/gh-md-toc
