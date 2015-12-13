@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ $1 ]; then
+    open -a "Mou" $1;
+else
+    open -a "Mou";
+fi
