@@ -7,6 +7,7 @@ layout 2monitorLayout
 
 bind 1:ctrl activate-snapshot 1monitorSnapshot
 bind 2:ctrl activate-snapshot 2monitorSnapshot
+# Saved to: ~/Library/Application Support/com.slate.Slate/snapshots (json file)
 bind 3:ctrl snapshot 1monitorSnapshot save-to-disk
 bind 4:ctrl snapshot 2monitorSnapshot save-to-disk
 
