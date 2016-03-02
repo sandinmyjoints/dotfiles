@@ -224,7 +224,7 @@ function quick-whois () {
 # Travis #
 ##########
 
-[ -f /Users/william/.travis/travis.sh ] && source /Users/william/.travis/travis.sh
+# [ -f /Users/william/.travis/travis.sh ] && source /Users/william/.travis/travis.sh
 
 
 #########
