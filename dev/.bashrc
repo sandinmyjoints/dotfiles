@@ -91,7 +91,7 @@ rvm_quit () {
 # Node #
 ########
 
-export NODE_LATEST=0.10.40
+export NODE_LATEST=0.10.41
 
 [[ -s ~/local/node-latest ]] && source ~/local/node-latest
 
@@ -144,31 +144,42 @@ alias npm_globals=npmtop
 
 # npm global packages I want:
 # $ npm ls -g --depth=0
-# /Users/william/.nvm/v0.10.38/lib
+# $ npmtop
+# /Users/william/.nvm/v0.10.40/lib
+# ├── @spanishdict/fun-with-examples@3.0.3 -> /Users/william/scm/sd/fun-with-examples
 # ├── @spanishdict/sd-language@2.1.0 -> /Users/william/scm/sd/sd-language
 # ├── bower@1.4.1
 # ├── cleaver@0.7.4
-# ├── coffeelint@1.9.7
+# ├── coffeelint@1.10.1
 # ├── doctoc@0.14.2
-# ├── eslint@0.20.0
-# ├── eslint-config-standard@1.1.0
-# ├── express-generator@4.12.1
+# ├── eslint@1.1.0
+# ├── eslint-config-standard@4.0.0
+# ├── eslint-plugin-standard@1.2.0
+# ├── express-generator@4.13.1
+# ├── grunt-cli@0.1.13
 # ├── http-server@0.8.0
 # ├── jsonlint@1.6.2
-# ├── node-inspector@0.10.1
-# ├── npm@2.8.0
+# ├── node-inspector@0.12.2
+# ├── npm@2.14.8
 # ├── surge@0.14.3
-# └── tzloc@1.0.1
+# └── tzloc@1.2.0
+
+####
+# But try this next time: nvm install v4.2 --reinstall-packages-from=iojs
+###
 
 function npm_install_globals () {
-   npm install -g npm@2.8.4
-   npm install -g bower cleaver coffeelint doctoc eslint eslint-config-standard express-generator http-server jsonlint node-inspector surge tzloc
+   npm install -g npm@2.14.14
+   npm install -g bower cleaver coffeelint eslint eslint-config-standard eslint-plugin-standard express-generator grunt-cli http-server jsonlint node-inspector surge tzloc
 }
 
 ########
 # Misc #
 ########
 
+complete -C aws_completer aws
+
+HISTCONTROL=ignoreboth
 export HISTIGNORE=' *'
 
 export EDITOR='emacsclient'
