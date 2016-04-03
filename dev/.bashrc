@@ -97,7 +97,7 @@ rvm_quit () {
 # Node #
 ########
 
-export NODE_LATEST=0.10.41
+export NODE_LATEST=0.10.44
 
 [[ -s ~/local/node-latest ]] && source ~/local/node-latest
 
