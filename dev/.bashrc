@@ -21,6 +21,12 @@ export PROJECT_HOME=$HOME/scm
 export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
 source /usr/local/bin/virtualenvwrapper_lazy.sh
 
+# Sensible Bash
+
+if [ -f ~/bin/sensible.bash ]; then
+   source ~/bin/sensible.bash
+fi
+
 #######
 # git #
 #######
@@ -179,16 +185,12 @@ function npm_install_globals () {
 
 complete -C aws_completer aws
 
-HISTCONTROL=ignoreboth
-export HISTIGNORE=' *'
-
 export EDITOR='emacsclient'
 
 ulimit -n 10000
 
 shopt -s extglob
 shopt -s globstar
-shopt -s checkwinsize
 
 # From http://superuser.com/a/59198
 [[ $- = *i* ]] && bind TAB:menu-complete
