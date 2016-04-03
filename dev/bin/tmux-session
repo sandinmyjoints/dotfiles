@@ -3,6 +3,9 @@
 # TODO: persist and restore the state & position of panes.
 set -e
 
+# See https://github.com/tmux/tmux/issues/284
+export TMUX_TMPDIR=/tmp
+
 dump() {
   local d=$'\t'
   tmux list-windows -a -F "#S${d}#W${d}#{pane_current_path}"

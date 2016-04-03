@@ -239,6 +239,9 @@ function synonym () {
     wn $1 -syns{n,v,a,r}
 }
 
+# See https://github.com/tmux/tmux/issues/284
+export TMUX_TMPDIR=/tmp
+
 # Useful commands for checking what process is using a port. TODO: Make into functions.
 # $ netstat -anp tcp | grep 3000
 # $ lsof -i tcp:3000
