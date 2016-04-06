@@ -24,7 +24,7 @@ command="tar cvf - notes/ | gzip > notes-$DATE.tgz"
 # command="tar cv --exclude notes/database/sd-prod-dump --exclude notes/atalanta/mgiza - notes/ | gzip > notes-$DATE.tgz"
 
 safeRunCommand $command
-command="openssl enc -aes-256-cbc -in notes-$DATE.tgz  -out Dropbox/Backups/notes-$DATE.tgz.enc"
+command="openssl enc -aes-256-cbc -salt -in notes-$DATE.tgz  -out Dropbox/Backups/notes-$DATE.tgz.enc"
 safeRunCommand $command
 command="rm notes-$DATE.tgz"
 safeRunCommand $command
