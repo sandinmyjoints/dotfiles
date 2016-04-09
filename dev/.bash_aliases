@@ -65,3 +65,6 @@ alias utcdate='date -u'
 
 alias test_all_fluencia='fab test:conf=config.settings.dev_fluencia && fab test:conf=config.settings.staging_fluencia && fab test:conf=config.settings.prod_fluencia'
 alias test_all_marketing='fab test:conf=config.settings.dev_marketing && fab test:conf=config.settings.staging_marketing && fab test:conf=config.settings.prod_marketing'
+
+alias attach='tmux attach -t '
+alias elasticsaerch=elasticsearch
