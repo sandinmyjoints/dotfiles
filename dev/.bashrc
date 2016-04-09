@@ -97,23 +97,22 @@ rvm_quit () {
 # Node #
 ########
 
-export NODE_LATEST=0.10.44
-
-[[ -s ~/local/node-latest ]] && source ~/local/node-latest
-
-# If I set nvm default, then nvm.sh will add it to PATH. Then Emacs
-# nvm.el is always going to find and use that version, even if I try
-# to switch it. So for now, I'm not setting nvm default.
-
-source ~/.nvm/nvm.sh
-
-# nvm deactivate  # Can be useful if nvm default is set.
-
 export PATH="${PATH}:./node_modules/.bin"
 
 #######
 # NVM #
 #######
+
+source ~/.nvm/nvm.sh
+[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+
+# If I set nvm default, then nvm.sh will add it to PATH. Then Emacs
+# nvm.el is always going to find and use that version, even if I try
+# to switch it. So for now, I'm not setting nvm default.
+#
+# nvm alias default $NODE_LATEST
+
+# nvm deactivate  # Can be useful if nvm default is set.
 
 ## nvm_use stable
 ## nvm_use system
@@ -137,6 +136,15 @@ nvm_deactivate() {
     nvm_quit
 }
 
+function nvm_use_if_needed () {
+    [[ -r ./.nvmrc  && -s ./.nvmrc ]] || return
+    WANTED=$(sed 's/v//' < ./.nvmrc)
+    CURRENT=$(hash node 2>/dev/null && node -v | sed 's/v//')
+    if [ "$WANTED" != "$CURRENT" ]; then
+        nvm use
+    fi
+}
+export PROMPT_COMMAND="$PROMPT_COMMAND ; nvm_use_if_needed"
 
 #######
 # npm #
@@ -148,6 +156,9 @@ function npmtop () {
 
 alias npm_globals=npmtop
 
+# START USIng:
+# nvm install v5.0 --reinstall-packages-from=4.2
+#
 # npm global packages I want:
 # $ npm ls -g --depth=0
 # $ npmtop
