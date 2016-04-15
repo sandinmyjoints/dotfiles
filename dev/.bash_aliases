@@ -1,6 +1,7 @@
 alias ll='ls -laGhF'
 alias ls='ls -hG'
 alias p='ipython'
+alias g='git'
 
 alias subl='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl'
 
@@ -63,8 +64,13 @@ alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 
 alias utcdate='date -u'
 
-alias test_all_fluencia='fab test:conf=config.settings.dev_fluencia && fab test:conf=config.settings.staging_fluencia && fab test:conf=config.settings.prod_fluencia'
-alias test_all_marketing='fab test:conf=config.settings.dev_marketing && fab test:conf=config.settings.staging_marketing && fab test:conf=config.settings.prod_marketing'
-
+# Tmux
 alias attach='tmux attach -t '
+
+# Autocorrect
 alias elasticsaerch=elasticsearch
+
+# Docker
+alias d='docker'
+alias dm='docker-machine'
+alias dc='docker-compose'
