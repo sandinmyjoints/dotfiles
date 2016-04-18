@@ -42,6 +42,9 @@ else
     source ~/bin/git-completion.bash
 fi
 
+# Autocomplete for 'g' as well. From http://nuclearsquid.com/writings/git-tricks-tips-workflows/
+complete -o default -o nospace -F _git g
+
 if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
     . $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
 else
