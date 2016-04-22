@@ -73,5 +73,6 @@ alias elasticsaerch=elasticsearch
 # Docker
 alias d='docker'
 alias dm='docker-machine'
-alias dmenv='eval $(docker-machine env)'
+alias dmenv='docker-machine env'
+alias evaldm='eval $(docker-machine env)'
 alias dc='docker-compose'
