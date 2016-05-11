@@ -22,7 +22,7 @@ function __my_rvm_ruby_version {
   [ "$gemset" != "" ] && gemset="@$gemset"
   local version=$(echo $MY_RUBY_HOME | awk -F'-' '{print $2}')
   local full="$version$gemset"
-  [ "$SHOW_RVM" != "" ] && [ "$full" != "" ] && clr_green "$full"
+  [ "$SHOW_RVM" != "" ] && [ "$full" != "" ] && clr_red "$full"
 }
 
 function __virtualenv {
