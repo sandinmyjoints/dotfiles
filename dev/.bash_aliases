@@ -77,3 +77,6 @@ alias dmenv='docker-machine env'
 alias evaldm='eval $(docker-machine env)'
 alias dc='docker-compose'
 alias dcl='docker-cloud'
+
+# Ops
+alias knifeatl='knife data bag from file webapp_site deploy.json && knife data bag from file webapp_translate deploy.json && knife data bag from file webapp_suggest deploy.json'

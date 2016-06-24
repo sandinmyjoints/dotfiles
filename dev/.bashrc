@@ -149,6 +149,8 @@ function nvm_use_if_needed () {
 }
 export PROMPT_COMMAND="$PROMPT_COMMAND ; nvm_use_if_needed"
 
+nvm_use default
+
 #######
 # npm #
 #######
@@ -159,7 +161,7 @@ function npmtop () {
 
 alias npm_globals=npmtop
 
-# START USIng:
+# START USING:
 # nvm install v5.0 --reinstall-packages-from=4.2
 #
 # npm global packages I want:
@@ -189,8 +191,8 @@ alias npm_globals=npmtop
 ###
 
 function npm_install_globals () {
-   npm install -g npm@2.14.14
-   npm install -g bower cleaver coffeelint eslint eslint-config-standard eslint-plugin-standard express-generator grunt-cli http-server jsonlint node-inspector surge tzloc
+   #npm install -g npm@2.15.1
+   npm install -g bower budo browserslist cleaver coffeelint eslint eslint-config-standard eslint-plugin-standard express-generator grunt-cli http-server jsonlint node-inspector surge tzloc
 }
 
 ########
