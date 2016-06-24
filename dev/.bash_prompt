@@ -48,11 +48,11 @@ function __info {
     # $(__git_dirty)
   )
   full="${full[*]}"
-  # [ "$full" != "" ] && echo "$full"
-  echo "$full"
+  # echo "$full"
+  [ "$full" == "" ] && echo "" || echo "$full "
 }
 
-PS1="\$(__info) \w \$ "
+PS1="\$(__info)\w \$ "
 BIG_PS1=$PS1
 LITTLE_PS1="\$ "
 
