@@ -27,6 +27,12 @@ if [ -f ~/bin/sensible.bash ]; then
    source ~/bin/sensible.bash
 fi
 
+BREW_PREFIX=$(brew --prefix)
+
+if [ -f $BREW_PREFIX/etc/bash_completion ]; then
+    . $BREW_PREFIX/etc/bash_completion
+fi
+
 #######
 # git #
 #######
@@ -36,17 +42,15 @@ function parse_git_branch {
   echo "("${ref#refs/heads/}")"
 }
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
-else
+if [ -f ~/bin/git-completion.bash ]; then
     source ~/bin/git-completion.bash
 fi
 
 # Autocomplete for 'g' as well. From http://nuclearsquid.com/writings/git-tricks-tips-workflows/
 complete -o default -o nospace -F _git g
 
-if [ -f $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]; then
-    . $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+if [ -f $BREW_PREFIX/etc/bash_completion.d/git-prompt.sh ]; then
+    . $BREW_PREFIX/etc/bash_completion.d/git-prompt.sh
 else
     source ~/bin/git-prompt.sh
 fi
