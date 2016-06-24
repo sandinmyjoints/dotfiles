@@ -80,3 +80,5 @@ alias dcl='docker-cloud'
 
 # Ops
 alias knifeatl='knife data bag from file webapp_site deploy.json && knife data bag from file webapp_translate deploy.json && knife data bag from file webapp_suggest deploy.json'
+
+alias n='source ~/dotfiles/dev/nvm-startup.sh'
