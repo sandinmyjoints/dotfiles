@@ -70,7 +70,7 @@ fi
 ###########
 
 subl_open () {
- NAME="$(basename $(pwd))"
+ local NAME="$(basename $(pwd))"
  open "../${NAME}.sublime-project"
 }
 
@@ -150,24 +150,26 @@ function npm_install_globals () {
    npm install -g bower budo browserslist cleaver coffeelint eslint eslint-config-standard eslint-plugin-standard express-generator grunt-cli http-server jsonlint node-inspector surge tzloc
 }
 
+##########
+# Travis #
+##########
+
+# [ -f /Users/william/.travis/travis.sh ] && source /Users/william/.travis/travis.sh
+
 ########
-# Misc #
+# Tmux #
 ########
 
-complete -C aws_completer aws
+# See https://github.com/tmux/tmux/issues/284
+export TMUX_TMPDIR=/tmp
 
-export EDITOR='emacsclient'
+function fix-tmux () {
+    killall -USR1 tmux
+}
 
-ulimit -n 10000
-
-shopt -s extglob
-shopt -s globstar
-
-# From http://superuser.com/a/59198
-[[ $- = *i* ]] && bind TAB:menu-complete
-
-### Added by the Heroku Toolbelt
-export PATH="$PATH:/usr/local/heroku/bin"
+####################
+# Functions
+####################
 
 # These don't work inside of tmux. Why not?
 function tabname {
@@ -193,29 +195,32 @@ function quick-whois () {
     command whois "domain ${1}"
 }
 
-##########
-# Travis #
-##########
-
-# [ -f /Users/william/.travis/travis.sh ] && source /Users/william/.travis/travis.sh
-
-
-#########
-# Other #
-#########
-
-function fix-tmux () {
-    killall -USR1 tmux
-}
-
 function synonym () {
     wn $1 -syns{n,v,a,r}
 }
 
-# See https://github.com/tmux/tmux/issues/284
-export TMUX_TMPDIR=/tmp
+function echoDjangoSettings () {
+    echo $DJANGO_SETTINGS_MODULE
+}
+
+########
+# Misc #
+########
+
+complete -C aws_completer aws
+
+export EDITOR='emacsclient'
+
+ulimit -n 10000
+
+shopt -s extglob
+shopt -s globstar
+
+# From http://superuser.com/a/59198
+[[ $- = *i* ]] && bind TAB:menu-complete
 
 # Useful commands for checking what process is using a port. TODO: Make into functions.
+# See sockets-netstat and sockets-lsof scripts.
 # $ netstat -anp tcp | grep 3000
 # $ lsof -i tcp:3000
 
@@ -231,3 +236,7 @@ export TMUX_TMPDIR=/tmp
 #########
 
 [[ -s ~/local/.bashrc ]] && source ~/local/.bashrc
+
+# TODO don't hardcode these.
+source ~/dotfiles/dev/bash_colors.sh
+source ~/dotfiles/dev/.bash_prompt
