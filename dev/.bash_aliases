@@ -21,7 +21,10 @@ alias ld='otool -L'
 
 alias ec='emacsclient'
 
-alias markdown='python -m markdown'
+#alias markdown='python -m markdown'
+alias md=multimarkdown
+alias mmd=multimarkdown
+alias markdown=multimarkdown
 
 alias icoffee='~/scm/wjb/coffee-script/bin/coffee'
 

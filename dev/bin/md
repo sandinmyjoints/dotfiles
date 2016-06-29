@@ -1,3 +1,0 @@
-#!/bin/bash
-
-/Users/william/bin/markdown-render.py $1 "/Users/william/scm/vendor/markdown-css-themes"
