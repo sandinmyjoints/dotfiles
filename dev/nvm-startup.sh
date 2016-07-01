@@ -2,7 +2,9 @@
 # NVM #
 #######
 
-source ~/.nvm/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
 [[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
 
 # If I set nvm default, then nvm.sh will add it to PATH. Then Emacs
