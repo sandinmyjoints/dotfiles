@@ -1,3 +1,12 @@
+# This file is only meant to be sourced, not run.
+called=$_
+if [[ $called != $0 ]] ; then
+    echo "${BASH_SOURCE[@]} is being sourced."
+else
+    this_file=`basename "$0"`
+    echo "$this_file is being run."
+fi
+
 # Sensible Bash - An attempt at saner Bash defaults
 # Maintainer: mrzool <http://mrzool.cc>
 # Version: 0.1
@@ -56,11 +65,6 @@ shopt -s autocd
 shopt -s dirspell
 # Correct spelling errors in arguments supplied to cd
 shopt -s cdspell
-
-# This defines where cd looks for targets
-# Add the directories you want to have fast access to, separated by colon
-# Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
-# CDPATH="."
 
 # This allows you to bookmark your favorite places across the file system
 # Define a variable containing a path and you will be able to cd into it regardless of the directory you're in

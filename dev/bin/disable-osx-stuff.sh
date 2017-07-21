@@ -1,3 +1,12 @@
+#!/usr/bin/env bash
+called=$_
+if [[ $called != $0 ]] ; then
+    echo "${BASH_SOURCE[@]} is being sourced."
+else
+    this_file=`basename "$0"`
+    echo "$this_file is being run."
+fi
+
 function disable_agent {
   echo "Disabling ${1}"
   launchctl unload -w /System/Library/LaunchAgents/${1}.plist
