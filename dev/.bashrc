@@ -1,36 +1,33 @@
-########
-# Path #
-########
-
-# Initially, PATH is /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
-# TODO: Define PATH in .bash_profile?
-#
-# Ensure usr/local takes precendence. Add home bin dirs.
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin"
-
-
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
-export CDPATH='.:~/scm/sd:~/scm/wjb'
-
-#####################
-# Virtualenvwrapper #
-#####################
-
-export WORKON_HOME=$HOME/env
-export PROJECT_HOME=$HOME/scm
-export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-source /usr/local/bin/virtualenvwrapper_lazy.sh
-
-# Sensible Bash
-
-if [ -f ~/bin/sensible.bash ]; then
-   source ~/bin/sensible.bash
+# This file is only meant to be sourced, not run.
+called=$_
+if [[ $called != $0 ]] ; then
+    echo "${BASH_SOURCE[@]} is being sourced."
+else
+    this_file=`basename "$0"`
+    echo "$this_file is being run."
 fi
+
+#################
+# Sensible Bash #
+#################
+
+if [ -f ~/dotfiles/dev/sensible.bash ]; then
+   source ~/dotfiles/dev/sensible.bash
+fi
+
+ulimit -n 10000
+
+shopt -s extglob
+shopt -s globstar
+
+############
+# Homebrew #
+############
 
 BREW_PREFIX=$(brew --prefix)
 
 if [ -f $BREW_PREFIX/etc/bash_completion ]; then
-    . $BREW_PREFIX/etc/bash_completion
+    source $BREW_PREFIX/etc/bash_completion
 fi
 
 #######
@@ -46,23 +43,20 @@ if [ -f ~/bin/git-completion.bash ]; then
     source ~/bin/git-completion.bash
 fi
 
-# Autocomplete for 'g' as well. From http://nuclearsquid.com/writings/git-tricks-tips-workflows/
-complete -o default -o nospace -F _git g
-
 if [ -f $BREW_PREFIX/etc/bash_completion.d/git-prompt.sh ]; then
-    . $BREW_PREFIX/etc/bash_completion.d/git-prompt.sh
+    source $BREW_PREFIX/etc/bash_completion.d/git-prompt.sh
 else
     source ~/bin/git-prompt.sh
 fi
 
-export PS1='\w$(__git_ps1 " (%s)")\$ '
+PS1='\w$(__git_ps1 " (%s)")\$ '
 
 ###########
 # Aliases #
 ###########
 
 if [ -f ~/.bash_aliases ]; then
-. ~/.bash_aliases
+    source ~/.bash_aliases
 fi
 
 ###########
@@ -74,18 +68,15 @@ subl_open () {
  open "../${NAME}.sublime-project"
 }
 
-##########
-# Python #
-##########
-
-export PYTHONPATH=":${PYTHONPATH}"
-
 ########
 # Ruby #
 ########
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# Load RVM into a shell session *as a function*.
+#
+# TODO: Might be better to handle this like nvm, in its own script with an alias to run it.
+# Could run it automatically in ops Terminal windows.
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 rvm_use () {
     export SHOW_RVM=true
@@ -100,12 +91,6 @@ rvm_quit () {
     rvm_deactivate
 }
 
-########
-# Node #
-########
-
-export PATH="${PATH}:./node_modules/.bin"
-
 #######
 # npm #
 #######
@@ -118,36 +103,42 @@ alias npm_globals=npmtop
 
 # START USING:
 # nvm install v5.0 --reinstall-packages-from=4.2
+# OR SEE ~/.nvm/default-packages
+# OR DO $ yarn global add $(cat ~/.nvm/default-packages)
 #
 # npm global packages I want:
 # $ npm ls -g --depth=0
 # $ npmtop
-# /Users/william/.nvm/v0.10.40/lib
-# ├── @spanishdict/fun-with-examples@3.0.3 -> /Users/william/scm/sd/fun-with-examples
-# ├── @spanishdict/sd-language@2.1.0 -> /Users/william/scm/sd/sd-language
-# ├── bower@1.4.1
-# ├── cleaver@0.7.4
-# ├── coffeelint@1.10.1
-# ├── doctoc@0.14.2
-# ├── eslint@1.1.0
-# ├── eslint-config-standard@4.0.0
-# ├── eslint-plugin-standard@1.2.0
-# ├── express-generator@4.13.1
-# ├── grunt-cli@0.1.13
-# ├── http-server@0.8.0
+# /Users/william/.nvm/versions/node/v4.6.1/lib
+# ├── @spanishdict/fun-with-examples@4.2.0 -> /Users/william/scm/sd/fun-with-examples
+# ├── browser-perf@1.4.11
+# ├── browserslist@1.3.3
+# ├── budo@8.3.0
+# ├── cleaver@0.8.2
+# ├── coffeelint@1.15.7
+# ├── disc@1.3.2
+# ├── elasticdump@2.4.2
+# ├── eslint@2.13.1
+# ├── eslint-plugin-promise@1.3.2
+# ├── eslint-plugin-standard@1.3.2
+# ├── express-generator@4.13.4
+# ├── grunt-cli@1.2.0
+# ├── http-server@0.9.0
+# ├── js-beautify@1.6.3
+# ├── json-diff@0.3.1
 # ├── jsonlint@1.6.2
-# ├── node-inspector@0.12.2
-# ├── npm@2.14.8
-# ├── surge@0.14.3
-# └── tzloc@1.2.0
-
-####
-# But try this next time: nvm install v4.2 --reinstall-packages-from=iojs
-###
+# ├── node-inspector@0.12.8
+# ├── npm@2.15.9
+# ├── standard-format@2.2.2
+# ├── surge@0.18.0
+# ├── tzloc@1.3.1
+# ├── uncss@0.14.1
+# ├── unicode-10.0.0@0.7.4
+# └── wd@0.4.0
 
 function npm_install_globals () {
    #npm install -g npm@2.15.1
-   npm install -g bower budo browserslist cleaver coffeelint eslint eslint-config-standard eslint-plugin-standard express-generator grunt-cli http-server jsonlint node-inspector surge tzloc
+   npm install -g bower budo browserslist cleaver coffeelint eslint eslint-config-standard eslint-plugin-standard express-generator grunt-cli http-server json-diff jsonlint node-inspector surge tzloc standard-format
 }
 
 ##########
@@ -156,20 +147,17 @@ function npm_install_globals () {
 
 # [ -f /Users/william/.travis/travis.sh ] && source /Users/william/.travis/travis.sh
 
-########
-# Tmux #
-########
-
-# See https://github.com/tmux/tmux/issues/284
-export TMUX_TMPDIR=/tmp
+####################
+# Functions
+####################
 
 function fix-tmux () {
     killall -USR1 tmux
 }
 
-####################
-# Functions
-####################
+function emacs_usr2 {
+    kill -USR2 $(pgrep -f emacs)
+}
 
 # These don't work inside of tmux. Why not?
 function tabname {
@@ -203,21 +191,39 @@ function echoDjangoSettings () {
     echo $DJANGO_SETTINGS_MODULE
 }
 
+function urlencode () {
+    local url=$1
+    python -c "import sys,urllib;print urllib.quote('${url}'.strip())" | tee pbcopy
+}
+
+function git_find () {
+    git log -G $1 --source --all
+}
+
+function fix_camera {
+    sudo killall VDCAssistant
+}
+
 ########
 # Misc #
 ########
 
+source /usr/local/bin/virtualenvwrapper_lazy.sh
+
+source /Users/william/.dvm/dvm.sh
+source /Users/william/.dvm/bash_completion
+
+#[[ -s "$(brew --prefix dvm)/dvm.sh" ]] && source "$(brew --prefix dvm)/dvm.sh"
+#[[ -s "$(brew --prefix dvm)/bash_completion" ]] && source "$(brew --prefix dvm)/bash_completion"
+
 complete -C aws_completer aws
-
-export EDITOR='emacsclient'
-
-ulimit -n 10000
-
-shopt -s extglob
-shopt -s globstar
 
 # From http://superuser.com/a/59198
 [[ $- = *i* ]] && bind TAB:menu-complete
+
+#############
+# Reference #
+#############
 
 # Useful commands for checking what process is using a port. TODO: Make into functions.
 # See sockets-netstat and sockets-lsof scripts.
