@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+file_location_if_sourced=$_
+if [[ $file_location_if_sourced != $0 ]] ; then
+    echo "${BASH_SOURCE[@]} is being sourced."
+else
+    this_file=`basename "$0"`
+    echo "$this_file is being run."
+fi
+
+set -x
+MY_PATH="`dirname \"$0\"`"
+echo "$MY_PATH"

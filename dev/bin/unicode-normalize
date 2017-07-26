@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+# From http://billposer.org/Linguistics/Computation/UnicodeNormalization.html
+import sys
+import codecs
+import unicodedata
+
+(utf8_encode, utf8_decode, utf8_reader, utf8_writer) = codecs.lookup('utf-8')
+infile = utf8_reader(sys.stdin)
+outfile = utf8_writer(sys.stdout)
+outfile.write(unicodedata.normalize('NFC', infile.read()))
+
+sys.exit(0)
