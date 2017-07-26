@@ -28,3 +28,25 @@ add-hook new-session
 tmux add-hook "new-session" if-shell "[ -e $HOME/.tmux-session.conf ]" source-file
   $HOME/.tmux-session.conf
 #+END_SRC
+* TODO OS X shell init files
+  - .profile
+  - .bashrc
+  - .bash_profile
+** how it works
+   - http://unix.stackexchange.com/a/129144
+   - $ bash or bash -i  <- Run bash interactive non-login, calls .bashrc.
+   - $ bash -c  <- Run bash non-interactively non-login, does not call .bashrc.
+   - $ bash -l <- Run bash login shell, calls .bash_profile .bash_login
+     .profile. Unlike most other shells, bash does not automatically load the
+     per-instance config file .bashrc when it's started as a login shell.
+   - new Terminal <- run bash login shell
+   - $ echo $- # If output contains i, then it's in an interactive shell
+   - env vars: Set in bash_profile so they only get set once. They are inherited
+     by subshells.
+   - aliases: Set in bashrc because they are not inherited.
+   - functions: Set in bashrc because they are not inherited by default. Or
+     export them with export -f.
+** Difference between source script and ./script
+   - http://stackoverflow.com/a/4779778
+   - source script executes in process and will change current environment.
+     ./script runs own process and will not change current environment.
