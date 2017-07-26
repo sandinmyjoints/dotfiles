@@ -1,15 +1,20 @@
+# This file is only meant to be sourced, not run.
+called=$_
+if [[ $called != $0 ]] ; then
+    echo "${BASH_SOURCE[@]} is being sourced."
+else
+    this_file=`basename "$0"`
+    echo "$this_file is being run."
+fi
+
+# ls better
 alias ll='ls -laGhF'
 alias ls='ls -hG'
-alias p='ipython'
-alias g='git'
+alias lt='ls -lAt && echo "------Oldest--"'
+alias ltr='ls -lArt && echo "------Newest--"'
 
-alias subl='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl'
+alias diff='diff -u'
 
-alias grepc='grep --color=auto -Ii'
-alias grepn='grep --color=auto -Iin'
-alias egrep='grep -E --color=auto -Ii'
-alias egrepn='grep -E --color=auto -Iin'
-alias grepnc='grep -E --color=never -Ii'
 alias fin='egrepn -r -C 3 --exclude *~'
 alias pg='pgrep -fil'
 alias pgrepf='pgrep -f'
@@ -26,9 +31,7 @@ alias md=multimarkdown
 alias mmd=multimarkdown
 alias markdown=multimarkdown
 
-alias icoffee='~/scm/wjb/coffee-script/bin/coffee'
-
-alias diff='diff -u'
+alias subl='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl'
 
 alias h?="history | grep"
 
@@ -43,7 +46,7 @@ alias mem='top -o rsize' # memory
 alias cpwd='pwd|tr -d "\n"|pbcopy'
 
 # DNS (with update thanks to @blanco)
-alias flush="sudo killall -HUP mDNSResponder"
+alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 
 # share history between terminal sessions
 alias he="history -a" # export history
@@ -51,10 +54,6 @@ alias hi="history -n" # import history
 
 # Get your current public IP
 alias ip="curl icanhazip.com"
-
-# ls better
-alias lt='ls -lAt && echo "------Oldest--"'
-alias ltr='ls -lArt && echo "------Newest--"'
 
 # mute the system volume
 alias stfu="osascript -e 'set volume output muted true'"
@@ -81,7 +80,21 @@ alias evaldm='eval $(docker-machine env)'
 alias dc='docker-compose'
 alias dcl='docker-cloud'
 
-# Ops
-alias knifeatl='knife data bag from file webapp_site deploy.json && knife data bag from file webapp_translate deploy.json && knife data bag from file webapp_suggest deploy.json'
-
 alias n='source ~/dotfiles/dev/nvm-startup.sh'
+
+# See http://unix.stackexchange.com/a/25329
+alias watch='watch '
+
+# Git
+alias git-prune-and-remove-untracked-branches='git fetch --prune && git branch -r | awk "{print \$1}" | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d'
+
+alias curlv='curl -v -o /dev/null'
+
+# https://stackoverflow.com/questions/5637311/how-to-use-git-diff-color-words-outside-a-git-repository
+alias diffmin='git diff --color-words --no-index'
+alias cpdiff='git diff | pbcopy'
+
+alias cgrep='ggrep --color='auto' -P -n'
+
+alias yarn-install='yarn install --ignore-engines'
+alias top='top -s 2 -o cpu -R -F'
