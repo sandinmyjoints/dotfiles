@@ -1,5 +1,12 @@
-#!/bin/bash
-#
+# This file is only meant to be sourced, not run.
+called=$_
+if [[ $called != $0 ]] ; then
+    echo "${BASH_SOURCE[@]} is being sourced."
+else
+    this_file=`basename "$0"`
+    echo "$this_file is being run."
+fi
+
 # Constants and functions for terminal colors.
 # Author: Max Tsepkov <max@yogi.pw>
 #
