@@ -1,0 +1,12 @@
+#!/bin/bash
+temp=$(mktemp)
+text=`cat`
+echo "$text" > $temp
+
+read -r -d '' lisp <<EOF
+  (switch-to-buffer (generate-new-buffer-name "*pipe*"))
+  (insert-file-contents "$temp")
+EOF
+
+emacsclient --eval "(progn $lisp $1)"
+rm "$temp"

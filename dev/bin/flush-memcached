@@ -1,0 +1,13 @@
+#!/usr/bin/expect
+
+set timeout 5
+
+spawn telnet localhost 11211
+
+expect "Escape character is '^]'." {
+    send "flush_all\r"
+}
+
+expect OK {
+    send "quit\r"
+}
