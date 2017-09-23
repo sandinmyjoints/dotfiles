@@ -56,10 +56,13 @@ PYTHONPATH=":${PYTHONPATH}"
 
 # Add RVM to PATH to allow use of rvm command in scripts.
 PATH="$PATH:$HOME/.rvm/bin"
+PATH="$PATH:/usr/local/Cellar/mysql/5.7.16/bin"
 
 ########
 # Misc #
 ########
+
+PATH="$HOME/.cargo/bin:$PATH"
 
 # See https://github.com/tmux/tmux/issues/284
 TMUX_TMPDIR=/tmp
