@@ -98,3 +98,8 @@ alias cgrep='ggrep --color='auto' -P -n'
 
 alias yarn-install='yarn install --ignore-engines'
 alias top='top -s 2 -o cpu -R -F'
+alias exa='exa -al '
+alias llx='exa '
+alias ecs-deploy='ecs-deploy --timeout 180 '
+
+alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium '
