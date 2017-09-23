@@ -101,44 +101,17 @@ function npmtop () {
 
 alias npm_globals=npmtop
 
-# START USING:
-# nvm install v5.0 --reinstall-packages-from=4.2
-# OR SEE ~/.nvm/default-packages
-# OR DO $ yarn global add $(cat ~/.nvm/default-packages)
+# See ~/.nvm/default-packages
 #
-# npm global packages I want:
-# $ npm ls -g --depth=0
-# $ npmtop
-# /Users/william/.nvm/versions/node/v4.6.1/lib
-# ├── @spanishdict/fun-with-examples@4.2.0 -> /Users/william/scm/sd/fun-with-examples
-# ├── browser-perf@1.4.11
-# ├── browserslist@1.3.3
-# ├── budo@8.3.0
-# ├── cleaver@0.8.2
-# ├── coffeelint@1.15.7
-# ├── disc@1.3.2
-# ├── elasticdump@2.4.2
-# ├── eslint@2.13.1
-# ├── eslint-plugin-promise@1.3.2
-# ├── eslint-plugin-standard@1.3.2
-# ├── express-generator@4.13.4
-# ├── grunt-cli@1.2.0
-# ├── http-server@0.9.0
-# ├── js-beautify@1.6.3
-# ├── json-diff@0.3.1
-# ├── jsonlint@1.6.2
-# ├── node-inspector@0.12.8
-# ├── npm@2.15.9
-# ├── standard-format@2.2.2
-# ├── surge@0.18.0
-# ├── tzloc@1.3.1
-# ├── uncss@0.14.1
-# ├── unicode-10.0.0@0.7.4
-# └── wd@0.4.0
-
 function npm_install_globals () {
    #npm install -g npm@2.15.1
-   npm install -g bower budo browserslist cleaver coffeelint eslint eslint-config-standard eslint-plugin-standard express-generator grunt-cli http-server json-diff jsonlint node-inspector surge tzloc standard-format
+    npm install -g $(cat ~/.nvm/default-packages)
+}
+
+function yarn_install_globals () {
+    echo "yarn does not have different globals per version of node. Use npm_install_globals instead."
+    exit 1
+    yarn global add $(cat ~/.nvm/default-packages)
 }
 
 ##########
