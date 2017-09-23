@@ -55,8 +55,12 @@ CLR_CYANB=46            # set cyan background
 CLR_WHITEB=47           # set white background
 
 # See: http://stackoverflow.com/a/19501528/599258
-NON_PRINTABLE_START="\001"
-NON_PRINTABLE_STOP="\002"
+# NON_PRINTABLE_START="\001"
+# NON_PRINTABLE_STOP="\002"
+#
+# See: https://superuser.com/a/301355/93702
+NON_PRINTABLE_START="\x01"
+NON_PRINTABLE_STOP="\x02"
 
 # General function to wrap string with escape seqence(s).
 # Ex: clr_escape foobar $CLR_RED $CLR_BOLD
@@ -67,15 +71,17 @@ function clr_escape
 	      if ! [ $2 -ge 0 -a $2 -le 97 ] 2>/dev/null; then
 	          echo "clr_escape: argument \"$2\" is out of range" >&2 && return 1
 	      fi
-        result="${CLR_ESC}${2}m${result}${CLR_ESC}${CLR_RESET}m"
-
-        # TODO: Fix multiline commands being overwritten
-        # result="${NON_PRINTABLE_START}${CLR_ESC}${2}m${NON_PRINTABLE_STOP}${result}${NON_PRINTABLE_START}${CLR_ESC}${CLR_RESET}m${NON_PRINTABLE_STOP}"
+        # Broken:
+        # result="${CLR_ESC}${2}m${result}${CLR_ESC}${CLR_RESET}m"
+        #
+        # Fixes (I think) multiline commands being overwritten:
+        result="${NON_PRINTABLE_START}${CLR_ESC}${2}m${NON_PRINTABLE_STOP}${result}${NON_PRINTABLE_START}${CLR_ESC}${CLR_RESET}m${NON_PRINTABLE_STOP}"
 
 	      shift || break
     done
 
-    echo -e "$NON_PRINTABLE_START$result$NON_PRINTABLE_STOP"
+    # echo -e "$NON_PRINTABLE_START$result$NON_PRINTABLE_STOP"
+    echo -e "$result"
 }
 
 function clr_reset           { clr_escape "$1" $CLR_RESET;           }
