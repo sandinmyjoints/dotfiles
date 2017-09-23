@@ -59,7 +59,7 @@ NON_PRINTABLE_START="\001"
 NON_PRINTABLE_STOP="\002"
 
 # General function to wrap string with escape seqence(s).
-# Ex: console_escape foobar $CLR_RED $CLR_BOLD
+# Ex: clr_escape foobar $CLR_RED $CLR_BOLD
 function clr_escape
 {
     local result="$1"
