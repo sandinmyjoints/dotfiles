@@ -19,9 +19,13 @@ function __git_dirty {
     [ $? == 1 ] && clr_red "X"
 }
 
+# clr_escape echoes, and the only way to capture the output of echo is with a
+# subshell. So, there are a lot of subshells.
 function __git_branch {
     local git_ps1=$(__git_ps1 "%s")
-    [ "$git_ps1" != "" ] && clr_escape $(echo "$git_ps1" | sed 's/feature/f/; s/chore/c/; s/bug/b/') $CLR_LIGHT_GRAY
+    if [ ! -z "$git_ps1" ]; then
+        clr_escape $(echo "$git_ps1" | sed 's/feature/f/; s/chore/c/; s/bug/b/') $CLR_LIGHT_GRAY
+    fi
 }
 
 function __my_rvm_ruby_version {
@@ -56,6 +60,7 @@ function __info {
         $(__git_branch)
         # $(__git_dirty)
     )
+    # Note: I think this is expanding the array into a string.
     full="${full[*]}"
 
     # [ "$full" == "" ] && echo "" || echo "$full "
