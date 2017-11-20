@@ -1,10 +1,14 @@
+# Bail if run in a non-interactive shell (like by scp). See:
+# http://thomas-cokelaer.info/blog/2011/09/scp-does-not-work-wrong-bashrc/
+[ -z "$PS1" ] && return
+
 # This file is only meant to be sourced, not run.
 called=$_
 if [[ $called != $0 ]] ; then
-    echo "${BASH_SOURCE[@]} is being sourced."
+    [ -z "$SSH_TTY" ] && echo "${BASH_SOURCE[@]} is being sourced."
 else
     this_file=`basename "$0"`
-    echo "$this_file is being run."
+    [ -z "$SSH_TTY" ] && echo "$this_file is being run."
 fi
 
 #################
