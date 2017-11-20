@@ -181,6 +181,17 @@ function fix_camera {
     sudo killall VDCAssistant
 }
 
+function result {
+    curl -s "localhost:2100/slim/result/$1" | jq ;
+}
+
+function ssb {
+    ssh -t sd-bastion ssh -A $1
+}
+
+function jsondiff {
+    diff <(jq -S . $1) <(jq -S . $2)
+}
 ########
 # Misc #
 ########
