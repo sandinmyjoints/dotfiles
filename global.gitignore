@@ -8,6 +8,7 @@ auto-save-list
 tramp
 .\#*
 .dir-locals.el
+TAGS
 
 # Org-mode
 .org-id-locations
