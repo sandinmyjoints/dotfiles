@@ -196,6 +196,9 @@ function jsondiff {
 # Misc #
 ########
 
+# Use Homebrew's Python.
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 source /Users/william/.dvm/dvm.sh
