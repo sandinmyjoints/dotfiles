@@ -234,6 +234,9 @@ complete -C aws_completer aws
 
 [[ -s ~/local/.bashrc ]] && source ~/local/.bashrc
 
-# TODO don't hardcode these.
 source ~/dotfiles/dev/bash_colors.sh
 source ~/dotfiles/dev/.bash_prompt
+source ~/dotfiles/dev/alias_completion.bash
+
+# source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
+# source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
