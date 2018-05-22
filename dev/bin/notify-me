@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# shell2http -port=4004 -form /notify "notify-me $v_title, $v_msg"
+
+title=$1
+msg=$2
+
+osascript -e "display notification \"$v_msg\" with title \"$v_title\""

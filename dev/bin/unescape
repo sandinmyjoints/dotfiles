@@ -1,0 +1,11 @@
+#!/usr/bin/env coffee
+
+unescapeHtml = (unsafe) ->
+  unsafe
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, "\"")
+    .replace(/&#039;/g, "'")
+
+console.log unescapeHtml process.argv[2]
