@@ -105,6 +105,10 @@ function npmtop () {
 
 alias npm_globals=npmtop
 
+function npmls () {
+    npm ls --depth=0
+}
+
 # See ~/.nvm/default-packages
 #
 function npm_install_globals () {
@@ -192,6 +196,15 @@ function ssb {
 function jsondiff {
     diff <(jq -S . $1) <(jq -S . $2)
 }
+
+# $ scale_image orig.jpg orig-small.jpg
+#
+# imagemagick can do lots of cool stuff, see: #
+# https://stackoverflow.com/a/31726270/599258
+function scale_image {
+    convert $1 -resize '50%' $2
+}
+
 ########
 # Misc #
 ########
