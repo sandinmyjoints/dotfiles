@@ -88,3 +88,5 @@ Temporary Items
 local_notes
 
 .tern-port
+
+docker-compose.override.yml
