@@ -67,6 +67,7 @@ PATH="$HOME/.cargo/bin:$PATH"
 # See https://github.com/tmux/tmux/issues/284
 TMUX_TMPDIR=/tmp
 
+GREP_OPTIONS="--exclude=*#*"
 EDITOR='emacsclient'
 JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
