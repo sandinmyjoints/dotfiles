@@ -8,8 +8,9 @@ else
 fi
 
 # ls better
-alias ll='ls -laGhF'
-alias ls='ls -hG'
+# These are BSD ls options, not sure how well they work with GNU ls.
+alias ll='ls -oAGhF'
+alias ls='ls -hFG'
 alias lt='ls -lAt && echo "------Oldest--"'
 alias ltr='ls -lArt && echo "------Newest--"'
 
@@ -25,7 +26,7 @@ alias ping9='ping 9.9.9.9'
 
 alias ld='otool -L'
 
-alias ec='emacsclient'
+alias ec='emacsclient -n'
 
 #alias markdown='python -m markdown'
 alias md=multimarkdown
@@ -101,6 +102,7 @@ alias yarn-install='yarn install --ignore-engines'
 alias top='top -s 2 -o cpu -R -F'
 alias exa='exa -al '
 alias llx='exa '
+alias xx='exa '
 alias ecs-deploy='ecs-deploy --timeout 180 '
 
 alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium '
