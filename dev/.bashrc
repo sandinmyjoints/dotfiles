@@ -132,12 +132,24 @@ function yarn_install_globals () {
 # Functions
 ####################
 
-function fix-tmux () {
-    killall -USR1 tmux
+function emacs_usr2 {
+    kill -USR2 "$(pgrep -f emacs-mac)"
 }
 
-function emacs_usr2 {
-    kill -USR2 $(pgrep -f emacs)
+function dired {
+    emacsclient -e "(dired \"$1\")"
+}
+
+function dirtree {
+    echo Adding "$PWD" to dirtree.
+    CMD="(dirtree \"$PWD\" t)"
+    emacsclient -e "$CMD"
+}
+
+# emacs-pipe is a shell script in /bin.
+
+function fix-tmux () {
+    killall -USR1 tmux
 }
 
 # These don't work inside of tmux. Why not?
@@ -204,6 +216,22 @@ function jsondiff {
 function scale_image {
     convert $1 -resize '50%' $2
 }
+
+# Usage: $ neodict_for en Africa
+function neodict_for {
+    # $ curl -sS 'http://site1.spanishdict.com/api/v1/dictionary?q=Africa&source=en' | jq -r '.data.neodict' | jq
+    curl -sS "http://site1.spanishdict.com/api/v1/dictionary?q=$2&source=$1" | jq -r '.data.neodict' | jq
+}
+
+# Usage: $ img 1500 1800 jpg
+function img {
+    filename="$1x$2.$3"
+    curl -sS -o "$filename" "https://via.placeholder.com/$filename"
+    ls -l "$filename"
+}
+
+# For reference:
+# $ shasum -a 256 <file>
 
 ########
 # Misc #
