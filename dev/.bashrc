@@ -1,6 +1,6 @@
 # Bail if run in a non-interactive shell (like by scp). See:
 # http://thomas-cokelaer.info/blog/2011/09/scp-does-not-work-wrong-bashrc/
-[ -z "$PS1" ] && return
+[ -z "$PS1" ] && echo Bailing && return
 
 # This file is only meant to be sourced, not run.
 called=$_
@@ -193,6 +193,10 @@ function git_find () {
     git log -G $1 --source --all
 }
 
+function gitcp {
+    git diff | pbcopy
+}
+
 function fix_camera {
     sudo killall VDCAssistant
 }
@@ -207,6 +211,10 @@ function ssb {
 
 function jsondiff {
     diff <(jq -S . $1) <(jq -S . $2)
+}
+
+function base64decode {
+    echo "$1" | base64 --decode ; printf '\n'
 }
 
 # $ scale_image orig.jpg orig-small.jpg
@@ -228,6 +236,11 @@ function img {
     filename="$1x$2.$3"
     curl -sS -o "$filename" "https://via.placeholder.com/$filename"
     ls -l "$filename"
+}
+
+function curljq {
+    url="$1"
+    curl -sS "$url" | jq '.'
 }
 
 # For reference:
