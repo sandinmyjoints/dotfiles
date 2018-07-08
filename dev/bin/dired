@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-# -*- mode: shell-script ; sh-shell: bash -*-
-
-emacsclient -e "(dired \"$1\")"
