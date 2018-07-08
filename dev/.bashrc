@@ -255,12 +255,6 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 source /usr/local/bin/virtualenvwrapper_lazy.sh
 
-source /Users/william/.dvm/dvm.sh
-source /Users/william/.dvm/bash_completion
-
-#[[ -s "$(brew --prefix dvm)/dvm.sh" ]] && source "$(brew --prefix dvm)/dvm.sh"
-#[[ -s "$(brew --prefix dvm)/bash_completion" ]] && source "$(brew --prefix dvm)/bash_completion"
-
 complete -C aws_completer aws
 
 # From http://superuser.com/a/59198
