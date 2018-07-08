@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+brew install emacs-mac --with-modern-icon --with-gnutls --with-imagemagick
