@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# apt-get install -y tmux emacs mysql-server mysql-client python-minimal make g++ memcached s3cmd pigz awscli jq
-sudo apt-get update && sudo apt-get install -y emacs jq
+apt-get install -y tmux emacs mysql-server mysql-client python-minimal make g++ memcached s3cmd pigz awscli jq
+
 cat << "EOF" >> .tmux.conf
 set -g default-terminal "screen-256color"
 
