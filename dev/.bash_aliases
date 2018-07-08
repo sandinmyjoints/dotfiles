@@ -27,6 +27,7 @@ alias ping9='ping 9.9.9.9'
 alias ld='otool -L'
 
 alias ec='emacsclient -n'
+alias emacs='emacsclient -a -n'
 
 #alias markdown='python -m markdown'
 alias md=multimarkdown
