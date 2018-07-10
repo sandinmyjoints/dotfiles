@@ -213,6 +213,12 @@ function ssb {
     ssh -t sd-bastion ssh -A $1
 }
 
+function ssht {
+    ssh -t "$@" "/usr/local/bin/tmux attach-session -t mine || /usr/local/bin/tmux new-session -s mine"
+}
+
+alias moshi='LANG=en_US.UTF-8 mosh --server=/usr/local/bin/mosh-server'
+
 function jsondiff {
     diff <(jq -S . $1) <(jq -S . $2)
 }
