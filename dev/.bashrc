@@ -1,6 +1,10 @@
-# Bail if run in a non-interactive shell (like by scp). See:
+# For mosh, see https://github.com/mobile-shell/mosh/issues/102#issuecomment-12503646
+export PATH=/usr/local/bin:$PATH
+
+# Bail silently (do NOT echo anything) if run in a non-interactive shell (like
+# by scp). See:
 # http://thomas-cokelaer.info/blog/2011/09/scp-does-not-work-wrong-bashrc/
-[ -z "$PS1" ] && echo Bailing && return
+[ -z "$PS1" ] && return
 
 # This file is only meant to be sourced, not run.
 called=$_
