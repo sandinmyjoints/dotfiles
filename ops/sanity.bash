@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Set up an Ubuntu instance.
 
-sudo apt-get update && sudo apt-get install -y emacs jq pigz awscli
+sudo apt-get update && sudo apt-get install -y emacs jq pigz awscli tmux mosh s3cmd
 
 alias attach='tmux attach -t '
 
