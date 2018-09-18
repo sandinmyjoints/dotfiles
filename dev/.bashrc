@@ -235,6 +235,30 @@ function scale_image {
     convert $1 -resize '50%' $2
 }
 
+alias last_screenshot="ls -1rt ~/Screenshots | tail -1"
+
+# $ thumb image.jpg 300 200
+# $ thumb "$(last_screenshot)" 800
+# $ shot i | thumb 300
+# see: https://www.imagemagick.org/Usage/thumbnails/#cut
+# See also: mogrify, which works on whole directories
+function thumb {
+    local fullfile="$1"
+    local filename=$(basename -- "$fullfile")
+    local extension="${filename##*.}"
+    local filename="${filename%.*}"
+
+    local width="$2"
+    local height="$3"
+
+    convert "$fullfile" -auto-orient -thumbnail "$width"x"$height" -unsharp 0x.5 "$filename"-thumb."$extension"
+}
+
+alias thumbnail=thumb
+
+alias up='NODE_NO_WARNINGS=1 up'
+alias shootup='up --direct "$(shot i)"'
+
 # Usage: $ neodict_for en Africa
 function neodict_for {
     # $ curl -sS 'http://site1.spanishdict.com/api/v1/dictionary?q=Africa&source=en' | jq -r '.data.neodict' | jq
