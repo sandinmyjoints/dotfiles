@@ -205,6 +205,15 @@ function fix_camera {
     sudo killall VDCAssistant
 }
 
+# based on https://superuser.com/a/742984/93702
+function fix_audio {
+    sudo kextunload /System/Library/Extensions/AppleHDA.kext
+    sudo kextload /System/Library/Extensions/AppleHDA.kext
+
+    # probably not needed unless audio is actively playing:
+    # ps aux | grep 'coreaudio[d]' | awk '{print $2}' | xargs sudo kill
+}
+
 function result {
     curl -s "localhost:2100/slim/result/$1" | jq ;
 }
