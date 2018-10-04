@@ -1,3 +1,13 @@
 #!/usr/bin/env bash
 
-brew install emacs-mac --with-modern-icon --with-gnutls --with-imagemagick
+# - Don't use glib: https://emacs.stackexchange.com/a/21463/2163
+# - Not sure if using gnutls (the default) is the right thing to do or not.
+# - Not sure whether using lib-xml2 is the right thing to do or not.
+#
+# brew reinstall
+brew install emacs-mac \
+     --with-modern-icon \
+     --with-imagemagick \
+     --with-dbus \
+     --with-no-title-bars \
+     --with-xml2
