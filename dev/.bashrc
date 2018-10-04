@@ -100,7 +100,7 @@ rvm_quit () {
 }
 
 #################
-# node/npm/yarn #
+# node/nvm/npm/yarn #
 #################
 
 # Preferred method of installing Yarn: brew install yarn --without-node
@@ -109,6 +109,16 @@ rvm_quit () {
 #
 # This install it once for the whole system, so it does not and should not be
 # installed globally per node installation.
+#
+# See: https://yarnpkg.com/lang/en/docs/cli/global/
+#
+# $ yarn global dir
+# /Users/william/.config/yarn/global
+#
+# This is where global bins will be symlinked.
+# $ yarn config set prefix ~/.yarn
+# $ yarn global bin
+# /Users/william/.yarn/bin
 
 
 # Examples

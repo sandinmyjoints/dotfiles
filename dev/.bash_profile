@@ -22,7 +22,7 @@ set -o allexport
 # /usr/bin:/bin:/usr/sbin:/sbin
 #
 # Ensure /usr/local takes precendence. Add home bin dirs.
-PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin"
+PATH="/usr/local/bin:/usr/local/sbin:$PATH:$(yarn global bin):~/local/bin:~/bin"
 
 #######
 # AWS #
