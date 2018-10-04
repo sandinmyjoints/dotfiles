@@ -99,9 +99,37 @@ rvm_quit () {
     rvm_deactivate
 }
 
-#######
-# npm #
-#######
+#################
+# node/npm/yarn #
+#################
+
+# Preferred method of installing Yarn: brew install yarn --without-node
+#
+# See: https://yarnpkg.com/lang/en/docs/install/#mac-stable
+#
+# This install it once for the whole system, so it does not and should not be
+# installed globally per node installation.
+
+
+# Examples
+# nvm run v8.11.3 -e "console.log(\"hello\")"
+# nvm exec v8.11.3 npm -v
+# nvm exec v8.11.3 bash -c 'npm -v'
+
+# Run a command on every local node installation.
+# Usage (use quotes around the command):
+# every_node v8.11.3 'npm -v'
+# every_node v8.11.3 'yarn global list yarn'
+# Problems:
+# - nvm ls output is not clean
+# - bash function rest args: how?
+# function every_node {
+#     version=$1
+#     command=$2
+#     version='v8.11.3'
+#     # nvm exec "$version" bash -c "$command"
+#     nvm exec "$version" "$command"
+# }
 
 function npmtop () {
     npm list -g --depth=0
