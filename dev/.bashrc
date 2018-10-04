@@ -294,7 +294,8 @@ function thumb {
 alias thumbnail=thumb
 
 alias up='NODE_NO_WARNINGS=1 up'
-alias shootup='up --direct "$(shot i)"'
+# FIXME: this runs shot whenever bash starts
+# alias shootup='up --direct "$(shot i)"'
 
 # Usage: $ neodict_for en Africa
 function neodict_for {
