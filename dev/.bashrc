@@ -280,6 +280,15 @@ function curljq {
 # For reference:
 # $ shasum -a 256 <file>
 
+function ecs-restart {
+    local $cluster="$1"
+    local $service="$2"
+
+    ([[ -z "${cluster// }" ]] || [[ -z "${service// }" ]]) && echo "Usage: ecs-restart <cluster> <service>"; exit 1
+
+    echo "aws ecs update-service --cluster $cluster --service $service"
+}
+
 ########
 # Misc #
 ########
