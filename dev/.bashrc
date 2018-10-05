@@ -282,8 +282,6 @@ function scale_image {
     convert $1 -resize '50%' $2
 }
 
-alias last_screenshot="ls -1rt ~/Screenshots | tail -1"
-
 # $ thumb image.jpg 300 200
 # $ thumb "$(last_screenshot)" 800
 # $ shot i | thumb 300
@@ -300,12 +298,6 @@ function thumb {
 
     convert "$fullfile" -auto-orient -thumbnail "$width"x"$height" -unsharp 0x.5 "$filename"-thumb."$extension"
 }
-
-alias thumbnail=thumb
-
-alias up='NODE_NO_WARNINGS=1 up'
-# FIXME: this runs shot whenever bash starts
-# alias shootup='up --direct "$(shot i)"'
 
 # Usage: $ neodict_for en Africa
 function neodict_for {

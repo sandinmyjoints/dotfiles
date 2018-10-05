@@ -107,3 +107,12 @@ alias xx='exa '
 alias ecs-deploy='ecs-deploy --timeout 180 '
 
 alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium '
+
+alias knot='./knot'
+
+alias thumbnail=thumb
+
+alias up='NODE_NO_WARNINGS=1 up'
+# FIXME: this runs shot whenever bash starts
+# alias shootup='up --direct "$(shot i)"'
+alias last_screenshot="ls -1rt ~/Screenshots | tail -1"
