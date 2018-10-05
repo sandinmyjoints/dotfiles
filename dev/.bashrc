@@ -337,6 +337,19 @@ function ecs-restart {
     echo "aws ecs update-service --cluster $cluster --service $service"
 }
 
+# Pretty-print PATH.
+function ppath {
+    echo $PATH | tr : '\n'
+}
+
+# From: https://unix.stackexchange.com/a/14896
+# De-dupe PATH.
+function pathmerge {
+    export ORIGINAL_PATH="$PATH"
+    export PATH=$(printf "%s" "$PATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
+    echo $PATH
+}
+
 ########
 # Misc #
 ########
@@ -379,3 +392,6 @@ source ~/dotfiles/dev/alias_completion.bash
 
 # source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
 # source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
+
+# added by pipsi (https://github.com/mitsuhiko/pipsi)
+export PATH="/Users/william/.local/bin:$PATH"
