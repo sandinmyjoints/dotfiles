@@ -22,7 +22,7 @@ set -o allexport
 # /usr/bin:/bin:/usr/sbin:/sbin
 #
 # Ensure /usr/local takes precendence. Add home bin dirs.
-PATH="/usr/local/bin:/usr/local/sbin:$PATH:$(yarn global bin):~/local/bin:~/bin"
+PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin"
 
 #######
 # AWS #
@@ -78,6 +78,9 @@ JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 CDPATH='.:~/scm/sd:~/scm/wjb'
 
 SD_BASTION=23.23.70.67
+
+# See https://github.com/typicode/husky/issues/172
+HUSKY_SKIP_INSTALL=1
 
 set +o allexport
 

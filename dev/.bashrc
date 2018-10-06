@@ -342,6 +342,13 @@ function pathmerge {
     echo $PATH
 }
 
+# Prettier for formatting markdown that works even when no node is in the
+# current PATH. But it's slow, because nvm is slow.
+function gp {
+    yarn_global_bin_path=$(nvm exec --silent "lts/*" yarn global bin)
+    nvm exec "lts/*" $yarn_global_bin_path/prettier --parser markdown
+}
+
 ########
 # Misc #
 ########
@@ -356,28 +363,6 @@ complete -C aws_completer aws
 # From http://superuser.com/a/59198
 [[ $- = *i* ]] && bind TAB:menu-complete
 
-#############
-# Reference #
-#############
-
-# Useful commands for checking what process is using a port. TODO: Make into functions.
-# See sockets-netstat and sockets-lsof scripts.
-# $ netstat -anp tcp | grep 3000
-# $ lsof -i tcp:3000
-
-# script / col
-# $ script -q
-# $ col -bp <typescript | less
-
-# How to tar and gzip:
-# $ tar -cvzf tarballname.tar.gz itemtocompress
-
-#########
-# Local #
-#########
-
-[[ -s ~/local/.bashrc ]] && source ~/local/.bashrc
-
 source ~/dotfiles/dev/bash_colors.sh
 source ~/dotfiles/dev/.bash_prompt
 source ~/dotfiles/dev/alias_completion.bash
@@ -387,3 +372,9 @@ source ~/dotfiles/dev/alias_completion.bash
 
 # added by pipsi (https://github.com/mitsuhiko/pipsi)
 export PATH="/Users/william/.local/bin:$PATH"
+
+#########
+# Local #
+#########
+
+[[ -s ~/local/.bashrc ]] && source ~/local/.bashrc

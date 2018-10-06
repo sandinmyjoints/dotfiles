@@ -15,10 +15,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# TODO: not clear to me whether I should have yarn in PATH or not. For now, leaving it out.
-# export PATH="$HOME/.yarn/bin:$PATH"
-# # https://github.com/yarnpkg/yarn/issues/648
-# export PATH="$PATH:$(yarn global bin)"
+# TODO: not clear to me whether I should have yarn in PATH or not. For now,
+# putting it in whenever node is going to be used (ie, nvm is started).
+# https://github.com/yarnpkg/yarn/issues/648
+#
+export PATH="$PATH:$(yarn global bin)"
+
 
 # If I set nvm default, then nvm.sh will add it to PATH. Then Emacs
 # nvm.el is always going to find and use that version, even if I try
