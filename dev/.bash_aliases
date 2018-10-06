@@ -116,3 +116,11 @@ alias up='NODE_NO_WARNINGS=1 up'
 # FIXME: this runs shot whenever bash starts
 # alias shootup='up --direct "$(shot i)"'
 alias last_screenshot="ls -1rt ~/Screenshots | tail -1"
+
+alias markdown=/usr/local/bin/cmark
+
+# Global prettier, because the node-specific bin dir is earlier on PATH than
+# globals. This only works if a node is on the PATH, ie, if nvm has been started
+# and a node selected.
+#
+alias gprettier=/Users/william/.yarn/bin/prettier
