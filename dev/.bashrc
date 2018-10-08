@@ -349,6 +349,17 @@ function gp {
     nvm exec "lts/*" $yarn_global_bin_path/prettier --parser markdown
 }
 
+# Usage: ecs-restart prod-sd-site prod-sd-site-public-2
+function ecs-restart {
+    local cluster="$1"
+    local service="$2"
+    ( [[ -z "${cluster// }" ]] || [[ -z "${service// }" ]] ) && echo "Usage: ecs-restart <cluster> <service>" && return 1
+
+    command="aws ecs update-service --cluster $cluster --service $service --force-new-deployment"
+    echo $command
+    eval $command
+}
+
 ########
 # Misc #
 ########
