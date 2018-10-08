@@ -3,6 +3,8 @@
 # TODO: persist and restore the state & position of panes.
 set -e
 
+renice -n 10
+
 # See https://github.com/tmux/tmux/issues/284
 export TMUX_TMPDIR=/tmp
 
@@ -48,6 +50,7 @@ restore() {
         new_session "$session_name" "$window_name" "$dir" "$dimensions"
         count=$(( $count + 1 ))
       fi
+      sleep 0.5
     fi
   done < ~/.tmux-session
 
