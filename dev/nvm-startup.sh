@@ -68,7 +68,7 @@ function nvm_use_if_needed () {
     if [ "$WANTED" != "$CURRENT" ]; then
         [[ "$nvm_has_been_used" -eq "0" ]] && unalias node
         nvm use
-        [[ "$nvm_has_been_used" -eq "0" ]] && export PATH="$PATH:$(yarn global bin)" && nvm_has_been_used=1
+        [[ "$nvm_has_been_used" -eq "0" ]] && export PATH="$PATH:$(yarn global bin)" && source <(npm completion) && nvm_has_been_used=1
     fi
 }
 export PROMPT_COMMAND="$PROMPT_COMMAND ; nvm_use_if_needed"
