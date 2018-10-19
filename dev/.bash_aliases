@@ -104,7 +104,7 @@ alias top='top -s 2 -o cpu -R -F'
 alias exa='exa -al '
 alias llx='exa '
 alias xx='exa '
-alias ecs-deploy='ecs-deploy --timeout 180 '
+# alias ecs-deploy='ecs-deploy --timeout 180 '
 
 alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium '
 
@@ -124,3 +124,5 @@ alias markdown=/usr/local/bin/cmark
 # and a node selected.
 #
 alias gprettier=/Users/william/.yarn/bin/prettier
+
+alias changes='/Users/william/scm/sd/neodarwin/bin/changes'
