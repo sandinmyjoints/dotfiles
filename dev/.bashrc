@@ -34,8 +34,14 @@ shopt -s globstar
 
 BREW_PREFIX=$(brew --prefix)
 
-if [ -f $BREW_PREFIX/etc/bash_completion ]; then
-    source $BREW_PREFIX/etc/bash_completion
+# bash completion 1.x, which is now unlinked.
+# if [ -f $BREW_PREFIX/etc/bash_completion ]; then
+#     source $BREW_PREFIX/etc/bash_completion
+# fi
+
+# bash completion 2.
+if [ -f /usr/local/share/bash-completion/bash_completion ]; then
+    . /usr/local/share/bash-completion/bash_completion
 fi
 
 #######
@@ -370,6 +376,8 @@ export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 complete -C aws_completer aws
+
+. ~/.local/share/bash-completion/completions/django
 
 # From http://superuser.com/a/59198
 [[ $- = *i* ]] && bind TAB:menu-complete

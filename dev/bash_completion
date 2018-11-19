@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# From: https://serverfault.com/questions/506612/standard-place-for-user-defined-bash-completion-d-scripts
+shopt -s nullglob
+
+for f in ~/dotfiles/dev/.bash_completion.d/*; do
+  [ -f "$f" ] && echo "source completion file <$f>" && . "$f"
+done
