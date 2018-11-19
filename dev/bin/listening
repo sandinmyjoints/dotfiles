@@ -1,0 +1,4 @@
+#!/bin/bash
+# $ listening PORT
+# lsof -n -i4TCP:$PORT | grep LISTEN
+lsof -n -i4TCP:$1 | grep LISTEN
