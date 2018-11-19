@@ -37,9 +37,12 @@ alias markdown=multimarkdown
 alias subl='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl'
 
 alias h?="history | grep"
-
-#copy output of last command to clipboard
-alias cl="fc -e -|pbcopy"
+# Put last command onto clipboard.
+cpl () {
+    fc -nl -1 | tr -d '\t' | sed -E 's/^[ ]+//g' | tee /dev/tty | pbcopy;
+}
+# Put output of last command onto clipboard.
+alias cl="fc -e - | pbcopy"
 
 # top
 alias cpu='top -o cpu'
@@ -116,6 +119,9 @@ alias up='NODE_NO_WARNINGS=1 up'
 # FIXME: this runs shot whenever bash starts
 # alias shootup='up --direct "$(shot i)"'
 alias last_screenshot="ls -1rt ~/Screenshots | tail -1"
+
+alias uplast='up -d ~/Screenshots/"$(last_screenshot)"'
+alias shootup=uplast
 
 alias markdown=/usr/local/bin/cmark
 
