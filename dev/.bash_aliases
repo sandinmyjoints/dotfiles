@@ -73,7 +73,7 @@ alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 alias utcdate='date -u'
 
 # Tmux
-alias attach='tmux attach -t '
+alias attach='tmux attach -t'
 
 # Autocorrect
 alias elasticsaerch=elasticsearch
@@ -89,7 +89,7 @@ alias dcl='docker-cloud'
 alias n='source ~/dotfiles/dev/nvm-startup.sh'
 
 # See http://unix.stackexchange.com/a/25329
-alias watch='watch '
+alias watch='watch'
 
 # Git
 alias git-prune-and-remove-untracked-branches='git fetch --prune && git branch -r | awk "{print \$1}" | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d'
@@ -104,12 +104,12 @@ alias cgrep='ggrep --color='auto' -P -n'
 
 alias yarn-install='yarn install --ignore-engines'
 alias top='top -s 2 -o cpu -R -F'
-alias exa='exa -al '
-alias llx='exa '
-alias xx='exa '
-# alias ecs-deploy='ecs-deploy --timeout 180 '
+alias exa='exa -al'
+alias llx='exa'
+alias xx='exa'
+# alias ecs-deploy='ecs-deploy --timeout 180'
 
-alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium '
+alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium'
 
 alias knot='./knot'
 
