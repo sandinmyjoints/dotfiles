@@ -34,6 +34,12 @@ shopt -s globstar
 
 BREW_PREFIX=$(brew --prefix)
 
+###############
+# Completions #
+###############
+
+# Lots of completions installed in /usr/local/etc/bash_completion.d, that seems to be a default place
+
 # bash completion 1.x, which is now unlinked.
 # if [ -f $BREW_PREFIX/etc/bash_completion ]; then
 #     source $BREW_PREFIX/etc/bash_completion
@@ -370,22 +376,23 @@ function ecs-restart {
 # Misc #
 ########
 
+# From http://superuser.com/a/59198
+[[ $- = *i* ]] && bind TAB:menu-complete
+
 # Use Homebrew's Python.
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 source /usr/local/bin/virtualenvwrapper_lazy.sh
 
+# TODO: move these completions stuff up to completions section
 complete -C aws_completer aws
 
 . ~/.local/share/bash-completion/completions/django
 
-# From http://superuser.com/a/59198
-[[ $- = *i* ]] && bind TAB:menu-complete
-
 source ~/dotfiles/dev/bash_colors.sh
 source ~/dotfiles/dev/.bash_prompt
-source ~/dotfiles/dev/alias_completion.bash
 source ~/dotfiles/dev/nvm-startup.sh
+source ~/dotfiles/dev/alias_completion.bash
 
 # source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
 # source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
