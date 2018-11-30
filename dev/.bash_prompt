@@ -46,6 +46,7 @@ function __virtualenv {
 }
 
 function __node {
+    # TODO: if node exists AND it's not an alias
     if hash node 2>/dev/null; then
         local v=$(node -v)
     fi
