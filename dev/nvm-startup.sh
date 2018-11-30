@@ -15,8 +15,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Make it so the first time node is run, it will activate itself.
-alias node='nvm_use default; unalias node; node $@'
+# Make it so the first time node is run, it will activate itself. The proper way
+# to start using node is to run nvm_use first, but sometimes node itself will be
+# run before nvm_use is run. Because nvm_use unaliases node, here we guarantee
+# it's an alias before unaliasing it to prevent an error message from unalias
+# about node not being found. :shrug:
+alias node='nvm_use default; alias node=n; unalias node; node $@'
 
 # Keep track of whether it's the first time nvm is used/node is run.
 export nvm_has_been_used=0

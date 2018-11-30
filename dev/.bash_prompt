@@ -46,11 +46,18 @@ function __virtualenv {
 }
 
 function __node {
-    # TODO: if node exists AND it's not an alias
+    local v
+    # If node is available...
     if hash node 2>/dev/null; then
-        local v=$(node -v)
+        # ...it might be an alias, because nvm_use has not been run yet. (node
+        # is probably available because some helpful package like heroku put it
+        # in /usr/local/bin or somewhere else that's on PATH.)
+        alias node 2>/dev/null >/dev/null && v="XX"
+
+        # If not an alias, it's good to go.
+        alias node 2>/dev/null >/dev/null || v=$(node -v)
     fi
-    [ -z "$v" ] || clr_escape "${v:1}" $CLR_CYAN
+    [ -z "$v" ] || clr_escape "${v:1}" "$CLR_CYAN"
 }
 
 function __info {
