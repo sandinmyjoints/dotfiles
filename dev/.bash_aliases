@@ -100,7 +100,7 @@ alias curlv='curl -v -o /dev/null'
 alias diffmin='git diff --color-words --no-index'
 alias cpdiff='git diff | pbcopy'
 
-alias cgrep='ggrep --color='auto' -P -n'
+alias cgrep='ggrep --color="auto" -P -n'
 
 alias yarn-install='yarn install --ignore-engines'
 alias top='top -s 2 -o cpu -R -F'
@@ -113,7 +113,7 @@ alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium'
 
 alias knot='./knot'
 
-alias thumbnail=thumb
+alias thumbnail='thumb'
 
 alias up='NODE_NO_WARNINGS=1 up'
 # FIXME: this runs shot whenever bash starts
@@ -121,14 +121,14 @@ alias up='NODE_NO_WARNINGS=1 up'
 alias last_screenshot="ls -1rt ~/Screenshots | tail -1"
 
 alias uplast='up -d ~/Screenshots/"$(last_screenshot)"'
-alias shootup=uplast
+alias shootup='uplast'
 
-alias markdown=/usr/local/bin/cmark
+alias markdown='/usr/local/bin/cmark'
 
 # Global prettier, because the node-specific bin dir is earlier on PATH than
 # globals. This only works if a node is on the PATH, ie, if nvm has been started
 # and a node selected.
 #
-alias gprettier=/Users/william/.yarn/bin/prettier
+alias gprettier='/Users/william/.yarn/bin/prettier'
 
 alias changes='/Users/william/scm/sd/neodarwin/bin/changes'
