@@ -36,7 +36,7 @@ nvm_use () {
     # source ~/.nvm/nvm.sh # Not needed if called earlier.
     if [ ${VERS} ]; then
         [[ "$nvm_has_been_used" -eq "0" ]] && unalias node
-        nvm use ${VERS}
+        nvm use "${VERS}"
         . <(npm completion)
     else
         echo "Choose a version:"
