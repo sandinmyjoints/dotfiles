@@ -30,9 +30,8 @@ alias ec='emacsclient -n'
 alias emacs='emacsclient -a -n'
 
 #alias markdown='python -m markdown'
-alias md=multimarkdown
-alias mmd=multimarkdown
-alias markdown=multimarkdown
+alias markdown='/usr/local/bin/cmark'
+alias md='/usr/local/bin/cmark'
 
 alias subl='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl'
 
@@ -122,8 +121,6 @@ alias last_screenshot="ls -1rt ~/Screenshots | tail -1"
 
 alias uplast='up -d ~/Screenshots/"$(last_screenshot)"'
 alias shootup='uplast'
-
-alias markdown='/usr/local/bin/cmark'
 
 # Global prettier, because the node-specific bin dir is earlier on PATH than
 # globals. This only works if a node is on the PATH, ie, if nvm has been started
