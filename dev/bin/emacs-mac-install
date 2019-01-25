@@ -3,17 +3,20 @@
 # emacs-mac work branch, which is --HEAD:
 # https://bitbucket.org/mituharu/emacs-mac/branch/work
 
+# Check what options an existing install used: see var system-configuration-options
+
 # - Don't use glib: https://emacs.stackexchange.com/a/21463/2163
 # - Not sure if using gnutls (the default) is the right thing to do or not.
 # - Not sure whether using lib-xml2 is the right thing to do or not.
 # - --with-no-title-bars sounds nice but makes it difficult to move window if toggled to less than fullscreen
+# - Support loading dynamic modules.
 #
 # Fresh install:
 brew install emacs-mac \
      --with-modern-icon \
      --with-imagemagick \
      --with-dbus \
-     --with-no-title-bars \
+     --with-modules \
      --with-xml2 \
      --HEAD
 
