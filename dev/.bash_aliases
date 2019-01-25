@@ -1,9 +1,9 @@
 # This file is only meant to be sourced, not run.
 called=$_
-if [[ $called != $0 ]] ; then
+if [[ $called != "$0" ]] ; then
     echo "${BASH_SOURCE[@]} is being sourced."
 else
-    this_file=`basename "$0"`
+    this_file=$(basename "$0")
     echo "$this_file is being run."
 fi
 
@@ -35,7 +35,7 @@ alias md='/usr/local/bin/cmark'
 
 alias subl='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl'
 
-alias h?="history | grep"
+alias 'h?'="history | grep"
 # Put last command onto clipboard.
 cpl () {
     fc -nl -1 | tr -d '\t' | sed -E 's/^[ ]+//g' | tee /dev/tty | pbcopy;
@@ -121,6 +121,7 @@ alias last_screenshot="ls -1rt ~/Screenshots | tail -1"
 
 alias uplast='up -d ~/Screenshots/"$(last_screenshot)"'
 alias shootup='uplast'
+alias lastup='uplast'
 
 # Global prettier, because the node-specific bin dir is earlier on PATH than
 # globals. This only works if a node is on the PATH, ie, if nvm has been started
@@ -129,3 +130,5 @@ alias shootup='uplast'
 alias gprettier='/Users/william/.yarn/bin/prettier'
 
 alias changes='/Users/william/scm/sd/neodarwin/bin/changes'
+
+alias lsp='ps -ef | grep -E "language-server|languageserver|javascript-typescript-stdio" | grep -v grep'
