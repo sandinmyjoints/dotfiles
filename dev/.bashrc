@@ -332,15 +332,6 @@ function curljq {
 # For reference:
 # $ shasum -a 256 <file>
 
-function ecs-restart {
-    local $cluster="$1"
-    local $service="$2"
-
-    ([[ -z "${cluster// }" ]] || [[ -z "${service// }" ]]) && echo "Usage: ecs-restart <cluster> <service>"; exit 1
-
-    echo "aws ecs update-service --cluster $cluster --service $service"
-}
-
 # Pretty-print PATH.
 function ppath {
     echo $PATH | tr : '\n'
@@ -367,7 +358,7 @@ function ecs-restart {
     local service="$2"
     ( [[ -z "${cluster// }" ]] || [[ -z "${service// }" ]] ) && echo "Usage: ecs-restart <cluster> <service>" && return 1
 
-    command="aws ecs update-service --cluster $cluster --service $service --force-new-deployment"
+    command="aws ecs update-service --cluster $cluster --service $service --force-new-deployment --region us-east-1"
     echo $command
     eval $command
 }
