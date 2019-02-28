@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -x
+pushd ~/scm/sd/neodarwin/ || return
+git fetch origin
+cd ~/scm/sd/atalanta/ || return
+git fetch origin
+cd ~/scm/sd/sd-playground/ || return
+git fetch origin
+cd ~/scm/sd/sd-router/ || return
+git fetch origin
+cd ~/scm/sd/sd-auth/ || return
+git fetch origin
+cd ~/scm/sd/hegemone/ || return
+git fetch origin
+cd ~/scm/sd/darwin/ || return
+git fetch origin
+popd || return
