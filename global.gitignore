@@ -9,6 +9,10 @@ tramp
 .\#*
 .dir-locals.el
 TAGS
+.dumbjump
+
+# Flycheck
+flycheck_*.el
 
 # Org-mode
 .org-id-locations
@@ -33,12 +37,6 @@ TAGS
 # cask packages
 .cask/
 
-# Flycheck
-flycheck_*.el
-
-# server auth directory
-/server/
-
 # projectiles files
 .projectile
 
@@ -51,10 +49,8 @@ pip-delete-this-directory.txt
 
 # OS X
 .DS_Store
-
 .AppleDouble
 .LSOverride
-
 
 # Thumbnails
 ._*
@@ -74,15 +70,14 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-
 # Dropbox settings and caches
 .dropbox
 .dropbox.attr
 .dropbox.cache
+
 .nvmrc
-
 local_notes
-
 .tern-port
 
 docker-compose.override.yml
+*.diff
