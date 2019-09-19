@@ -23,5 +23,4 @@ brew install emacs-mac \
 # Reinstall with same options as last install:
 # brew reinstall emacs-mac
 
-# head is now at 1bbba10cef
-# HEAD-4156eb5
+# Alternative package: https://github.com/d12frosted/homebrew-emacs-plus
