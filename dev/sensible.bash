@@ -23,16 +23,21 @@ shopt -s checkwinsize
 PROMPT_DIRTRIM=2
 
 ## SMARTER TAB-COMPLETION (Readline bindings) ##
+if [[ ${SHELLOPTS} =~ (vi|emacs) ]]; then  # see https://superuser.com/a/1361068/93702
 
-# Perform file completion in a case insensitive fashion
-bind "set completion-ignore-case on"
+    # Perform file completion in a case insensitive fashion
+    bind "set completion-ignore-case on"
 
-# Treat hyphens and underscores as equivalent
-bind "set completion-map-case on"
+    # Treat hyphens and underscores as equivalent
+    bind "set completion-map-case on"
 
-# Display matches for ambiguous patterns at first tab press
-bind "set show-all-if-ambiguous on"
+    # Display matches for ambiguous patterns at first tab press
+    bind "set show-all-if-ambiguous on"
 
+    bind "set bell-style visible"
+    bind "set visible-stats on"
+    bind "set mark-symlinked-directories on"
+fi
 ## SANE HISTORY DEFAULTS ##
 
 # Append to the history file, don't overwrite it
