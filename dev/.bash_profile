@@ -62,12 +62,14 @@ PATH="$PATH:/usr/local/Cellar/mysql/5.7.16/bin"
 # Misc #
 ########
 
+BREW_PREFIX="$(brew --prefix)"
+
 PATH="$HOME/.cargo/bin:$PATH"
 
 # See https://github.com/tmux/tmux/issues/284
 TMUX_TMPDIR=/tmp
 
-GREP_OPTIONS="--exclude=*#*"
+# GREP_OPTIONS="--exclude=*#*"
 EDITOR='emacsclient'
 JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
@@ -75,7 +77,7 @@ JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 # Add the directories you want to have fast access to, separated by colon
 # Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
 # CDPATH="."
-CDPATH='.:~/scm/sd:~/scm/wjb'
+CDPATH=':~/scm/sd:~/scm/wjb'
 
 SD_BASTION=23.23.70.67
 
