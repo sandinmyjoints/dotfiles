@@ -78,12 +78,12 @@ alias attach='tmux attach -t'
 alias elasticsaerch=elasticsearch
 
 # Docker
-alias d='docker'
-alias dm='docker-machine'
-alias dmenv='docker-machine env'
 alias evaldm='eval $(docker-machine env)'
+
 alias dc='docker-compose'
-alias dcl='docker-cloud'
+# see https://github.com/docker/compose/issues/3317#issuecomment-416552656 about trapping docker compose down
+
+alias upup='git pull && docker-compose up'
 
 alias n='source ~/dotfiles/dev/nvm-startup.sh'
 
@@ -92,6 +92,11 @@ alias watch='watch'
 
 # Git
 alias git-prune-and-remove-untracked-branches='git fetch --prune && git branch -r | awk "{print \$1}" | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d'
+
+BREW_PREFIX="$(brew --prefix)"
+alias brew_curl="${BREW_PREFIX}/opt/curl/bin/curl "
+# prefer homebrew's curl
+alias curl="${BREW_PREFIX}/opt/curl/bin/curl "
 
 alias curlv='curl -v -o /dev/null'
 
@@ -102,6 +107,7 @@ alias cpdiff='git diff | pbcopy'
 alias cgrep='ggrep --color="auto" -P -n'
 
 alias yarn-install='yarn install --ignore-engines'
+
 alias top='top -s 2 -o cpu -R -F'
 alias exa='exa -al'
 alias llx='exa'
@@ -111,6 +117,8 @@ alias xx='exa'
 alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium'
 
 alias knot='./knot'
+
+alias claer='clear'
 
 alias thumbnail='thumb'
 
@@ -132,3 +140,43 @@ alias gprettier='/Users/william/.yarn/bin/prettier'
 alias changes='/Users/william/scm/sd/neodarwin/bin/changes'
 
 alias lsp='ps -ef | grep -E "language-server|languageserver|javascript-typescript-stdio" | grep -v grep'
+alias tsserver='ps -ef | grep -E "tsserver" | grep -v grep'
+alias ts='tsserver'
+
+alias zoom='open -a "Google Chrome Beta" "https://zoom.us/j/4960947967" ; echo -n https://zoom.us/j/4960947967 | pbcopy'
+alias sup='open -a "Google Chrome Beta" "https://zoom.us/j/476688636"'
+alias standup='sup'
+
+alias gitmine='git-mine'
+alias gm='git-mine'
+
+# sdc aliases
+
+alias sd='sdc'
+function sdcl() {
+  local SERVICE="$1"
+  sdc logs -f --tail=100 $SERVICE | gsed -u 's/^[^|]*[^ ]* //'
+}
+
+function sdup() {
+  local SERVICE="$1"
+  sdc up "$SERVICE"
+}
+
+function restart() {
+  local SERVICE="$1"
+  sdc stop "$SERVICE" && sdc up --no-deps -d "$SERVICE" && sdcl "$SERVICE"
+}
+
+function rebuild () {
+  local SERVICE="$1"
+  sdc stop "$SERVICE" && sdc up --build --no-deps -d "$SERVICE" && sdcl "$SERVICE"
+}
+
+function check_changelog_bucket () {
+    aws s3api list-objects --bucket sd-changelog --output json --query "[sum(Contents[].Size), length(Contents[])]"
+}
+
+function emacs_byte_recompile () {
+    gfind . -name "*.elc" -print0 | xargs -0 rm && command emacs --batch -Q --eval '(progn (byte-recompile-directory "/Users/william/.emacs.d/elisp" 0) (byte-recompile-directory "/Users/william/.emacs.d/elpa" 0))'
+}
