@@ -34,8 +34,9 @@ PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin"
 # Virtualenvwrapper #
 #####################
 
-WORKON_HOME=$HOME/env
-PROJECT_HOME=$HOME/scm
+# WORKON_HOME=$HOME/env  # Old virtualenvs.
+WORKON_HOME=$HOME/.local/venvs  # New virtualenvs.
+PROJECT_HOME=$HOME/scm/sd
 VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
 
 ########
@@ -79,6 +80,11 @@ JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 # CDPATH="."
 CDPATH=':~/scm/sd:~/scm/wjb'
 
+########
+# Work #
+########
+
+SD_ROOT="$HOME/scm/sd"
 SD_BASTION=23.23.70.67
 
 # See https://github.com/typicode/husky/issues/172

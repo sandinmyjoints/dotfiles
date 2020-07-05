@@ -143,8 +143,8 @@ alias lsp='ps -ef | grep -E "language-server|languageserver|javascript-typescrip
 alias tsserver='ps -ef | grep -E "tsserver" | grep -v grep'
 alias ts='tsserver'
 
-alias zoom='open -a "Google Chrome Beta" "https://zoom.us/j/4960947967" ; echo -n https://zoom.us/j/4960947967 | pbcopy'
-alias sup='open -a "Google Chrome Beta" "https://zoom.us/j/476688636"'
+alias zoom='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/4960947967" ; echo -n https://zoom.us/j/4960947967 | pbcopy'
+alias sup='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/476688636"'
 alias standup='sup'
 
 alias gitmine='git-mine'
@@ -179,4 +179,12 @@ function check_changelog_bucket () {
 
 function emacs_byte_recompile () {
     gfind . -name "*.elc" -print0 | xargs -0 rm && command emacs --batch -Q --eval '(progn (byte-recompile-directory "/Users/william/.emacs.d/elisp" 0) (byte-recompile-directory "/Users/william/.emacs.d/elpa" 0))'
+}
+
+function pswebpack () {
+    ps -ef|grep -v grep|grep webpack
+}
+
+function killwebpack () {
+    pkill -f webpack
 }

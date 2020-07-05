@@ -18,9 +18,14 @@ brew install emacs-mac \
      --with-dbus \
      --with-modules \
      --with-xml2 \
+     --with-jansson \
+     --with-json \
      --HEAD
 
 # Reinstall with same options as last install:
 # brew reinstall emacs-mac
+
+# used this when getting jansson support, don't know whether it's necessary or not:
+# export PKG_CONFIG_PATH="/usr/local/opt/jansson/lib/pkgconfig"
 
 # Alternative package: https://github.com/d12frosted/homebrew-emacs-plus

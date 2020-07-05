@@ -1,3 +1,4 @@
+# -*- default-directory: "/Users/william/dotfiles"; -*-
 # For mosh, see https://github.com/mobile-shell/mosh/issues/102#issuecomment-12503646
 export PATH=/usr/local/bin:$PATH
 
@@ -23,10 +24,16 @@ if [ -f ~/dotfiles/dev/sensible.bash ]; then
    source ~/dotfiles/dev/sensible.bash
 fi
 
+# This sets both hard and soft limits, so cannot be raised past 10000.
 ulimit -n 10000
 
 shopt -s extglob
 shopt -s globstar
+
+# From: https://serverfault.com/questions/506612/standard-place-for-user-defined-bash-completion-d-scripts
+# see https://unix.stackexchange.com/questions/204803/why-is-nullglob-not-default
+# Turning it off for now.
+# shopt -s nullglob
 
 ############
 # Homebrew #
