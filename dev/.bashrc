@@ -45,17 +45,40 @@ BREW_PREFIX=$(brew --prefix)
 # Completions #
 ###############
 
-# Lots of completions installed in /usr/local/etc/bash_completion.d, that seems to be a default place
-
 # bash completion 1.x, which is now unlinked.
 # if [ -f $BREW_PREFIX/etc/bash_completion ]; then
 #     source $BREW_PREFIX/etc/bash_completion
 # fi
 
 # bash completion 2.
-if [ -f /usr/local/share/bash-completion/bash_completion ]; then
-    . /usr/local/share/bash-completion/bash_completion
-fi
+
+# I think the below script does the same thing, possibly in a more generally compatible way.
+# if [ -f /usr/local/share/bash-completion/bash_completion ]; then
+#  . /usr/local/share/bash-completion/bash_completion
+# fi
+
+# Lots of completions installed in /usr/local/etc/bash_completion.d, that
+# seems to be a default place. Do I need to manually source them all? -> I
+# think the below entrypoint script will do it. See
+# https://stackoverflow.com/a/14970926/599258
+
+# To check whether completions are in there for some package: $ ll $BASH_COMPLETION_COMPAT_DIR | grep yarn
+
+# This script seems to be the official entrypoint. It's smart enough to look
+# for the specific script in /usr/local/Cellar/bash-completion@2/2.8/
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" && ( -z "$INSIDE_EMACS" || "$EMACS_BASH_COMPLETE" = "t" ) ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+# Docker completion is described here: https://docs.docker.com/docker-for-mac/#bash
+
+complete -C aws_completer aws
+
+. ~/.local/share/bash-completion/completions/django
+
+#https://github.com/dsifford/yarn-completion
+. ~/.local/share/bash-completion/completions/yarn
+
+. ~/dotfiles/dev/alias_completion.bash
 
 #######
 # git #
