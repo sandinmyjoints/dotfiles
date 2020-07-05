@@ -404,6 +404,32 @@ function ecs-restart {
     eval $command
 }
 
+# Retrieve db secrets from https://console.aws.amazon.com/secretsmanager/home?region=us-east-1#/listSecrets
+#
+# Usage:
+# $ dbcreds staging/sd-site
+# $ dbcreds prod/master
+#
+# See also: https://github.com/spanishdict/sd-gimme-db/blob/master/create-db-dump#L36
+# passwords may contain ticks:
+# SANITIZED_DB_MASTER_PW="${RAW_DB_MASTER_PW/`/\\`}"
+function dbcreds {
+    aws secretsmanager get-secret-value --secret-id "$1" --version-stage AWSCURRENT \
+        | jq '.SecretString | fromjson' \
+        | tee /dev/tty \
+        | jq '.password' --raw-output \
+        | pbcopy
+}
+
+alias dbpass=dbcreds
+alias db_creds=dbcreds
+
+function list_secrets {
+    aws secretsmanager list-secrets --max-results 100 | jq '.SecretList [].Name' | sed 's/"//g'
+}
+
+alias list-secrets=list_secrets
+
 ########
 # Misc #
 ########
