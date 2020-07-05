@@ -89,14 +89,16 @@ function parse_git_branch {
   echo "("${ref#refs/heads/}")"
 }
 
-if [ -f ~/bin/git-completion.bash ]; then
-    source ~/bin/git-completion.bash
+if [ -f $BREW_PREFIX/etc/bash_completion.d/git-completion.bash ]; then
+    source $BREW_PREFIX/etc/bash_completion.d/git-completion.bash
+else
+    source $HOME/bin/git-completion.bash
 fi
 
 if [ -f $BREW_PREFIX/etc/bash_completion.d/git-prompt.sh ]; then
     source $BREW_PREFIX/etc/bash_completion.d/git-prompt.sh
 else
-    source ~/bin/git-prompt.sh
+    source $HOME/bin/git-prompt.sh
 fi
 
 PS1='\w$(__git_ps1 " (%s)")\$ '
