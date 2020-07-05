@@ -1,0 +1,3 @@
+# How to generate:
+# $ ./make-mime.py -a config.yaml:cloud-config -a script.sh:x-shellscript > user-data
+# Then upload user-data to a well-known url, then put that url in here.

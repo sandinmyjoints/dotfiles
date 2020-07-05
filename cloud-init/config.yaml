@@ -1,0 +1,25 @@
+#cloud-config
+
+package_update: true
+
+# Install additional packages on first boot
+#
+
+# if packages are specified, this apt_update will be set to true
+#
+# packages may be supplied as a single package name or as a list
+# with the format [<package>, <version>] wherein the specifc
+# package version will be installed.
+packages:
+  - emacs
+  - tmux
+  - jq
+  - moreutils
+  - zstd
+  - pigz
+  - awscli
+  - mosh
+  - s3cmd
+  - rsync
+
+# sudo apt update && sudo apt install -y emacs tmux jq pigz awscli mosh s3cmd rsync
