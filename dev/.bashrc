@@ -296,6 +296,10 @@ function fix_audio {
     # ps aux | grep 'coreaudio[d]' | awk '{print $2}' | xargs sudo kill
 }
 
+function fix_audio2 () {
+    sudo launchctl stop com.apple.audio.coreaudiod && sudo launchctl start com.apple.audio.coreaudiod
+}
+
 function result {
     curl -s "localhost:2100/slim/result/$1" | jq ;
 }
@@ -375,6 +379,11 @@ function pathmerge {
     export ORIGINAL_PATH="$PATH"
     export PATH=$(printf "%s" "$PATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
     echo $PATH
+}
+
+# return jest with testPathPattern
+function jestp {
+    jest -w 2 --testPathPattern "$1"
 }
 
 # Prettier for formatting markdown that works even when no node is in the
