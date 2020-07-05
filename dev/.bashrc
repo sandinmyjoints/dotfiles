@@ -409,22 +409,17 @@ function ecs-restart {
 ########
 
 # From http://superuser.com/a/59198
-[[ $- = *i* ]] && bind TAB:menu-complete
+[[ ${SHELLOPTS} =~ (vi|emacs) ]] && [[ $- = *i* ]] && bind TAB:menu-complete
 
-# Use Homebrew's Python.
+# Use Homebrew's Python. Note: WORKON_HOME is defined in .bash_profile.
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2
+# virtualenvwrapper itself does not appear to have been installed by Homebrew.
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 source /usr/local/bin/virtualenvwrapper_lazy.sh
-
-# TODO: move these completions stuff up to completions section
-complete -C aws_completer aws
-
-. ~/.local/share/bash-completion/completions/django
 
 source ~/dotfiles/dev/bash_colors.sh
 source ~/dotfiles/dev/.bash_prompt
 source ~/dotfiles/dev/nvm-startup.sh
-source ~/dotfiles/dev/alias_completion.bash
 
 # source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
 # source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
