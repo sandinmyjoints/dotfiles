@@ -180,6 +180,11 @@ function check_changelog_bucket () {
 function emacs_byte_recompile () {
     gfind . -name "*.elc" -print0 | xargs -0 rm && command emacs --batch -Q --eval '(progn (byte-recompile-directory "/Users/william/.emacs.d/elisp" 0) (byte-recompile-directory "/Users/william/.emacs.d/elpa" 0))'
 }
+alias elc_recompile=emacs_byte_recompile
+
+function elc_rm () {
+    gfind . -name "*.elc" -print0 | xargs -0 rm
+}
 
 function pswebpack () {
     ps -ef|grep -v grep|grep webpack
