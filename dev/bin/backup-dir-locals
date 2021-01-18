@@ -4,11 +4,14 @@ pushd "$HOME/scm/sd" || exit 1
 
 # gfind "." -name '.dir-locals.el' ! -path '*node_modules*' \
 #     | xargs -I {} sh -c 'dirname {} '
+echo Making Dropbox directories...
 gfind "." -name '.dir-locals.el' ! -path '*node_modules*' \
     | xargs -I {} sh -c 'dirname {}' \
     | xargs -I {} sh -c 'mkdir -p ~/Dropbox/Backups/dir-locals/{}'
 
+echo Copying dir-locals files into Dropbox...
 gfind "." -name '.dir-locals.el' ! -path '*node_modules*' \
     | xargs -I {} sh -c 'cp {} ~/Dropbox/Backups/dir-locals/{}'
 
+echo Done.
 popd
