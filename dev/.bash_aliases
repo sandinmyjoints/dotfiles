@@ -186,6 +186,10 @@ function elc_rm () {
     gfind . -name "*.elc" -print0 | xargs -0 rm
 }
 
+function pyc_rm () {
+    gfind . -name "*.pyc" -print0 | xargs -0 rm
+}
+
 function pswebpack () {
     ps -ef|grep -v grep|grep webpack
 }
