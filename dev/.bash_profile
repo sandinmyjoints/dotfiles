@@ -57,7 +57,6 @@ PYTHONPATH=":${PYTHONPATH}"
 
 # Add RVM to PATH to allow use of rvm command in scripts.
 PATH="$PATH:$HOME/.rvm/bin"
-PATH="$PATH:/usr/local/Cellar/mysql/5.7.16/bin"
 
 ########
 # Misc #
@@ -72,7 +71,11 @@ TMUX_TMPDIR=/tmp
 
 # GREP_OPTIONS="--exclude=*#*"
 EDITOR='emacsclient'
-JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+
+# Currently, I don't have Java installed.
+# JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+
+WEBPACK_STATS_VERBOSITY=minimal
 
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
