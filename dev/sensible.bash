@@ -4,7 +4,7 @@ if [[ $called != $0 ]] ; then
     echo "${BASH_SOURCE[@]} is being sourced."
 else
     this_file=`basename "$0"`
-    echo "$this_file is being run."
+    echo "WARNING: $this_file is being run. It is only meant to be sourced."
 fi
 
 # Sensible Bash - An attempt at saner Bash defaults

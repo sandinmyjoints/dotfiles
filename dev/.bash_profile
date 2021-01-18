@@ -4,7 +4,7 @@ if [[ $called != $0 ]] ; then
     echo "${BASH_SOURCE[@]} is being sourced."
 else
     this_file=`basename "$0"`
-    echo "$this_file is being run."
+    echo "WARNING: $this_file is being run. It is only meant to be sourced."
 fi
 
 # Each variable or function that is created or modified is given the export
@@ -89,6 +89,8 @@ SD_BASTION=23.23.70.67
 
 # See https://github.com/typicode/husky/issues/172
 HUSKY_SKIP_INSTALL=1
+
+WEBPACK_STATS_VERBOSITY=minimal
 
 set +o allexport
 

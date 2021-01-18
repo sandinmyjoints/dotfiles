@@ -13,7 +13,7 @@ if [[ $called != $0 ]] ; then
     [ -z "$SSH_TTY" ] && echo "${BASH_SOURCE[@]} is being sourced."
 else
     this_file=`basename "$0"`
-    [ -z "$SSH_TTY" ] && echo "$this_file is being run."
+    [ -z "$SSH_TTY" ] && echo "WARNING: $this_file is being run. It is only meant to be sourced."
 fi
 
 #################
