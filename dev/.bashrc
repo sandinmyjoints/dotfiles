@@ -393,15 +393,19 @@ function gp {
     nvm exec "lts/*" $yarn_global_bin_path/prettier --parser markdown
 }
 
-# Usage: ecs-restart prod-sd-site prod-sd-site-public-2
+# Usage: ecs-restart <cluster name> <service name>
+# Example: ecs-restart sd-production-fargate prod-sd-neodarwin-fargate
 function ecs-restart {
     local cluster="$1"
     local service="$2"
     ( [[ -z "${cluster// }" ]] || [[ -z "${service// }" ]] ) && echo "Usage: ecs-restart <cluster> <service>" && return 1
 
-    command="aws ecs update-service --cluster $cluster --service $service --force-new-deployment --region us-east-1"
-    echo $command
-    eval $command
+    restartcommand="aws ecs update-service --cluster $cluster --service $service --force-new-deployment > /dev/null"
+    echo $restartcommand
+    eval $restartcommand
+    stablecommand="aws ecs wait services-stable --cluster $cluster --services $service"
+    echo $stablecommand
+    eval $stablecommand
 }
 
 # Retrieve db secrets from https://console.aws.amazon.com/secretsmanager/home?region=us-east-1#/listSecrets
