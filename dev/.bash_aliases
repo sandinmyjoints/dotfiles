@@ -71,6 +71,15 @@ alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
 
 alias utcdate='date -u'
 
+# this has to come after bashrc, which defines vterm_cmd
+function set-tmux-in-vterm () {
+    if [ -n "$TMUX" ]; then
+        vterm_cmd set-tmux-in-vterm 1
+    else
+        vterm_cmd set-tmux-in-vterm 0
+    fi
+}
+
 # Tmux
 alias attach='tmux attach -t'
 
