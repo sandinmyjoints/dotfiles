@@ -177,8 +177,11 @@ function check_changelog_bucket () {
     aws s3api list-objects --bucket sd-changelog --output json --query "[sum(Contents[].Size), length(Contents[])]"
 }
 
+# The problem with this is it doesn't have site-lisp and packages dirs on
+# load-path, so a lot of things don't find packages they depend on.
 function emacs_byte_recompile () {
-    gfind . -name "*.elc" -print0 | xargs -0 rm && command emacs --batch -Q --eval '(progn (byte-recompile-directory "/Users/william/.emacs.d/elisp" 0) (byte-recompile-directory "/Users/william/.emacs.d/elpa" 0))'
+    gfind . -name "*.elc" -print0 | xargs -0 rm && \
+        command emacs --batch -Q --eval '(progn (byte-recompile-directory "/Users/william/.emacs.d/elisp" 0) (byte-recompile-directory "/Users/william/.emacs.d/elpa" 0))'
 }
 alias elc_recompile=emacs_byte_recompile
 
