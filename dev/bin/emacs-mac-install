@@ -11,15 +11,16 @@
 # - --with-no-title-bars sounds nice but makes it difficult to move window if toggled to less than fullscreen
 # - Support loading dynamic modules.
 #
+# - I think these are on by default, so not needed anymore:
+#     --with-modules \
+#     --with-jansson \
+
+#
 # Fresh install:
 brew install emacs-mac \
      --with-modern-icon \
      --with-imagemagick \
      --with-dbus \
-     --with-modules \
-     --with-xml2 \
-     --with-jansson \
-     --with-json \
      --HEAD
 
 # Reinstall with same options as last install:
