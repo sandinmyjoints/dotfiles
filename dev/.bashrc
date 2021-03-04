@@ -219,7 +219,7 @@ function yarn_install_globals () {
 ####################
 
 function emacs_usr2 {
-    kill -USR2 "$(pgrep -f emacs-mac)"
+    kill -USR2 "$(pgrep -f 'build-emacs-for-macos|emacs-mac')"
 }
 
 function dired {
