@@ -153,8 +153,9 @@ alias tsserver='ps -ef | grep -E "tsserver" | grep -v grep'
 alias ts='tsserver'
 
 alias zoom='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/4960947967" ; echo -n https://zoom.us/j/4960947967 | pbcopy'
-alias sup='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/476688636"'
-alias standup='sup'
+alias sup_mth='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/88626280717"'
+alias sup_wf='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/83978350059"'
+alias sup='echo sup_mth or sup_wf'
 
 alias gitmine='git-mine'
 alias gm='git-mine'
