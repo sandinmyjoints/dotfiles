@@ -4,6 +4,11 @@
 
 PORT="$1"
 
+echo ----------------------------------------
+set -x
 sudo lsof -n -i4TCP:$PORT | grep LISTEN
 
-# sudo netstat -p tcp | grep $PORT
+set +x
+echo ----------------------------------------
+set -x
+sudo netstat -p tcp | grep $PORT
