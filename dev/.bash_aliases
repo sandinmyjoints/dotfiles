@@ -76,12 +76,12 @@ function set-tmux-in-vterm () {
     if [ -n "$TMUX" ]; then
         vterm_cmd set-tmux-in-vterm 1
     else
-        vterm_cmd set-tmux-in-vterm 0
+        vterm_cmd set-tmux-in-vterm 1 # Try turning it on unconditionally, see if anything breaks
     fi
 }
 
 # Tmux
-alias attach='tmux attach -t'
+alias attach='set-tmux-in-vterm ; tmux attach -t'
 
 # Autocorrect
 alias elasticsaerch=elasticsearch
@@ -204,9 +204,15 @@ function pyc_rm () {
 }
 
 function pswebpack () {
-    ps -ef|grep -v grep|grep webpack
+    ps -rf | grep -v grep | grep -E "PID|webpack|node.+watch|npm" | gsort -n -k2 -k3
 }
 
 function killwebpack () {
     pkill -f webpack
+}
+
+function nwatch () {
+    # avoid yarn watch, b/c when invoked that way, C-c leaves behind a webpack
+    # process with ppid 1
+    npm run build:webpack:dev -- -w
 }
