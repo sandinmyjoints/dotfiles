@@ -19,6 +19,8 @@
 # Fresh install:
 brew install emacs-mac \
      --with-modern-icon \
+     # --with-big-sur-icon \
+     --with-mac-metal \
      --with-imagemagick \
      --with-dbus \
      --HEAD
