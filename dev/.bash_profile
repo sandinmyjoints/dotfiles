@@ -21,8 +21,8 @@ set -o allexport
 # Initially, PATH is
 # /usr/bin:/bin:/usr/sbin:/sbin
 #
-# Ensure /usr/local takes precendence. Add home bin dirs.
-PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin"
+# Ensure Homebrew takes precendence. Add home bin dirs.
+PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin"
 
 #######
 # AWS #

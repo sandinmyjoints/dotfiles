@@ -224,3 +224,6 @@ function anybar () {
     ANYBAR_TITLE=vocab ANYBAR_PORT=1739 open -na AnyBar
     ANYBAR_TITLE=main ANYBAR_PORT=1738 open -na AnyBar
 }
+
+# Intel Brew
+alias ib="PATH=/usr/local/bin:/usr/local/sbin:$PATH "
