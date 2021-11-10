@@ -373,6 +373,7 @@ function curljq {
 function ppath {
     echo $PATH | tr : '\n'
 }
+alias path_pretty_print=ppath
 
 # From: https://unix.stackexchange.com/a/14896
 # De-dupe PATH.
