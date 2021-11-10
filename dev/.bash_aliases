@@ -120,7 +120,6 @@ alias yarn-install='yarn install --ignore-engines'
 alias top='top -s 2 -o cpu -R -F'
 alias exa='exa -al'
 alias llx='exa'
-alias xx='exa'
 # alias ecs-deploy='ecs-deploy --timeout 180'
 
 alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium'
@@ -131,7 +130,6 @@ alias claer='clear'
 
 alias thumbnail='thumb'
 
-alias up='NODE_NO_WARNINGS=1 up'
 # FIXME: this runs shot whenever bash starts
 # alias shootup='up --direct "$(shot i)"'
 alias last_screenshot="ls -1rt ~/Screenshots | tail -1"
@@ -149,8 +147,6 @@ alias gprettier='/Users/william/.yarn/bin/prettier'
 alias changes='/Users/william/scm/sd/neodarwin/bin/changes'
 
 alias lsp='ps -ef | grep -E "language-server|languageserver|javascript-typescript-stdio" | grep -v grep'
-alias tsserver='ps -ef | grep -E "tsserver" | grep -v grep'
-alias ts='tsserver'
 
 alias zoom='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/4960947967" ; echo -n https://zoom.us/j/4960947967 | pbcopy'
 alias sup_mth='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/88626280717"'
@@ -211,8 +207,20 @@ function killwebpack () {
     pkill -f webpack
 }
 
+function pstsserver () {
+    # each tsserver has a typingsInstaller.js child. It doesn't use much resources, so skip it.
+    ps -ef | grep -v grep | grep -v typingsInstaller | grep -E "PID|tsserver" | gsort -n -k2 -k3
+}
+
 function nwatch () {
     # avoid yarn watch, b/c when invoked that way, C-c leaves behind a webpack
     # process with ppid 1
     npm run build:webpack:dev -- -w
+}
+
+function anybar () {
+    # ANYBAR_TITLE=lessons ANYBAR_PORT=1741 open -na AnyBar
+    ANYBAR_TITLE=classroom ANYBAR_PORT=1740 open -na AnyBar
+    ANYBAR_TITLE=vocab ANYBAR_PORT=1739 open -na AnyBar
+    ANYBAR_TITLE=main ANYBAR_PORT=1738 open -na AnyBar
 }

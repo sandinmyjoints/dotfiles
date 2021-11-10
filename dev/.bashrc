@@ -101,7 +101,8 @@ else
     source $HOME/bin/git-prompt.sh
 fi
 
-PS1='\w$(__git_ps1 " (%s)")\$ '
+# Superceded by bash_prompt.sh
+# PS1='\w$(__git_ps1 " (%s)")\$ '
 
 ###########
 # Aliases #
