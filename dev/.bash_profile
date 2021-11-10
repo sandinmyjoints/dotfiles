@@ -64,7 +64,7 @@ PATH="$PATH:$HOME/.rvm/bin"
 
 BREW_PREFIX="$(brew --prefix)"
 
-PATH="$HOME/.cargo/bin:$PATH"
+# PATH="$HOME/.cargo/bin:$PATH"
 
 # See https://github.com/tmux/tmux/issues/284
 TMUX_TMPDIR=/tmp
