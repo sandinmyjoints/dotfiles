@@ -149,9 +149,8 @@ alias changes='/Users/william/scm/sd/neodarwin/bin/changes'
 alias lsp='ps -ef | grep -E "language-server|languageserver|javascript-typescript-stdio" | grep -v grep'
 
 alias zoom='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/4960947967" ; echo -n https://zoom.us/j/4960947967 | pbcopy'
-alias sup_mth='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/88626280717"'
-alias sup_wf='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/83978350059"'
-alias sup='echo sup_mth or sup_wf'
+alias zoomcp='echo -n https://zoom.us/j/4960947967 | pbcopy'
+alias sup='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/83376013488"'
 
 alias gitmine='git-mine'
 alias gm='git-mine'
@@ -160,8 +159,9 @@ alias gm='git-mine'
 
 alias sd='sdc'
 function sdcl() {
-  local SERVICE="$1"
-  sdc logs -f --tail=100 $SERVICE | gsed -u 's/^[^|]*[^ ]* //'
+    local SERVICE="$1"
+    # sdc logs -f --tail=100 $SERVICE | gsed -u 's/^[^|]*[^ ]* //'
+    sdc logs -f --tail=100 --no-log-prefix $SERVICE
 }
 
 function sdup() {
@@ -224,6 +224,17 @@ function anybar () {
     ANYBAR_TITLE=vocab ANYBAR_PORT=1739 open -na AnyBar
     ANYBAR_TITLE=main ANYBAR_PORT=1738 open -na AnyBar
 }
+
+function anybar_reset () {
+    PORT="$1"
+    # using nc:
+    # echo -n "hollow" | nc -u -w0 localhost "$PORT"
+
+    # using bash special alias
+    echo -n "hollow" >/dev/udp/localhost/"$PORT"
+}
+
+alias anybar_hollow=anybar_reset
 
 # Intel Brew
 alias ib="PATH=/usr/local/bin:/usr/local/sbin:$PATH "
