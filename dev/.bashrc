@@ -1,6 +1,6 @@
 # -*- default-directory: "/Users/william/dotfiles"; -*-
 # For mosh, see https://github.com/mobile-shell/mosh/issues/102#issuecomment-12503646
-export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
+# export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
 
 # Bail silently (do NOT echo anything) if run in a non-interactive shell (like
 # by scp). See:
