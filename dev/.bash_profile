@@ -75,8 +75,6 @@ EDITOR='emacsclient'
 # Currently, I don't have Java installed.
 # JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
-WEBPACK_STATS_VERBOSITY=minimal
-
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
 # Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
