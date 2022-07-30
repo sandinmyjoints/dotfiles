@@ -51,8 +51,7 @@ nvm_use () {
     # putting it in whenever node is going to be used (ie, nvm is started).
     # https://github.com/yarnpkg/yarn/issues/648
     #
-    [[ "$nvm_has_been_used" -eq "0" ]] && export PATH="$PATH:$(yarn global bin)" && nvm_has_been_used=1
-
+    [[ "$nvm_has_been_used" -eq "0" ]] && nvm_has_been_used=1
 }
 
 alias nvmuse=nvm_use
@@ -65,14 +64,18 @@ nvm_deactivate() {
     nvm_quit
 }
 
+# npm bin --global returns the path to directory its node is in
+# export PATH="$PATH:$(npm bin --global)"
+
 function nvm_use_if_needed () {
     [[ -r ./.nvmrc  && -s ./.nvmrc ]] || return
     WANTED=$(sed 's/v//' < ./.nvmrc)
     CURRENT=$(hash node 2>/dev/null && node -v | sed 's/v//')
     if [ "$WANTED" != "$CURRENT" ]; then
         [[ "$nvm_has_been_used" -eq "0" ]] && unalias node
-        nvm use
-        [[ "$nvm_has_been_used" -eq "0" ]] && export PATH="$PATH:$(yarn global bin)" && source <(npm completion) && nvm_has_been_used=1
+        nvm use # Sets PATH
+        [[ "$nvm_has_been_used" -eq "0" ]] && source <(npm completion) && nvm_has_been_used=1
     fi
 }
+# About PROMPT_COMMAND: https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x264.html
 export PROMPT_COMMAND="$PROMPT_COMMAND ; nvm_use_if_needed"
