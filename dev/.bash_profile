@@ -22,7 +22,10 @@ set -o allexport
 # /usr/bin:/bin:/usr/sbin:/sbin
 #
 # Ensure Homebrew takes precendence. Add home bin dirs.
-PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:$PATH:~/local/bin:~/bin"
+PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:$PATH:~/.local/bin:~/local/bin:~/bin"
+
+# This script adds cargo to PATH.
+. "$HOME/.cargo/env"
 
 #######
 # AWS #

@@ -451,13 +451,11 @@ source /usr/local/bin/virtualenvwrapper_lazy.sh
 
 source ~/dotfiles/dev/bash_colors.sh
 source ~/dotfiles/dev/.bash_prompt
+# note: nvm-startup modifies PS1
 source ~/dotfiles/dev/nvm-startup.sh
 
 # source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
 # source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
-
-# added by pipsi (https://github.com/mitsuhiko/pipsi)
-export PATH="/Users/william/.local/bin:$PATH"
 
 ################################################################################
 # vterm
