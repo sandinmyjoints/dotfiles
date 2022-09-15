@@ -203,12 +203,6 @@ function npm_install_globals () {
     npm install -g $(cat ~/.nvm/default-packages)
 }
 
-function yarn_install_globals () {
-    echo "yarn does not have different globals per version of node. Use npm_install_globals instead."
-    exit 1
-    yarn global add $(cat ~/.nvm/default-packages)
-}
-
 ##########
 # Travis #
 ##########
@@ -220,7 +214,7 @@ function yarn_install_globals () {
 ####################
 
 function emacs_usr2 {
-    kill -USR2 "$(pgrep -f 'build-emacs-for-macos|emacs-mac')"
+    kill -USR2 "$(pgrep -f 'build-emacs-for-macos|emacs-mac|Emacs.app')"
 }
 
 function dired {
@@ -286,6 +280,8 @@ function gitcp {
 
 function fix_camera {
     sudo killall VDCAssistant
+    sudo killall coreaudiod
+    sudo killall avconferenced
 }
 
 # based on https://superuser.com/a/742984/93702
@@ -435,6 +431,10 @@ function list_secrets {
 }
 
 alias list-secrets=list_secrets
+
+function tiday {
+    tidy -i -m -w 160 -ashtml -utf8 index.html
+}
 
 ########
 # Misc #
