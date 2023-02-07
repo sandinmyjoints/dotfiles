@@ -1,6 +1,8 @@
-# -*- default-directory: "/Users/william/dotfiles"; -*-
+# -*- default-directory: "/Users/william/dotfiles/dev/"; mode: shell-script -*-
+
+# shellcheck disable=SC1091
+
 # For mosh, see https://github.com/mobile-shell/mosh/issues/102#issuecomment-12503646
-# export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
 
 # Bail silently (do NOT echo anything) if run in a non-interactive shell (like
 # by scp). See:
@@ -9,10 +11,10 @@
 
 # This file is only meant to be sourced, not run.
 called=$_
-if [[ $called != $0 ]] ; then
+if [[ $called != "$0" ]] ; then
     [ -z "$SSH_TTY" ] && echo "${BASH_SOURCE[@]} is being sourced."
 else
-    this_file=`basename "$0"`
+    this_file=$(basename "$0")
     [ -z "$SSH_TTY" ] && echo "WARNING: $this_file is being run. It is only meant to be sourced."
 fi
 
@@ -21,7 +23,7 @@ fi
 #################
 
 if [ -f ~/dotfiles/dev/sensible.bash ]; then
-   source ~/dotfiles/dev/sensible.bash
+   source $HOME/dotfiles/dev/sensible.bash
 fi
 
 # This sets both hard and soft limits, so cannot be raised past 10000.
@@ -73,12 +75,12 @@ export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
 
 complete -C aws_completer aws
 
-. ~/.local/share/bash-completion/completions/django
+. "$HOME/.local/share/bash-completion/completions/django"
 
 #https://github.com/dsifford/yarn-completion
-. ~/.local/share/bash-completion/completions/yarn
+. "$HOME/.local/share/bash-completion/completions/yarn"
 
-. ~/dotfiles/dev/alias_completion.bash
+. "$HOME/dotfiles/dev/alias_completion.bash"
 
 #######
 # git #
@@ -89,16 +91,16 @@ function parse_git_branch {
   echo "("${ref#refs/heads/}")"
 }
 
-if [ -f $BREW_PREFIX/etc/bash_completion.d/git-completion.bash ]; then
-    source $BREW_PREFIX/etc/bash_completion.d/git-completion.bash
+if [ -f "$BREW_PREFIX/etc/bash_completion.d/git-completion.bash" ]; then
+    source "$BREW_PREFIX/etc/bash_completion.d/git-completion.bash"
 else
-    source $HOME/bin/git-completion.bash
+    source "$HOME/bin/git-completion.bash"
 fi
 
-if [ -f $BREW_PREFIX/etc/bash_completion.d/git-prompt.sh ]; then
-    source $BREW_PREFIX/etc/bash_completion.d/git-prompt.sh
+if [ -f "$BREW_PREFIX/etc/bash_completion.d/git-prompt.sh" ]; then
+    source "$BREW_PREFIX/etc/bash_completion.d/git-prompt.sh"
 else
-    source $HOME/bin/git-prompt.sh
+    source "$HOME/bin/git-prompt.sh"
 fi
 
 # Superceded by bash_prompt.sh
@@ -108,18 +110,13 @@ fi
 # Aliases #
 ###########
 
-if [ -f ~/.bash_aliases ]; then
-    source ~/.bash_aliases
+if [ -f "$HOME/.bash_aliases" ]; then
+    source "$HOME/.bash_aliases"
 fi
 
-###########
-# Sublime #
-###########
-
-subl_open () {
- local NAME="$(basename $(pwd))"
- open "../${NAME}.sublime-project"
-}
+if [ -f "$HOME/.bash_sd" ]; then
+    source "$HOME/.bash_sd"
+fi
 
 ########
 # Ruby #
@@ -133,7 +130,7 @@ subl_open () {
 
 rvm_use () {
     export SHOW_RVM=true
-    rvm use $@;
+    rvm use "$@";
 }
 
 rvm_deactivate () {
@@ -199,15 +196,10 @@ function npmls () {
 # See ~/.nvm/default-packages
 #
 function npm_install_globals () {
-   #npm install -g npm@2.15.1
-    npm install -g $(cat ~/.nvm/default-packages)
+    #npm install -g npm@2.15.1
+    # For some reason, quoting the subshell causes recent versions of npm 8 to install only the first package.
+    npm install -g $(cat $HOME/.nvm/default-packages | tr '\n' ' ')
 }
-
-##########
-# Travis #
-##########
-
-# [ -f /Users/william/.travis/travis.sh ] && source /Users/william/.travis/travis.sh
 
 ####################
 # Functions
@@ -219,12 +211,6 @@ function emacs_usr2 {
 
 function dired {
     emacsclient -e "(dired \"$1\")"
-}
-
-function dirtree {
-    echo Adding "$PWD" to dirtree.
-    CMD="(dirtree \"$PWD\" t)"
-    emacsclient -e "$CMD"
 }
 
 # emacs-pipe is a shell script in /bin.
@@ -258,11 +244,11 @@ function quick-whois () {
 }
 
 function synonym () {
-    wn $1 -syns{n,v,a,r}
+    wn "$1" -syns{n,v,a,r}
 }
 
 function echoDjangoSettings () {
-    echo $DJANGO_SETTINGS_MODULE
+    echo "$DJANGO_SETTINGS_MODULE"
 }
 
 function urlencode () {
@@ -270,8 +256,12 @@ function urlencode () {
     python -c "import sys,urllib;print urllib.quote('${url}'.strip())" | tee pbcopy
 }
 
+function base64decode {
+    echo "$1" | base64 --decode ; printf '\n'
+}
+
 function git_find () {
-    git log -G $1 --source --all
+    git log -G "$1" --source --all
 }
 
 function gitcp {
@@ -297,10 +287,6 @@ function fix_audio2 () {
     sudo launchctl stop com.apple.audio.coreaudiod && sudo launchctl start com.apple.audio.coreaudiod
 }
 
-function result {
-    curl -s "localhost:2100/slim/result/$1" | jq ;
-}
-
 function ssb {
     ssh -t sd-bastion ssh -A $1
 }
@@ -309,14 +295,10 @@ function ssht {
     ssh -t "$@" "/usr/local/bin/tmux attach-session -t mine || /usr/local/bin/tmux new-session -s mine"
 }
 
-alias moshi='LANG=en_US.UTF-8 mosh --server=/usr/local/bin/mosh-server'
+alias moshi='LANG=en_US.UTF-8 mosh --server=/opt/homebrew/bin/mosh-server'
 
 function jsondiff {
-    diff <(jq -S . $1) <(jq -S . $2)
-}
-
-function base64decode {
-    echo "$1" | base64 --decode ; printf '\n'
+    diff <(jq -S . "$1") <(jq -S . "$2")
 }
 
 # $ scale_image orig.jpg orig-small.jpg
@@ -324,7 +306,7 @@ function base64decode {
 # imagemagick can do lots of cool stuff, see: #
 # https://stackoverflow.com/a/31726270/599258
 function scale_image {
-    convert $1 -resize '50%' $2
+    convert "$1" -resize '50%' $2
 }
 
 # $ thumb image.jpg 300 200
@@ -334,7 +316,8 @@ function scale_image {
 # See also: mogrify, which works on whole directories
 function thumb {
     local fullfile="$1"
-    local filename=$(basename -- "$fullfile")
+    local filename
+    filename=$(basename -- "$fullfile")
     local extension="${filename##*.}"
     local filename="${filename%.*}"
 
@@ -342,12 +325,6 @@ function thumb {
     local height="$3"
 
     convert "$fullfile" -auto-orient -thumbnail "$width"x"$height" -unsharp 0x.5 "$filename"-thumb."$extension"
-}
-
-# Usage: $ neodict_for en Africa
-function neodict_for {
-    # $ curl -sS 'http://site1.spanishdict.com/api/v1/dictionary?q=Africa&source=en' | jq -r '.data.neodict' | jq
-    curl -sS "http://site1.spanishdict.com/api/v1/dictionary?q=$2&source=$1" | jq -r '.data.neodict' | jq
 }
 
 # Usage: $ img 1500 1800 jpg
@@ -375,7 +352,8 @@ alias path_pretty_print=ppath
 # De-dupe PATH.
 function pathmerge {
     export ORIGINAL_PATH="$PATH"
-    export PATH=$(printf "%s" "$PATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
+    export PATH
+    PATH=$(printf "%s" "$PATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
     echo $PATH
 }
 
@@ -391,47 +369,6 @@ function gp {
     nvm exec "lts/*" $yarn_global_bin_path/prettier --parser markdown
 }
 
-# Usage: ecs-restart <cluster name> <service name>
-# Example: ecs-restart sd-production-fargate prod-sd-neodarwin-fargate
-function ecs-restart {
-    local cluster="$1"
-    local service="$2"
-    ( [[ -z "${cluster// }" ]] || [[ -z "${service// }" ]] ) && echo "Usage: ecs-restart <cluster> <service>" && return 1
-
-    restartcommand="aws ecs update-service --cluster $cluster --service $service --force-new-deployment > /dev/null"
-    echo $restartcommand
-    eval $restartcommand
-    stablecommand="aws ecs wait services-stable --cluster $cluster --services $service"
-    echo $stablecommand
-    eval $stablecommand
-}
-
-# Retrieve db secrets from https://console.aws.amazon.com/secretsmanager/home?region=us-east-1#/listSecrets
-#
-# Usage:
-# $ dbcreds staging/sd-site
-# $ dbcreds prod/master
-#
-# See also: https://github.com/spanishdict/sd-gimme-db/blob/master/create-db-dump#L36
-# passwords may contain ticks:
-# SANITIZED_DB_MASTER_PW="${RAW_DB_MASTER_PW/`/\\`}"
-function dbcreds {
-    aws secretsmanager get-secret-value --secret-id "$1" --version-stage AWSCURRENT \
-        | jq '.SecretString | fromjson' \
-        | tee /dev/tty \
-        | jq '.password' --raw-output \
-        | pbcopy
-}
-
-alias dbpass=dbcreds
-alias db_creds=dbcreds
-
-function list_secrets {
-    aws secretsmanager list-secrets --max-results 100 | jq '.SecretList [].Name' | sed 's/"//g'
-}
-
-alias list-secrets=list_secrets
-
 function tiday {
     tidy -i -m -w 160 -ashtml -utf8 index.html
 }
@@ -443,19 +380,10 @@ function tiday {
 # From http://superuser.com/a/59198
 [[ ${SHELLOPTS} =~ (vi|emacs) ]] && [[ $- = *i* ]] && bind TAB:menu-complete
 
-# Use Homebrew's Python. Note: WORKON_HOME is defined in .bash_profile.
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2
-# virtualenvwrapper itself does not appear to have been installed by Homebrew.
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
-source /usr/local/bin/virtualenvwrapper_lazy.sh
-
-source ~/dotfiles/dev/bash_colors.sh
-source ~/dotfiles/dev/.bash_prompt
+source $HOME/dotfiles/dev/bash_colors.sh
+source $HOME/dotfiles/dev/.bash_prompt
 # note: nvm-startup modifies PS1
-source ~/dotfiles/dev/nvm-startup.sh
-
-# source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
-# source '/opt/homebrew-cask/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
+source $HOME/dotfiles/dev/nvm-startup.sh
 
 ################################################################################
 # vterm
@@ -508,4 +436,4 @@ eval "$(direnv hook bash)"
 # Local #
 #########
 
-[[ -s ~/local/.bashrc ]] && source ~/local/.bashrc
+[[ -s $HOME/local/.bashrc ]] && source $HOME/local/.bashrc

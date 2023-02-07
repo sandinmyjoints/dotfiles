@@ -1,0 +1,80 @@
+# SD-related Bash functions and aliases.
+#
+# To use, source from your .bashrc file:
+#
+#     source ".bash_sd"
+#
+# This file is only meant to be sourced, not run.
+#
+called=$_
+if [[ $called != "$0" ]] ; then
+    echo "${BASH_SOURCE[@]} is being sourced."
+else
+    this_file=$(basename "$0")
+    echo "WARNING: $this_file is being run. It is only meant to be sourced."
+fi
+
+# Tail logs from sdc services.
+function sdcl() {
+    local SERVICE="$1"
+    sdc logs -f --tail=100 --no-log-prefix "$SERVICE"
+}
+
+# Rebuild an sdc container.
+function rebuild () {
+  local SERVICE="$1"
+  sdc stop "$SERVICE" && sdc up --build --no-deps -d "$SERVICE" && sdcl "$SERVICE"
+}
+
+# Restart an sdc container.
+function restart() {
+  local SERVICE="$1"
+  sdc stop "$SERVICE" && sdc up --no-deps -d "$SERVICE" && sdcl "$SERVICE"
+}
+
+# Restart tasks in an ECS service.
+#
+# Usage: ecs-restart <cluster name> <service name>
+# Example: ecs-restart sd-production-fargate prod-sd-neodarwin-fargate
+#
+function ecs-restart {
+    local cluster="$1"
+    local service="$2"
+    { [[ -z "${cluster// }" ]] || [[ -z "${service// }" ]] ; } && echo "Usage: ecs-restart <cluster> <service>" && return 1
+
+    restartcommand="aws ecs update-service --cluster $cluster --service $service --force-new-deployment > /dev/null"
+    echo "$restartcommand"
+    eval "$restartcommand"
+    stablecommand="aws ecs wait services-stable --cluster $cluster --services $service"
+    echo "$stablecommand"
+    eval "$stablecommand"
+}
+
+# List names of db secrets.
+function list-secrets {
+    aws secretsmanager list-secrets --max-results 100 | jq '.SecretList [].Name' | sed 's/"//g'
+}
+
+# Retrieve db secrets from
+# https://console.aws.amazon.com/secretsmanager/home?region=us-east-1#/listSecrets
+# These are different from the secrets managed by sd-ecs. See
+# https://github.com/spanishdict/sd-gimme-db/blob/master/docs/db-user-accounts.md#secrets-managed-in-aws-as-of-2022-10-24
+#
+# Usage:
+# $ dbcreds staging/sd-site
+# $ dbcreds prod/master
+#
+# Passwords may contain ticks:
+# SANITIZED_DB_MASTER_PW="${RAW_DB_MASTER_PW/`/\\`}"
+# See https://github.com/spanishdict/sd-gimme-db/blob/69bcb481ccff8bdf97d0e49424f07fec091d66de/create-db-dump#L41
+#
+function dbcreds {
+    local secret_name="$1"
+    { [[ -z "${secret_name// }" ]] ; } && echo "Usage: db-creds <secret name, like 'staging/sd-auth'>" && return 1
+
+    aws secretsmanager get-secret-value --secret-id "$1" --version-stage AWSCURRENT \
+        | jq '.SecretString | fromjson' \
+        | tee /dev/tty \
+        | jq '.password' --raw-output \
+        | pbcopy
+}

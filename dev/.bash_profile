@@ -1,9 +1,16 @@
+# -*- default-directory: "/Users/william/dotfiles/dev/"; -*-
+
+# shellcheck disable=SC2034
+
 # This file is only meant to be sourced, not run.
+
+# shellcheck disable=SC1091
+
 called=$_
-if [[ $called != $0 ]] ; then
+if [[ $called != "$0" ]] ; then
     echo "${BASH_SOURCE[@]} is being sourced."
 else
-    this_file=`basename "$0"`
+    this_file=$(basename "$0")
     echo "WARNING: $this_file is being run. It is only meant to be sourced."
 fi
 
@@ -21,8 +28,8 @@ set -o allexport
 # Initially, PATH is
 # /usr/bin:/bin:/usr/sbin:/sbin
 #
-# Ensure Homebrew takes precendence. Add home bin dirs.
-PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:$PATH:~/.local/bin:~/local/bin:~/bin"
+# Ensure Homebrew takes precedence. Add home bin dirs.
+PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/bin"
 
 # This script adds cargo to PATH.
 . "$HOME/.cargo/env"
@@ -40,7 +47,6 @@ PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:$PATH:
 # WORKON_HOME=$HOME/env  # Old virtualenvs.
 WORKON_HOME=$HOME/.local/venvs  # New virtualenvs.
 PROJECT_HOME=$HOME/scm/sd
-VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
 
 ########
 # Node #
@@ -67,8 +73,6 @@ PATH="$PATH:$HOME/.rvm/bin"
 
 BREW_PREFIX="$(brew --prefix)"
 
-# PATH="$HOME/.cargo/bin:$PATH"
-
 # See https://github.com/tmux/tmux/issues/284
 TMUX_TMPDIR=/tmp
 
@@ -80,9 +84,9 @@ EDITOR='emacsclient'
 
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
-# Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
+# Ex: CDPATH=".:~:$HOME/projects" will look for targets in the current working directory, in home and in the $HOME/projects folder
 # CDPATH="."
-CDPATH=':~/scm/sd:~/scm/wjb'
+CDPATH=":$HOME/scm/sd:$HOME/scm/wjb"
 
 ########
 # Work #
@@ -102,4 +106,4 @@ set +o allexport
 # bashrc #
 ##########
 
-[[ -s ~/.bashrc ]] && source ~/.bashrc
+[[ -s $HOME/.bashrc ]] && source "$HOME/.bashrc"

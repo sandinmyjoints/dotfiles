@@ -13,6 +13,8 @@ alias ll='ls -oAGhF'
 alias ls='ls -hFG'
 alias lt='ls -lAt && echo "------Oldest--"'
 alias ltr='ls -lArt && echo "------Newest--"'
+alias exa='exa -al'
+alias llx='exa'
 
 alias diff='diff -u'
 
@@ -29,13 +31,14 @@ alias ld='otool -L'
 alias ec='emacsclient -n'
 alias emacs='emacsclient -a -n'
 
-#alias markdown='python -m markdown'
-alias markdown='/usr/local/bin/cmark'
-alias md='/usr/local/bin/cmark'
-
-alias subl='/Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl'
+alias markdown='cmark'
+alias md='cmark'
 
 alias 'h?'="history | grep"
+# share history between terminal sessions
+alias he="history -a" # export history
+alias hi="history -n" # import history
+
 # Put last command onto clipboard.
 cpl () {
     fc -nl -1 | tr -d '\t' | sed -E 's/^[ ]+//g' | tee /dev/tty | pbcopy;
@@ -44,18 +47,12 @@ cpl () {
 alias cl="fc -e - | pbcopy"
 
 # top
+alias top='top -s 2 -o cpu -R -F'
 alias cpu='top -o cpu'
 alias mem='top -o rsize' # memory
 
-# copy the working directory path
-alias cpwd='pwd|tr -d "\n"|pbcopy'
-
 # DNS (with update thanks to @blanco)
 alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
-
-# share history between terminal sessions
-alias he="history -a" # export history
-alias hi="history -n" # import history
 
 # Get your current public IP
 alias ip="curl icanhazip.com"
@@ -66,11 +63,11 @@ alias stfu="osascript -e 'set volume output muted true'"
 # trim newlines
 alias tn='tr -d "\n"'
 
-# list TODO/FIX lines from the current project
-alias todos="ack -n --nogroup '(TODO|FIX(ME)?):'"
-
 alias utcdate='date -u'
+alias claer='clear'
 
+# Tmux
+#
 # this has to come after bashrc, which defines vterm_cmd
 function set-tmux-in-vterm () {
     if [ -n "$TMUX" ]; then
@@ -80,19 +77,10 @@ function set-tmux-in-vterm () {
     fi
 }
 
-# Tmux
 alias attach='set-tmux-in-vterm ; tmux attach -t'
-
-# Autocorrect
-alias elasticsaerch=elasticsearch
-
-# Docker
-alias evaldm='eval $(docker-machine env)'
 
 alias dc='docker-compose'
 # see https://github.com/docker/compose/issues/3317#issuecomment-416552656 about trapping docker compose down
-
-alias upup='git pull && docker-compose up'
 
 alias n='source ~/dotfiles/dev/nvm-startup.sh'
 
@@ -102,6 +90,7 @@ alias watch='watch'
 # Git
 alias git-prune-and-remove-untracked-branches='git fetch --prune && git branch -r | awk "{print \$1}" | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d'
 
+# Homebrew
 BREW_PREFIX="$(brew --prefix)"
 alias brew_curl="${BREW_PREFIX}/opt/curl/bin/curl "
 # prefer homebrew's curl
@@ -111,24 +100,12 @@ alias curlv='curl -v -o /dev/null'
 
 # https://stackoverflow.com/questions/5637311/how-to-use-git-diff-color-words-outside-a-git-repository
 alias diffmin='git diff --color-words --no-index'
-alias cpdiff='git diff | pbcopy'
 
 alias cgrep='ggrep --color="auto" -P -n'
-
-alias yarn-install='yarn install --ignore-engines'
-
-alias top='top -s 2 -o cpu -R -F'
-alias exa='exa -al'
-alias llx='exa'
-# alias ecs-deploy='ecs-deploy --timeout 180'
 
 alias chromium='/Applications/Chromium.app/Contents/MacOS/Chromium'
 
 alias knot='./knot'
-
-alias claer='clear'
-
-alias thumbnail='thumb'
 
 # FIXME: this runs shot whenever bash starts
 # alias shootup='up --direct "$(shot i)"'
@@ -144,44 +121,12 @@ alias lastup='uplast'
 #
 alias gprettier='/Users/william/.yarn/bin/prettier'
 
-alias changes='/Users/william/scm/sd/neodarwin/bin/changes'
-
-alias lsp='ps -ef | grep -E "language-server|languageserver|javascript-typescript-stdio" | grep -v grep'
 
 alias zoom='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/4960947967" ; echo -n https://zoom.us/j/4960947967 | pbcopy'
 alias zoomcp='echo -n https://zoom.us/j/4960947967 | pbcopy'
 alias sup='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/83376013488"'
 
-alias gitmine='git-mine'
 alias gm='git-mine'
-
-# sdc aliases
-
-alias sd='sdc'
-function sdcl() {
-    local SERVICE="$1"
-    # sdc logs -f --tail=100 $SERVICE | gsed -u 's/^[^|]*[^ ]* //'
-    sdc logs -f --tail=100 --no-log-prefix $SERVICE
-}
-
-function sdup() {
-  local SERVICE="$1"
-  sdc up "$SERVICE"
-}
-
-function restart() {
-  local SERVICE="$1"
-  sdc stop "$SERVICE" && sdc up --no-deps -d "$SERVICE" && sdcl "$SERVICE"
-}
-
-function rebuild () {
-  local SERVICE="$1"
-  sdc stop "$SERVICE" && sdc up --build --no-deps -d "$SERVICE" && sdcl "$SERVICE"
-}
-
-function check_changelog_bucket () {
-    aws s3api list-objects --bucket sd-changelog --output json --query "[sum(Contents[].Size), length(Contents[])]"
-}
 
 # The problem with this is it doesn't have site-lisp and packages dirs on
 # load-path, so a lot of things don't find packages they depend on.
@@ -199,6 +144,7 @@ function pyc_rm () {
     gfind . -name "*.pyc" -print0 | xargs -0 rm
 }
 
+alias lsp='ps -ef | grep -E "language-server|languageserver|javascript-typescript-stdio" | grep -v grep'
 function pswebpack () {
     ps -rf | grep -v grep | grep -E "PID|webpack|node.+watch|npm" | gsort -n -k2 -k3
 }
@@ -210,6 +156,11 @@ function killwebpack () {
 function pstsserver () {
     # each tsserver has a typingsInstaller.js child. It doesn't use much resources, so skip it.
     ps -ef | grep -v grep | grep -v typingsInstaller | grep -E "PID|tsserver" | gsort -n -k2 -k3
+}
+
+# SD stuff.
+function check_changelog_bucket () {
+    aws s3api list-objects --bucket sd-changelog --output json --query "[sum(Contents[].Size), length(Contents[])]"
 }
 
 function nwatch () {
@@ -238,3 +189,12 @@ alias anybar_hollow=anybar_reset
 
 # Intel Brew
 alias ib="PATH=/usr/local/bin:/usr/local/sbin:$PATH "
+
+# Docker kill
+#
+# $ dkill USR2 sdplayground_sd-playground_1
+function dkill () {
+    SIGNAL="$1"
+    CONTAINER="$2"
+    docker kill --signal="$SIGNAL" "$CONTAINER"
+}
