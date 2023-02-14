@@ -44,8 +44,7 @@ PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:$PATH:
 # Virtualenvwrapper #
 #####################
 
-# WORKON_HOME=$HOME/env  # Old virtualenvs.
-WORKON_HOME=$HOME/.local/venvs  # New virtualenvs.
+WORKON_HOME=$HOME/.local/share/virtualenvs
 PROJECT_HOME=$HOME/scm/sd
 
 ########
