@@ -29,7 +29,7 @@ set -o allexport
 # /usr/bin:/bin:/usr/sbin:/sbin
 #
 # Ensure Homebrew takes precedence. Add home bin dirs.
-PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/bin"
+PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:/opt/homebrew/opt/mysql-client/bin:$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/bin"
 
 # This script adds cargo to PATH.
 . "$HOME/.cargo/env"
