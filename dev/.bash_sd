@@ -17,7 +17,11 @@ fi
 # Tail logs from sdc services.
 function sdcl() {
     local SERVICE="$1"
-    sdc logs -f --tail=100 --no-log-prefix "$SERVICE"
+    if [[ -z "${SERVICE// }" ]] ; then
+        sdc logs -f --tail=100 --no-log-prefix
+    else
+        sdc logs -f --tail=100 --no-log-prefix "$SERVICE"
+    fi
 }
 
 # Rebuild an sdc container.
