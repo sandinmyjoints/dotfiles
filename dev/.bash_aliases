@@ -93,8 +93,6 @@ alias git-prune-and-remove-untracked-branches='git fetch --prune && git branch -
 # Homebrew
 BREW_PREFIX="$(brew --prefix)"
 alias brew_curl="${BREW_PREFIX}/opt/curl/bin/curl "
-# prefer homebrew's curl
-alias curl="${BREW_PREFIX}/opt/curl/bin/curl "
 
 alias curlv='curl -v -o /dev/null'
 
@@ -170,7 +168,7 @@ function nwatch () {
 }
 
 function anybar () {
-    # ANYBAR_TITLE=lessons ANYBAR_PORT=1741 open -na AnyBar
+    ANYBAR_TITLE=lessons ANYBAR_PORT=1741 open -na AnyBar
     ANYBAR_TITLE=classroom ANYBAR_PORT=1740 open -na AnyBar
     ANYBAR_TITLE=vocab ANYBAR_PORT=1739 open -na AnyBar
     ANYBAR_TITLE=main ANYBAR_PORT=1738 open -na AnyBar
