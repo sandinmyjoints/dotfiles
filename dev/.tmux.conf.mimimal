@@ -1,0 +1,31 @@
+# Tmux man page: http://man.openbsd.org/tmux
+#
+# Some useful tips:
+# - https://mutelight.org/practical-tmux
+# - https://github.com/gpakosz/.tmux/
+#
+# Reload configuration file:
+# source-file ~/.tmux.conf
+
+set -g default-terminal "screen-256color"
+
+set -g history-limit 5000
+
+# Start numbering from 1.
+set -g base-index 1
+# Make pane numbering consistent with windows.
+setw -g pane-base-index 1
+
+######################################################################
+# Key bindings.
+
+# Prefix is C-].
+unbind C-b
+set -g prefix ^]
+
+# Send to inner window with C-] C-].
+bind-key ^] send-prefix
+
+# Always use emacs bindings. See: http://superuser.com/a/396461
+set-option -g status-keys emacs
+set-option -g mode-keys emacs

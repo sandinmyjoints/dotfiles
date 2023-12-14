@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Usage:
+# $ upshot i|w
+# (interactive or window)
+# See:
+# - https://discussions.apple.com/thread/7824154
+# - https://superuser.com/questions/339702/how-do-i-change-the-default-screenshot-name-in-os-x-lion
+
+set -euo pipefail
+
+timestamp=$(date "+%Y-%m-%d-%H%M%S")m
+outfile="/Users/$LOGNAME/Screenshots/Screenshot_$timestamp.png"
+
+# set -x
+
+mode="${1:-w}"
+
+# echo "Writing to $outfile."
+screencapture -"$mode"ox "$outfile"
+echo "$outfile"
+
+up --direct "$outfile"

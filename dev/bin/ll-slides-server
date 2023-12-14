@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+nvm_use default
+pushd ~/notes/lls
+http-server -c 0 -p 1212 &
