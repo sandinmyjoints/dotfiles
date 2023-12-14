@@ -101,6 +101,12 @@ WEBPACK_STATS_VERBOSITY=minimal
 
 set +o allexport
 
+#########
+# Local #
+#########
+
+[[ -s $HOME/local/.bash_profile ]] && source $HOME/local/.bash_profile
+
 ##########
 # bashrc #
 ##########
