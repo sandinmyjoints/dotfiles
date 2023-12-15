@@ -77,8 +77,12 @@ complete -C aws_completer aws
 
 . "$HOME/.local/share/bash-completion/completions/django"
 
-#https://github.com/dsifford/yarn-completion
-. "$HOME/.local/share/bash-completion/completions/yarn"
+# https://github.com/dsifford/yarn-completion
+#
+# Only works with Bash > 4.
+if ((BASH_VERSINFO[0] > 4)); then
+  . "$HOME/.local/share/bash-completion/completions/yarn"
+fi
 
 . "$HOME/dotfiles/dev/alias_completion.bash"
 
