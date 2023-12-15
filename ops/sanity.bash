@@ -40,7 +40,7 @@ setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
 EOF
 
 cat <<"EOF" >> .ssh/rc
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Fix SSH auth socket location so agent forwarding works with tmux
 if test "$SSH_AUTH_SOCK" ; then

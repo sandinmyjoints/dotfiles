@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ENV=${1:-"staging"}
 patterns=( *-app-* *-app2-* *-router-* *-neodarwin-* *-site-rw-* *-search-*)

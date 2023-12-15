@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 temp=$(mktemp)
 text=`cat`
 echo "$text" > $temp

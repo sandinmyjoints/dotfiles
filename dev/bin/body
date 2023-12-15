@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # From https://news.ycombinator.com/item?id=8234255
 # Usage: $ body 5 10 body_test.txt
 # <prints lines 5-10 inclusive of body_test.txt>
