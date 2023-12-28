@@ -75,16 +75,22 @@ export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
 
 complete -C aws_completer aws
 
-. "$HOME/.local/share/bash-completion/completions/django"
+if [ -f "$HOME/.local/share/bash-completion/completions/django" ]; then
+  source  "$HOME/.local/share/bash-completion/completions/django"
+fi
+
+if [ -f "$HOME/dotfiles/dev/alias_completion.bash" ]; then
+    source "$HOME/dotfiles/dev/alias_completion.bash"
+fi
 
 # https://github.com/dsifford/yarn-completion
 #
 # Only works with Bash > 4.
-if ((BASH_VERSINFO[0] > 4)); then
-  . "$HOME/.local/share/bash-completion/completions/yarn"
+if [ -f "$HOME/.local/share/bash-completion/completions/yarn" ]; then
+        if ((BASH_VERSINFO[0] > 4)); then
+        source "$HOME/.local/share/bash-completion/completions/yarn"
+    fi
 fi
-
-. "$HOME/dotfiles/dev/alias_completion.bash"
 
 #######
 # git #

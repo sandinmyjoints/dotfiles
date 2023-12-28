@@ -32,7 +32,9 @@ set -o allexport
 PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin:/opt/homebrew/opt/mysql-client/bin:$PATH:$HOME/.local/bin:$HOME/local/bin:$HOME/bin:/Users/william/Library/Python/3.11/bin"
 
 # This script adds cargo to PATH.
-. "$HOME/.cargo/env"
+if [ -f "$HOME/.cargo/env" ]; then
+  source "$HOME/.cargo/env"
+fi
 
 #######
 # AWS #
