@@ -117,8 +117,7 @@ alias lastup='uplast'
 # globals. This only works if a node is on the PATH, ie, if nvm has been started
 # and a node selected.
 #
-alias gprettier='/Users/william/.yarn/bin/prettier'
-
+alias gprettier="$HOME/.yarn/bin/prettier"
 
 alias zoom='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/4960947967" ; echo -n https://zoom.us/j/4960947967 | pbcopy'
 alias zoomcp='echo -n https://zoom.us/j/4960947967 | pbcopy'
@@ -130,7 +129,7 @@ alias gm='git-mine'
 # load-path, so a lot of things don't find packages they depend on.
 function emacs_byte_recompile () {
     gfind . -name "*.elc" -print0 | xargs -0 rm && \
-        command emacs --batch -Q --eval '(progn (byte-recompile-directory "/Users/william/.emacs.d/elisp" 0) (byte-recompile-directory "/Users/william/.emacs.d/elpa" 0))'
+        command emacs --batch -Q --eval '(progn (byte-recompile-directory "/Users/william/.emacs.d/elisp" 0) (byte-recompile-directory "/Users/william/.emacs.d/elpa" 0) (byte-recompile-directory "/Users/wbert/.emacs.d/elisp" 0) (byte-recompile-directory "/Users/wbert/.emacs.d/elpa" 0))'
 }
 alias elc_recompile=emacs_byte_recompile
 

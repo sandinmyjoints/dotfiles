@@ -1,4 +1,4 @@
-# -*- default-directory: "/Users/william/dotfiles/dev/"; mode: shell-script -*-
+# -*- default-directory: "$HOME/dotfiles/dev/"; mode: shell-script -*-
 
 # shellcheck disable=SC1091
 
@@ -165,12 +165,12 @@ rvm_quit () {
 # See: https://yarnpkg.com/lang/en/docs/cli/global/
 #
 # $ yarn global dir
-# /Users/william/.config/yarn/global
+# $HOME/.config/yarn/global
 #
 # This is where global bins will be symlinked.
 # $ yarn config set prefix ~/.yarn
 # $ yarn global bin
-# /Users/william/.yarn/bin
+# $HOME/.yarn/bin
 
 
 # Examples

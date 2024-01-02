@@ -1,4 +1,4 @@
-# -*- default-directory: "/Users/william/dotfiles/dev/"; -*-
+# -*- default-directory: "~/dotfiles/dev/"; -*-
 
 # shellcheck disable=SC2034
 
