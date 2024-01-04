@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Restore with:
+# $ rsync -av bitling.local:~/Dropbox/Backups/dir-locals/ ~/scm/sd
+
 pushd "$HOME/scm/sd" || exit 1
 
 # gfind "." -name '.dir-locals.el' ! -path '*node_modules*' \
