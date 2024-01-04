@@ -1,0 +1,6 @@
+#!/bin/bash
+
+projectbase=`greadlink -f .`
+projectname=`basename ${projectbase}`
+mkdir -p ~/notes/${projectname}
+ln -s ~/notes/${projectname} ${projectbase}/local_notes
