@@ -113,15 +113,17 @@ alias uplast='up -d ~/Screenshots/"$(last_screenshot)"'
 alias shootup='uplast'
 alias lastup='uplast'
 
-# Global prettier, because the node-specific bin dir is earlier on PATH than
-# globals. This only works if a node is on the PATH, ie, if nvm has been started
-# and a node selected.
-#
-alias gprettier="$HOME/.yarn/bin/prettier"
+hostname=$(hostname)
 
-alias zoom='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/4960947967" ; echo -n https://zoom.us/j/4960947967 | pbcopy'
+if [ "$hostname" == "SM-LAP-PWH79VW5" ]; then
+    alias zoom='open -a "Zoom.us" "https://zoom.us/j/4960947967" ; echo -n https://zoom.us/j/4960947967 | pbcopy'
+    alias sup='open -a "Zoom.us" "https://zoom.us/j/81322703741"'
+elif [ "$hostname" == "bitling" ]; then
+    alias zoom='open -a "Zoom.us" "https://zoom.us/j/4960947967" ; echo -n https://zoom.us/j/4960947967 | pbcopy'
+    alias sup='open -a "Zoom.us" "https://zoom.us/j/81322703741"'
+fi
+
 alias zoomcp='echo -n https://zoom.us/j/4960947967 | pbcopy'
-alias sup='open -a "FirefoxDeveloperEdition - Work" "https://zoom.us/j/83376013488"'
 
 alias gm='git-mine'
 
