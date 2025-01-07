@@ -74,7 +74,7 @@ function list-secrets {
 #
 function dbcreds {
     local secret_name="$1"
-    { [[ -z "${secret_name// }" ]] ; } && echo "Usage: db-creds <secret name, like 'staging/sd-auth'>" && return 1
+    { [[ -z "${secret_name// }" ]] ; } && echo "Usage: db-creds <secret name, like 'staging/sd-auth'>. Use list-secrets to list secrets." && return 1
 
     aws secretsmanager get-secret-value --secret-id "$1" --version-stage AWSCURRENT \
         | jq '.SecretString | fromjson' \
