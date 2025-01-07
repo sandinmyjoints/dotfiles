@@ -1,32 +1,16 @@
 #!/usr/bin/env bash
 
+set -e
 DATE=`date +%Y-%m-%d`
 pushd ~
 
-# Based on http://stackoverflow.com/a/8217870
-safeRunCommand() {
-    typeset cmnd="$*"
-    typeset ret_code
-
-    echo $cmnd
-    eval $cmnd
-    ret_code=$?
-    if [ $ret_code != 0 ]; then
-        printf "'$cmnd' exited with %d. Bailing.\n" $ret_code
-        exit $ret_code
-    fi
-}
-
-command="tar cvf - notes/ | gzip > notes-$DATE.tgz"
+tar cvf - notes/ | gzip > notes-$DATE.tgz
 
 # Here's how to exclude particular directories.
 # TODO: Skip any files > 20 MB or so.
 # command="tar cv --exclude notes/database/sd-prod-dump --exclude notes/atalanta/mgiza - notes/ | gzip > notes-$DATE.tgz"
 
-safeRunCommand $command
-command="openssl enc -aes-256-cbc -salt -in notes-$DATE.tgz  -out Dropbox/Backups/notes-$DATE.tgz.enc"
-safeRunCommand $command
-command="rm notes-$DATE.tgz"
-safeRunCommand $command
+openssl enc -aes-256-cbc -salt -in notes-$DATE.tgz  -out Dropbox/Backups/notes-$DATE.tgz.enc
+rm notes-$DATE.tgz
 
 popd
