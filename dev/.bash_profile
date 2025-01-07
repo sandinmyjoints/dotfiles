@@ -72,6 +72,8 @@ PATH="$PATH:$HOME/.rvm/bin"
 # Misc #
 ########
 
+CLICOLOR=1
+PAGER=less
 BREW_PREFIX="$(brew --prefix)"
 
 # See https://github.com/tmux/tmux/issues/284
