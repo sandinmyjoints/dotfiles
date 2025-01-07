@@ -63,7 +63,6 @@ alias stfu="osascript -e 'set volume output muted true'"
 # trim newlines
 alias tn='tr -d "\n"'
 
-alias utcdate='date -u'
 alias claer='clear'
 
 # Tmux
@@ -79,8 +78,13 @@ function set-tmux-in-vterm () {
 
 alias attach='set-tmux-in-vterm ; tmux attach -t'
 
-alias dc='docker-compose'
+alias date='date -Iseconds'
+alias utcdate='date -u'
+alias udate='date -u'
+
+alias dc='docker compose'
 # see https://github.com/docker/compose/issues/3317#issuecomment-416552656 about trapping docker compose down
+alias dcu='docker compose up --no-log-prefix '
 
 alias n='source ~/dotfiles/dev/nvm-startup.sh'
 
