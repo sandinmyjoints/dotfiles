@@ -1,4 +1,4 @@
-# -*- default-directory: "$HOME/dotfiles/dev/"; mode: shell-script -*-
+# -*- mode: shell-script -*-
 
 # shellcheck disable=SC1091
 
