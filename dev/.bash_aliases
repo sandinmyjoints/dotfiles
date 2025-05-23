@@ -113,9 +113,29 @@ alias knot='./knot'
 # alias shootup='up --direct "$(shot i)"'
 alias last_screenshot="ls -1rt ~/Screenshots | tail -1"
 
-alias uplast='up -d ~/Screenshots/"$(last_screenshot)"'
-alias shootup='uplast'
-alias lastup='uplast'
+# Old
+# alias uplast='up -d ~/Screenshots/"$(last_screenshot)"'
+
+function upload_last_screenshot () {
+    BUCKET=wjb-static
+    DIR=screenshots
+    LAST="$HOME/Screenshots/$(last_screenshot)"
+    FILENAME="screencap-$(LC_ALL=C tr -dc 'a-f0-9' < /dev/urandom | head -c 12).png"
+    mc -q cp --attr x-amz-acl=public-read "$LAST" "s3/$BUCKET/$DIR/$FILENAME"
+    echo -n "https://s3.amazonaws.com/$BUCKET/$DIR/$FILENAME" | pbcopy
+}
+
+alias uplast='upload_last_screenshot'
+alias shootup='upload_last_screenshot'
+alias lastup='upload_last_screenshot'
+
+# function take_screen_capture_and_upload () {
+#     set -e
+#     FILENAME=$(LC_ALL=C tr -dc 'a-f0-9' < /dev/urandom | head -c 32).png
+#     screencapture -i "/tmp/$FILENAME"
+#     mc -q cp --attr x-amz-acl=public-read "/tmp/$FILENAME" "s3/$BUCKET/$DIR/$FILENAME"
+#     echo -n "https://s3-us-east-1.amazonaws.com/$BUCKET/$DIR/$FILENAME" | pbcopy
+# }
 
 hostname=$(hostname)
 
