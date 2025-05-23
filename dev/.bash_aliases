@@ -201,3 +201,7 @@ function dkill () {
     CONTAINER="$2"
     docker kill --signal="$SIGNAL" "$CONTAINER"
 }
+
+function sso () {
+    aws sso login --profile default
+}
