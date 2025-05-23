@@ -75,6 +75,7 @@ PATH="$PATH:$HOME/.rvm/bin"
 CLICOLOR=1
 PAGER=less
 BREW_PREFIX="$(brew --prefix)"
+OLLAMA_API_BASE=http://127.0.0.1:11434
 
 # See https://github.com/tmux/tmux/issues/284
 TMUX_TMPDIR=/tmp
