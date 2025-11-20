@@ -83,8 +83,8 @@ TMUX_TMPDIR=/tmp
 # GREP_OPTIONS="--exclude=*#*"
 EDITOR='emacsclient'
 
-# Currently, I don't have Java installed.
-# JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+JAVA_HOME=/Users/wbert/java/amazon-corretto-24.jdk/Contents/Home
+export PATH="$JAVA_HOME/bin:$PATH"
 
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
