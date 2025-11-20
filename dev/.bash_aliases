@@ -189,7 +189,8 @@ function check_changelog_bucket () {
 function nwatch () {
     # avoid yarn watch, b/c when invoked that way, C-c leaves behind a webpack
     # process with ppid 1
-    npm run build:webpack:dev -- -w
+    # npm run build:webpack:dev -- -w
+    webpack --mode development --progress -w
 }
 
 function anybar () {
@@ -224,4 +225,8 @@ function dkill () {
 
 function sso () {
     aws sso login --profile default
+}
+
+function yarn-ixl () {
+    GIT_SSH_COMMAND='ssh -o IdentitiesOnly=yes -i $HOME/.ssh/id_ed25519_ixl -F /dev/null' yarn
 }
