@@ -11,6 +11,7 @@ tar cvf - notes/ | gzip > notes-$DATE.tgz
 # command="tar cv --exclude notes/database/sd-prod-dump --exclude notes/atalanta/mgiza - notes/ | gzip > notes-$DATE.tgz"
 
 openssl enc -aes-256-cbc -salt -in notes-$DATE.tgz  -out Dropbox/Backups/notes-$DATE.tgz.enc
+# openssl dec -aes-256-cbc -salt -in notes-DATE.tgz.enc  -out Dropbox/Backups/notes-DATE.tgz
 rm notes-$DATE.tgz
 
 popd
