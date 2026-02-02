@@ -83,7 +83,11 @@ TMUX_TMPDIR=/tmp
 # GREP_OPTIONS="--exclude=*#*"
 EDITOR='emacsclient'
 
-JAVA_HOME=/Users/wbert/java/amazon-corretto-24.jdk/Contents/Home
+# Java through brew corretto Cask
+export JAVA_HOME="$(/usr/libexec/java_home)"
+
+# Java 24, manually installed
+# JAVA_HOME=/Users/wbert/java/amazon-corretto-24.jdk/Contents/Home
 export PATH="$JAVA_HOME/bin:$PATH"
 
 # This defines where cd looks for targets
