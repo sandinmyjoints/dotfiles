@@ -1,6 +1,6 @@
 # https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File-Syntax.html
 
-set bell-style visual
+set prefer-visible-bell on
 
 # For this to work, need to set up LS_COLORS.
 set colored-completion-prefix on
@@ -12,6 +12,8 @@ set completion-map-case on
 set completion-query-items 50
 
 set mark-symlinked-directories on
+
+set revert-all-at-newline on
 
 set show-all-if-ambiguous on
 
