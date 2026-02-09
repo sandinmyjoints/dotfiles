@@ -230,3 +230,22 @@ function sso () {
 function yarn-ixl () {
     GIT_SSH_COMMAND='ssh -o IdentitiesOnly=yes -i $HOME/.ssh/id_ed25519_ixl -F /dev/null' yarn
 }
+
+alias yarnxl=yarn-ixl
+
+# DCOM
+
+# Usage: dctest TestWordSearcher
+function dctest () {
+    mvn test -Dmaven.test.skip=false -Dskip.npm -Dskip.installnodenpm "-Dtest=$1"
+}
+
+function dcup () {
+    local tomcat_version=apache-tomcat-10.1.50
+    local tomcat_home="$HOME/dcom/$tomcat_version"
+    "$tomcat_home/bin/catalina.sh" run
+}
+
+function test_aws () {
+    aws s3 ls --profile dcom-nonprod-dev
+}
